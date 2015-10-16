@@ -20,14 +20,14 @@
 ##############################################################################
 
 {
-    'name': 'MLG ARAP ACCOUNT',
+    'name': 'GreenERP SALE',
     'version': '1.0',
-    'category': 'ARAP',
+    'category': 'GreenERP',
     'sequence': 1,
-    'depends': ['report_aeroo_controller','report_aeroo'],
+    'author': 'nguyentoanit@gmail.com',
+    'website' : 'http://incomtech.com/',
+    'depends': ['sale','green_erp_account'],
     'data': [
-        'report/danhsach_congno_view.xml',
-        'wizard/danhsach_congno_view.xml',
         'menu.xml',
     ],
     'css' : [

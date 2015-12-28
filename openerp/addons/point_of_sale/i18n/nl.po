@@ -3,13 +3,14 @@
 # * point_of_sale
 # 
 # Translators:
+# Erwin van der Ploeg <erwin@bas-solutions.nl>, 2015
 # Yenthe Van Ginneken <yenthespam@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-09 09:18+0000\n"
-"PO-Revision-Date: 2015-10-10 09:46+0000\n"
+"PO-Revision-Date: 2015-11-25 08:45+0000\n"
 "Last-Translator: Martin Trigaux\n"
 "Language-Team: Dutch (http://www.transifex.com/odoo/odoo-9/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +22,7 @@ msgstr ""
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_res_users_supplier_invoice_count
 msgid "# Vendor Bills"
-msgstr "# Fabrikant rekeningen"
+msgstr "# Leveranciers facturen"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_report_pos_order_nbr
@@ -617,7 +618,7 @@ msgstr "Toestaan dat gebruikers inloggen via Google."
 #. module: point_of_sale
 #: selection:pos.config.settings,module_pos_mercury:0
 msgid "Allows customers to pay with credit cards."
-msgstr "Sta klanten toe om te betalen met kredietkaarten."
+msgstr "Sta klanten toe om te betalen met creditcards."
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_config_settings_module_pos_discount
@@ -1197,7 +1198,7 @@ msgstr "Aanmaakdatum"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_config_settings_module_pos_mercury
 msgid "Credit Cards"
-msgstr "Kredietkaarten"
+msgstr "Creditcards"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_config_currency_id
@@ -1660,12 +1661,12 @@ msgstr "Importeren van orders is voltooid"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order_fiscal_position_id
 msgid "Fiscal Position"
-msgstr ""
+msgstr "Fiscale positie"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_config_fiscal_position_ids
 msgid "Fiscal Positions"
-msgstr ""
+msgstr "Fiscale posities"
 
 #. module: point_of_sale
 #: model:ir.ui.view,arch_db:point_of_sale.view_pos_config_form
@@ -2126,7 +2127,7 @@ msgstr "Inloggen als manager"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_config_settings_module_pos_loyalty
 msgid "Loyalty Program"
-msgstr ""
+msgstr "Getrouwheidsprogramma"
 
 #. module: point_of_sale
 #: model:ir.ui.view,arch_db:point_of_sale.view_pos_payment
@@ -2146,7 +2147,7 @@ msgstr "Beheer productvarianten"
 #. module: point_of_sale
 #: model:ir.ui.view,arch_db:point_of_sale.view_sale_config_settings_form_pos
 msgid "Manage loyalty program with points and rewards for customers"
-msgstr ""
+msgstr "Beheer getrouwheidsprogramma's met punten en beloningen voor klanten"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_config_settings_group_light_multi_company
@@ -2264,7 +2265,7 @@ msgstr "Geen betaling gevonden voor deze sessie. Niet mogelijk om wisselgeld te 
 #. module: point_of_sale
 #: selection:pos.config.settings,module_pos_mercury:0
 msgid "No credit card"
-msgstr "Geen kredietkaart"
+msgstr "Geen creditcard"
 
 #. module: point_of_sale
 #: code:addons/point_of_sale/report/pos_invoice.py:29
@@ -3284,7 +3285,7 @@ msgstr "Selecteer gebruiker"
 #: code:addons/point_of_sale/static/src/js/screens.js:1922
 #, python-format
 msgid "Select tax"
-msgstr ""
+msgstr "Kies belasting"
 
 #. module: point_of_sale
 #: code:addons/point_of_sale/point_of_sale.py:1197
@@ -3455,7 +3456,7 @@ msgstr "Sla ticket scherm over"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_category_image_small
 msgid "Small-sized image"
-msgstr ""
+msgstr "Kleine afbeelding"
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_category_image_small
@@ -4272,13 +4273,6 @@ msgid "Yellow Peppers"
 msgstr "Gele paprika's"
 
 #. module: point_of_sale
-#: model:ir.ui.view,arch_db:point_of_sale.view_pos_session_form
-msgid ""
-"You can define another list of available currencies on the\n"
-"                                    <i>Cash Registers</i> tab of the"
-msgstr "Het is mogelijk een andere lijst te maken van beschikbare valuta's bij de\n<i>Kassaregisters</i> tab op de"
-
-#. module: point_of_sale
 #: code:addons/point_of_sale/point_of_sale.py:771
 #, python-format
 msgid ""
@@ -4516,11 +4510,6 @@ msgstr "niet gebruikt"
 #, python-format
 msgid "paid orders"
 msgstr "betaalde orders"
-
-#. module: point_of_sale
-#: model:ir.ui.view,arch_db:point_of_sale.view_pos_session_form
-msgid "payment method."
-msgstr "betaalmethode."
 
 #. module: point_of_sale
 #: model:ir.model,name:point_of_sale.model_pos_config

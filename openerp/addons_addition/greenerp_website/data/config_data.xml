@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="menu_green_tea_farm" model="website.menu">
+            <field name="name">Tea Farm</field>
+            <field name="url">/farm</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">55</field>
+        </record>
+        <record id="action_open_green_tea_farm" model="ir.actions.act_url">
+            <field name="name">Website Tea Farm</field>
+            <field name="target">self</field>
+            <field name="url">/farm</field>
+        </record>
+        <record id="open_green_tea_farm_menu" model="ir.actions.todo">
+            <field name="action_id" ref="action_open_green_tea_farm"/>
+            <field name="state">open</field>
+        </record>
+
+    </data>
+</openerp>

@@ -3,12 +3,13 @@
 # * crm
 # 
 # Translators:
+# Adrian Munteanu <adrian.munteanu@itconstruction.ro>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-09 09:17+0000\n"
-"PO-Revision-Date: 2015-10-10 09:47+0000\n"
+"PO-Revision-Date: 2015-12-03 08:48+0000\n"
 "Last-Translator: Martin Trigaux\n"
 "Language-Team: Romanian (http://www.transifex.com/odoo/odoo-9/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +28,7 @@ msgstr "# Intalniri"
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_opportunity_report_nbr_activities
 msgid "# of Activities"
-msgstr ""
+msgstr "# de activităţi"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -179,7 +180,7 @@ msgid ""
 "                                            <span class=\"fa fa-laptop\"/>\n"
 "                                            <strong> Screen Customization</strong>\n"
 "                                        </span>"
-msgstr ""
+msgstr "<span class=\"panel-title\">\n<span class=\"fa fa-laptop\"/>\n<strong> Personalizare ecran</strong>\n</span>"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1021,6 +1022,11 @@ msgid "Consumers"
 msgstr ""
 
 #. module: crm
+#: model:ir.ui.view,arch_db:crm.crm_case_form_view_oppor
+msgid "Contact Information"
+msgstr ""
+
+#. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_contact_name
 msgid "Contact Name"
 msgstr "Numele Contactului"
@@ -1355,7 +1361,7 @@ msgstr "Destinatie contact"
 #: model:ir.model.fields,field_description:crm.field_crm_partner_binding_display_name
 #: model:ir.model.fields,field_description:crm.field_crm_stage_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Afiseaza nume"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1819,7 +1825,7 @@ msgstr "În cazul în care opt-out este verificat, acest contact a refuzat să p
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead2opportunity_partner_mass_force_assignation
 msgid "If unchecked, this will leave the salesman of duplicated opportunities"
-msgstr ""
+msgstr "Dacă este debifat, va lasă vânzătorul să duplice oportunităţi"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1880,7 +1886,7 @@ msgstr ""
 #: code:addons/crm/sales_team.py:15
 #, python-format
 msgid "Incoming"
-msgstr ""
+msgstr "Primire"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1966,7 +1972,7 @@ msgstr "Data ultimului mesaj"
 #: model:ir.model.fields,field_description:crm.field_crm_partner_binding___last_update
 #: model:ir.model.fields,field_description:crm.field_crm_stage___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modificare la"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_date_last_stage_update
@@ -3866,12 +3872,12 @@ msgstr ""
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mesaje Website"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead_website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Istoric comunicare website"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -3881,7 +3887,7 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Welcome"
-msgstr ""
+msgstr "Bine ati venit"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -3974,7 +3980,7 @@ msgstr ""
 #: code:addons/crm/base_partner_merge.py:447
 #, python-format
 msgid "You have to specify a filter for your selection"
-msgstr ""
+msgstr "Trebuie să specificaţi un filtru pentru selecţie"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner

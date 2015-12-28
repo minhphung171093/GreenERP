@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+    <record id="view_loai_cv_tree_vew" model="ir.ui.view">
+			<field name="name">loai.cv.tree</field>
+			<field name="model">loai.cv</field>
+			<field name="arch" type="xml">
+				<tree string="Loại Công Việc">
+					<field name="name"/>
+					<field name="dinh_muc"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_loai_cv_form_vew" model="ir.ui.view">
+            <field name="name">loai.cv.form</field>
+            <field name="model">loai.cv</field>
+            <field name="arch" type="xml">
+                <form string="Loại Công Việc">    
+                	<sheet>
+	                    <group>
+	                    	<field name="name"/>
+	                    	<field name="dinh_muc"/>
+	               	  	</group>
+                	</sheet>
+                </form>
+            </field>
+        </record>     
+		
+		<record id="action_loai_cv_form" model="ir.actions.act_window">
+            <field name="name">Loại Công Việc</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">loai.cv</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_loai_cv_tree_vew"/>
+        </record>
+        
+        <menuitem action="action_loai_cv_form"
+            id="menu_action_loai_cv_form"
+            parent="project.menu_project_config" sequence="100"/>
+        
+	<!-- Task -->
+        <record id="inherit_view_task_form2" model="ir.ui.view">
+            <field name="name">inherit.project.task.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='stage_id']" position="replace">
+            		<button name="thuchien" states='moi_tao,tam_ngung' string="Thực Hiện" type="object" class="oe_highlight"/>
+            		<button name="%(action_mo_ta_task_form)d" states='dang_thuc_hien' string="Ngưng" type="action" class="oe_highlight"/>
+            		<button name="hoanthanh" states='tam_ngung' string="Hoàn Thành" type="object" class="oe_highlight"/>
+                	<field name="state" widget="statusbar" statusbar_visible="moi_tao,dang_thuc_hien,tam_ngung,hoan_thanh" on_change="onchange_date_start()"/>
+                	<field name="stage_id" widget="statusbar" clickable="True"
+                            options="{'fold_field': 'fold'}" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+            		<field name ="date_start" string="Ngày Bắt Đầu"/>
+            		<field name ="date_end" string="Ngày Kết Thúc"/>
+            	</xpath>
+            	<xpath expr="//field[@name='user_id']" position="after">
+            		<field name ="loai_cv_id" on_change="onchange_loaicv(loai_cv_id)"/>
+            		<field name ="dinh_muc"/>
+            	</xpath>
+            	
+            </field>
+        </record>
+        
+        <record id="inherit_view_task_tree2" model="ir.ui.view">
+            <field name="name">inherit.project.task.tree</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                <tree decoration-bf="message_needaction==True" decoration-danger="date_deadline and (date_deadline&lt;current_date)" position="replace">
+                    <tree decoration-bf="message_needaction==True" decoration-danger="date_deadline and (date_deadline&lt;current_date)" string="Tasks">
+	                    <field name="message_needaction" invisible="1"/>
+	                    <field name="sequence" invisible="not context.get('seq_visible', False)"/>
+	                    <field name="name"/>
+	                    <field name="project_id" invisible="context.get('user_invisible', False)"/>
+	                    <field name="user_id" invisible="context.get('user_invisible', False)"/>
+	                    <field name="planned_hours" invisible="context.get('set_visible',False)" groups="project.group_time_work_estimation_tasks"/>
+	                    <field name="date_deadline" invisible="context.get('deadline_visible',True)"/>
+	                    <field name="stage_id" invisible="1"/>
+	                    <field name="date_start"/>
+	                    <field name="date_end"/>
+	                    <field name="state"/>
+	            	</tree>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_task_cal_report_calendar" model="ir.ui.view">
+            <field name="name">task.cal.report.calendar</field>
+            <field name="model">task.cal.report</field>
+            <field name="arch" type="xml">
+                <calendar string="Tasks" color="name" date_start="date_start" date_stop="date_end" readonly="True" create="false" edit="false" delete="false">
+                    <field name="task_id"/>
+                    <field name="hours"/>
+                </calendar>
+            </field>
+        </record>
+        
+        <record id="action_task_cal_report" model="ir.actions.act_window">
+            <field name="name">Calendar Task</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">task.cal.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="view_task_cal_report_calendar"/>
+        </record>
+        
+        <menuitem action="action_task_cal_report"
+            id="menu_green_user_task"
+            parent="base.menu_project_report"
+            sequence="15"/>
+            
+<!-- Group Task -->
+		<record id="green_group_task_tree" model="ir.ui.view">
+            <field name="name">inherit.green.group.project.task.tree</field>
+            <field name="model">project.task</field>
+            <field name="arch" type="xml">
+                <tree string="Tasks" create="false" edit="false" delete="false">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="project_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/> 
+                    <field name="dinh_muc"/>
+                    <field name="songay_tre"/>
+                    <field name="state"/>
+            	</tree>
+            </field>
+        </record>
+        
+        <record id="green_group_task_tree_search_form" model="ir.ui.view">
+            <field name="name">green.group.task.tree.search.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='stage_id']" position="replace">
+            		<field name="state"/>
+            	</xpath>
+            	
+            	<xpath expr="//filter[@name='Stage']" position="replace">
+            		<filter string="State" name="State" context="{'group_by':'state'}"/>
+            	</xpath>
+            	<xpath expr="//filter[@name='project']" position="replace">
+            	</xpath>
+            	<xpath expr="//filter[@name='User']" position="after">
+            		<filter string="Project" name="project" context="{'group_by':'project_id'}"/>
+            	</xpath>
+            	
+            </field>
+        </record>
+        
+        <record id="action_green_group_task_tree" model="ir.actions.act_window">
+            <field name="name">Group Task</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="green_group_task_tree"/>
+            <field name="search_view_id" ref="green_group_task_tree_search_form"/>
+            <field name="context">{
+                    'search_default_User': 1,
+                }
+            </field>
+        </record>
+        
+        <record id="action_green_group_task_tree1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="green_group_task_tree"/>
+            <field name="act_window_id" ref="action_green_group_task_tree"/>
+        </record>
+        
+        <menuitem action="action_green_group_task_tree"
+            id="menu_green_group_task"
+            parent="base.menu_project_report"
+            sequence="16"/>
+            
+<!-- User Task -->        
+        <record id="inherit_green_user_task_tree" model="ir.ui.view">
+            <field name="name">inherit.green.user.project.task.tree</field>
+            <field name="model">project.task</field>
+            <field name="arch" type="xml">
+                <tree string="Tasks">
+                    <field name="message_needaction" invisible="1"/>
+                    <field name="sequence" invisible="not context.get('seq_visible', False)"/>
+                    <field name="name"/>
+                    <field name="project_id" invisible="context.get('user_invisible', False)"/>
+                    <field name="user_id" invisible="context.get('user_invisible', False)"/>
+                    <field name="planned_hours" invisible="context.get('set_visible',False)" groups="project.group_time_work_estimation_tasks"/>
+                    <field name="date_deadline" invisible="context.get('deadline_visible',True)"/>
+                    <field name="stage_id" invisible="1"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="state"/>
+                    <button name="thuchien" states='moi_tao,tam_ngung' string="Thực Hiện" type="object" class="oe_highlight"/>
+            		<button name="%(action_mo_ta_task_form)d" states='dang_thuc_hien' string="Tạm Ngưng" type="action" class="oe_highlight"/>
+            		<button name="hoanthanh" states='tam_ngung' string="Hoàn Thành" type="object" class="oe_highlight"/>
+            	</tree>
+            </field>
+        </record>
+        
+        <record id="action_green_user_task_tree" model="ir.actions.act_window">
+            <field name="name">User Task</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','hoan_thanh'),('user_id','=',uid)]</field> 
+            <field name="view_id" ref="inherit_green_user_task_tree"/>
+            <field name="search_view_id" ref="green_group_task_tree_search_form"/>
+            <field name="context">{
+                    'search_default_project': 1,
+                }
+            </field>
+        </record>
+        
+        <record id="action_green_user_task_tree1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="inherit_green_user_task_tree"/>
+            <field name="act_window_id" ref="action_green_user_task_tree"/>
+        </record>
+        
+        <menuitem action="action_green_user_task_tree"
+            id="menu_green_task"
+            sequence="49"/>
+
+    </data>
+</openerp>

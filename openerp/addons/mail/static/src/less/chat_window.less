@@ -4,10 +4,11 @@
     .o-flex-display();
     .o-flex-flow(column, nowrap);
     position: fixed;
-    width: 240px;
+    width: 260px;
     height: 333px;
     background-color: @o-chat-window-bg;
     border: 1px solid gray;
+    border-radius: 3px;
 
     .o_chat_header {
         .o-flex-display();
@@ -36,6 +37,8 @@
         padding: 5px;
 
         .o_mail_thread .o_thread_date_separator {
+            margin-top: 0px;
+            margin-bottom: 15px;
             border-color: lightgray;
             .o_thread_date {
                 background-color: @o-chat-window-bg;

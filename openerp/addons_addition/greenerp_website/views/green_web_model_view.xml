@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="inherit_green_web_product_template_normal_form_view" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="mode">primary</field>
+        <field eval="7" name="priority"/>
+        <field name="inherit_id" ref="sale.product_template_form_view_sale_order_button"/>
+        <field name="arch" type="xml">
+            <field name="type" position="before">
+                <field name="test_ckeditor" widget="text_ckeditor4"/>
+            </field>
+        </field>
+</record>
+
+</data>
+</openerp>

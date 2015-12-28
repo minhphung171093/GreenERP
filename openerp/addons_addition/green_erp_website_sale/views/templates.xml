@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="green_erp_sale_footer_custom" inherit_id="website.footer_default" name="Footer Job Link">
+    <xpath expr="//div[@id='info']/ul" position="inside">
+    <li><a href="/sales">Sales</a></li>
+    </xpath>
+</template>
+
+<template id="index" name="Salse">
+    <t t-call="website.layout">
+    	<html>
+			<head>
+				<title>
+					Hello!
+				</title>
+			</head>
+			<body>
+				<h1> Welcome! </h1>
+			</body>
+		</html>
+        <div id="wrap">
+            <div class="oe_structure">
+                <section data-snippet-id="text-block" class="mb16">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-center mb16" data-snippet-id="colmd">
+                                <h2>Our Sale Order</h2>
+                                <h3 class="text-muted">Join us and help disrupt the enterprise market!</h3>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+			
+			<div class="container oe_website_jobs">
+                <div class="row">
+                    <div class="hidden" id="jobs_grid_left">
+
+                    </div>
+                    <div class="col-md-12" id="jobs_grid">
+                        <div t-if="not sales">
+                            <div class="text-center text-muted">
+                              <h4 class="css_editable_display">No sale order found</h4>
+                              <t groups="base.group_website_publisher">
+                                <t  groups="base.group_hr_manager">
+                                  <p>Click on "Content" to define a new job offer or "Help" for more informations.</p>
+                                  <img src="/website/static/src/img/content_here.png"/>
+                                </t>
+                              </t>
+                            </div>
+                        </div>
+                        <ul class="media-list" t-if="sales">
+                            <li t-foreach="sales" t-as="sale" class="media">
+                                <div class="media-body" t-att-data-publish="sale.website_published and 'on' or 'off'">
+                                    <h3 class="media-heading">
+                                    	<div t-if="sale.website_published">
+	                                        <a t-attf-href="/sales/detail/#{ slug(sale) }">
+	                                            <span t-field="sale.name"/>
+	                                        </a>
+	                                    </div>
+	                                    <div t-if="not sale.website_published">
+                                            <span t-field="sale.name"/>
+	                                    </div>
+                                    </h3>
+
+                                    <span t-if="not sale.website_published" class="label label-danger">not published</span>
+                                    <div class="text-muted">
+                                        <i class="fa fa-clock-o"/> <span t-field="sale.date_order"/>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+			
+        </div>
+    </t>
+</template>
+
+<template id="detail" name='Sale Detail'>
+    <t t-call="website.layout">
+    	<t t-set="additional_title">Sale Detail</t>
+    	
+    	<div id="wrap" class="js_hr_recruitment">
+	        <div class="oe_structure"/>
+	
+	        <section class="container mt8">
+	            <div class="row">
+	              <div class="col-sm-5">
+	                  <ol class="breadcrumb mb0">
+	                      <li><a href="/sales">Our Sales</a></li>
+	                      <li class="active"><span t-field="sale.name"></span></li>
+	                  </ol>
+	              </div><div class="col-sm-7">
+	                  <t t-call="website.publish_management">
+	                      <t t-set="object" t-value="sale"/>
+	                      <t t-set="publish_edit" t-value="True"/>
+	                  </t>
+	              </div>
+	            </div>
+	        </section>
+			
+	        <div class="oe_structure" style="clear:both;">
+	            <h1 class="text-center" t-field="sale.name"/>
+	        </div>
+	        
+	        <h3> Customer: <span t-field="sale.partner_id.name"/> </h3>
+	        <br/>
+	        
+             <div class="col-sm-5" style="font-weight: bold">
+	            Product
+	         </div>
+	         <div class="col-sm-7" style="font-weight: bold">
+	            Subtotal
+	         </div>
+	        <li t-foreach="sale.order_line" t-as="line">
+                <span class="col-sm-5" t-field="line.product_id.name"/>
+                <span class="col-sm-6" t-field="line.price_subtotal"/>
+            </li>
+	        
+	    </div>
+	    
+    </t>
+</template>
+
+</data>
+</openerp>

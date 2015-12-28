@@ -1,0 +1,11 @@
+@media (min-width: 1200px) {
+	.detaillistfarm > .row{
+		margin: 0 10px;
+	}
+	.pdf5{
+		padding-left: 5px;
+	}
+	.pddetail .col-md-5{
+		padding-left: 10px;
+	}
+}

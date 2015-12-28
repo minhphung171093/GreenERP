@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="0">
+	
+		<record id="aeroo_sample_report_id" model="ir.actions.report.xml">
+	        <field name="name">aeroo_sample_report_id</field>
+	        <field name="type">ir.actions.report.xml</field>
+	        <field name="model">res.partner</field>
+	        <field name="report_name">aeroo_sample_report_id</field>
+	        <field name="report_type">aeroo</field>
+	        <field name="in_format">oo-odt</field>
+	        <field name="out_format" model="report.mimetypes" search="[('code','=','oo-doc'),('compatible_types','=','oo-odt')]"/>
+	        <field name="parser_loc">report_aeroo_sample/report/parser.py</field>
+	        <field name="report_rml">report_aeroo_sample/report/template.odt</field>
+	        <field name="parser_state">loc</field>
+	        <field name="tml_source">file</field>
+	        <field name="attachment_use" eval="0"/>
+    	</record> 
+    	   
+    	<report 
+			auto="False" 
+			menu="True"
+			id="aeroo_sample_report_id" 
+			model="res.partner" 
+			name="aeroo_sample_report_id"
+	        string="Sample Report doc"
+	        rml="report_aeroo_sample/report/template.odt"/>
+	
+		<record id="aeroo_sample_report_xls_id" model="ir.actions.report.xml">
+	        <field name="name">aeroo_sample_report_xls_id</field>
+	        <field name="type">ir.actions.report.xml</field>
+	        <field name="model">res.partner</field>
+	        <field name="report_name">aeroo_sample_report_xls_id</field>
+	        <field name="report_type">aeroo</field>
+	        <field name="in_format">oo-ods</field>
+	        <field name="out_format" model="report.mimetypes" search="[('code','=','oo-xls'),('compatible_types','=','oo-ods')]"/>
+	        <field name="parser_loc">report_aeroo_sample/report/parser.py</field>
+	        <field name="report_rml">report_aeroo_sample/report/template.ods</field>
+	        <field name="parser_state">loc</field>
+	        <field name="tml_source">file</field>
+	        <field name="attachment_use" eval="0"/>
+    	</record> 
+    	   
+    	<report 
+			auto="False" 
+			menu="True"
+			id="aeroo_sample_report_xls_id" 
+			model="res.partner" 
+			name="aeroo_sample_report_xls_id"
+	        string="Sample Report xls"
+	        rml="report_aeroo_sample/report/template.ods"/>
+		
+</data>
+</openerp>
+

@@ -25,7 +25,7 @@ var FieldTextHtmlSimple = widget.extend({
     template: 'web_editor.FieldTextHtmlSimple',
     _config: function () {
         var self = this;
-        return {
+        var config = {
             'focus': false,
             'height': 180,
             'toolbar': [
@@ -46,11 +46,17 @@ var FieldTextHtmlSimple = widget.extend({
                 self.trigger('changed_value');
             }
         };
+        if (session.debug) {
+            config.toolbar.splice(7, 0, ['view', ['codeview']]);
+        }
+        return config;
     },
     start: function() {
         var def = this._super.apply(this, arguments);
         this.$translate.remove();
         this.$translate = $();
+        // Triggers a mouseup to refresh the editor toolbar
+        this.$content.trigger('mouseup');
         return def;
     },
     initialize_content: function() {
@@ -104,7 +110,10 @@ var FieldTextHtmlSimple = widget.extend({
         var value = this.get('value');
         this.$textarea.val(value || '');
         this.$content.html(this.text_to_html(value));
-        this.$content.focusInEnd();
+        // on ie an error may occur when creating range on not displayed element
+        try {
+            this.$content.focusInEnd();
+        } catch (e) {}
         var history = this.$content.data('NoteHistory');
         if (history && history.recordUndo()) {
             this.$('.note-toolbar').find('button[data-event="undo"]').attr('disabled', false);
@@ -117,8 +126,8 @@ var FieldTextHtmlSimple = widget.extend({
         if (this.options['style-inline']) {
             transcoder.class_to_style(this.$content);
             transcoder.font_to_img(this.$content);
-            this.internal_set_value(this.$content.html());
         }
+        this.internal_set_value(this.$content.html());
     },
     destroy_content: function () {
         $(".oe-view-manager-content").off("scroll");

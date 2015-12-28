@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bogdan, 2015
+# Zoriana Zaiats, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-18 08:12+0000\n"
-"PO-Revision-Date: 2015-10-07 11:23+0000\n"
-"Last-Translator: Bogdan\n"
+"PO-Revision-Date: 2015-12-02 14:39+0000\n"
+"Last-Translator: Zoriana Zaiats\n"
 "Language-Team: Ukrainian (http://www.transifex.com/odoo/odoo-9/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +29,7 @@ msgstr ""
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.latest_blogs
 msgid "&amp;times;"
-msgstr ""
+msgstr "&amp;times;"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_feed
@@ -222,25 +223,25 @@ msgstr ""
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_rc_about_us
 msgid "About us"
-msgstr ""
+msgstr "Про нас"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_message_needaction
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Необхідна дія"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:24
 #, python-format
 msgid "Add Content"
-msgstr ""
+msgstr "Додати вміст"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_rc_history
 msgid "Archives"
-msgstr ""
+msgstr "Архіви"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_short
@@ -266,12 +267,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_blog.view_blog_post_search
 #: model:website.menu,name:website_blog.menu_news
 msgid "Blog"
-msgstr ""
+msgstr "Блог"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_name
 msgid "Blog Name"
-msgstr ""
+msgstr "Назва блогу"
 
 #. module: website_blog
 #: code:addons/website_blog/models/website_blog.py:287
@@ -280,50 +281,50 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_blog.view_blog_post_search
 #, python-format
 msgid "Blog Post"
-msgstr ""
+msgstr "Допис блогу"
 
 #. module: website_blog
 #: code:addons/website_blog/models/website_blog.py:291
 #, python-format
 msgid "Blog Post <b>%s</b> seems to have a link to this page !"
-msgstr ""
+msgstr "Допис блогу <b>%s</b> посилається на цю сторінку !"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:37
 #, python-format
 msgid "Blog Post Created"
-msgstr ""
+msgstr "Створено допис блогу"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_complete
 #: model:ir.ui.view,arch_db:website_blog.view_blog_post_form
 msgid "Blog Post Title"
-msgstr ""
+msgstr "Назва допису блогу"
 
 #. module: website_blog
 #: model:ir.actions.act_window,name:website_blog.action_blog_post
 #: model:ir.ui.menu,name:website_blog.menu_page
 #: model:ir.ui.view,arch_db:website_blog.view_blog_post_list
 msgid "Blog Posts"
-msgstr ""
+msgstr "Дописи блогу"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_subtitle
 #: model:ir.ui.view,arch_db:website_blog.view_blog_post_form
 msgid "Blog Subtitle"
-msgstr ""
+msgstr "Підзаголовок блогу"
 
 #. module: website_blog
 #: model:ir.model,name:website_blog.model_blog_tag
 msgid "Blog Tag"
-msgstr ""
+msgstr "Мітка блогу"
 
 #. module: website_blog
 #: model:ir.actions.act_window,name:website_blog.action_tags
 #: model:ir.ui.menu,name:website_blog.menu_blog_tag
 msgid "Blog Tags"
-msgstr ""
+msgstr "Мітки блогу"
 
 #. module: website_blog
 #: model:ir.actions.act_window,name:website_blog.action_blog_blog
@@ -331,17 +332,17 @@ msgstr ""
 #: model:ir.ui.menu,name:website_blog.menu_blog
 #: model:ir.ui.view,arch_db:website_blog.view_blog_blog_list
 msgid "Blogs"
-msgstr ""
+msgstr "Блоги"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Blue"
-msgstr ""
+msgstr "Блакитна"
 
 #. module: website_blog
 #: model:blog.post,subtitle:website_blog.blog_post_2
 msgid "Building your company's website and selling your products online easy."
-msgstr ""
+msgstr "Легко будувати вебсайт компанії та продавати товари онлайн."
 
 #. module: website_blog
 #. openerp-web
@@ -349,60 +350,60 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 #, python-format
 msgid "Change Cover"
-msgstr ""
+msgstr "Змінити обкладинку"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:54
 #, python-format
 msgid "Change and customize your blog post cover."
-msgstr ""
+msgstr "Змінити обкладинку дописів вашого блогу."
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:108
 #, python-format
 msgid "Check Mobile Preview"
-msgstr ""
+msgstr "Перевірити перегляд на мобільному"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:68
 #, python-format
 msgid "Choose an image"
-msgstr ""
+msgstr "Вибрати зображення"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:69
 #, python-format
 msgid "Choose an image from the library."
-msgstr ""
+msgstr "Вибрати зображення з бібліотеки."
 
 #. module: website_blog
 #: code:addons/website_blog/models/website_blog.py:220
 #, python-format
 msgid "Click here to access the post."
-msgstr ""
+msgstr "Натисніть сюди, щоб отримати доступ до допису."
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_short
 msgid "Click on \"Content\" on the top menu to write your first blog post."
-msgstr ""
+msgstr "Натисніть \"Вміст\" у верхньому меню, щоб написати свій перший допис до блогу."
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:94
 #, python-format
 msgid "Click on '<em>Save</em>' button to record changes on the page."
-msgstr ""
+msgstr "Натисніть на кнопку '<em>Зберегти</em>', щоб записати зміни на цій сторінці."
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:77
 #, python-format
 msgid "Click on '<em>Save</em>' to set the picture as cover."
-msgstr ""
+msgstr "Натисніть на '<em>Зберегти</em>', щоб встановити зображення як обкладинку."
 
 #. module: website_blog
 #. openerp-web
@@ -416,14 +417,14 @@ msgstr ""
 #. module: website_blog
 #: model:ir.actions.act_window,help:website_blog.action_blog_post
 msgid "Click to create a new blog post."
-msgstr ""
+msgstr "Натисніть, щоб створити новий допис."
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:124
 #, python-format
 msgid "Close Tutorial"
-msgstr ""
+msgstr "Закрити інструктаж"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
@@ -433,7 +434,7 @@ msgstr "Колір"
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_rc_about_us
 msgid "Contact us"
-msgstr ""
+msgstr "Зв'яжіться з нами"
 
 #. module: website_blog
 #. openerp-web
@@ -456,39 +457,39 @@ msgstr "Далі"
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:60
 #, python-format
 msgid "Cover"
-msgstr ""
+msgstr "Обкладинка"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_cover_properties
 msgid "Cover Properties"
-msgstr ""
+msgstr "Властивості обкладинки"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:14
 #, python-format
 msgid "Create a blog post"
-msgstr ""
+msgstr "Створити допис"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_create_uid
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_create_uid
 msgid "Created by"
-msgstr "Created by"
+msgstr "Створив"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_create_date
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_create_date
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_create_date
 msgid "Created on"
-msgstr "Created on"
+msgstr "Дата створення"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:53
 #, python-format
 msgid "Customize Cover"
-msgstr ""
+msgstr "Налаштувати обкладинку"
 
 #. module: website_blog
 #: model:ir.model.fields,help:website_blog.field_blog_blog_message_last_post
@@ -499,24 +500,24 @@ msgstr "Дата останнього повідомлення по запису
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_mail_message_path
 msgid "Discussion Path"
-msgstr ""
+msgstr "Шлях обговорення"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_display_name
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_display_name
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Показати ім'я"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_complete
 msgid "Duplicate"
-msgstr ""
+msgstr "Дублювати"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_rc_follow_us
 msgid "Follow us"
-msgstr ""
+msgstr "Підпишіться"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_message_follower_ids
@@ -528,28 +529,28 @@ msgstr "Підписники"
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_message_channel_ids
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Підписники (Канали)"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_message_partner_ids
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Підписники (Партнери)"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Full Screen"
-msgstr ""
+msgstr "На весь екран"
 
 #. module: website_blog
 #: model:blog.blog,subtitle:website_blog.blog_blog_1
 msgid "Get in touch with us"
-msgstr ""
+msgstr "Зв’яжіться з нами"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Green"
-msgstr ""
+msgstr "Зелена"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.view_blog_post_search
@@ -571,7 +572,7 @@ msgstr "ID"
 #. module: website_blog
 #: model:blog.post,subtitle:website_blog.blog_post_1
 msgid "Ideas behind the Odoo communication tools."
-msgstr ""
+msgstr "Ідеї, що стоять за інструментами спілкування Odoo."
 
 #. module: website_blog
 #: model:ir.model.fields,help:website_blog.field_blog_blog_message_unread
@@ -583,7 +584,7 @@ msgstr "Якщо позначено, то повідомленя потребу�
 #: model:ir.model.fields,help:website_blog.field_blog_blog_message_needaction
 #: model:ir.model.fields,help:website_blog.field_blog_post_message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Якщо відмічено, то нові повідомлення будуть потребувати вашої уваги."
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.latest_blogs
@@ -599,7 +600,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_message_is_follower
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Стежить"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_write_uid
@@ -619,24 +620,24 @@ msgstr "Дата останнього повідомлення"
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_write_date
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Остання модифікація"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_write_uid
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Востаннє оновив"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_write_date
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Останнє оновлення"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.latest_blogs
 msgid "Latest Posts"
-msgstr ""
+msgstr "Останні дописи"
 
 #. module: website_blog
 #. openerp-web
@@ -687,7 +688,7 @@ msgstr "Name"
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Narrow"
-msgstr ""
+msgstr "Вузький"
 
 #. module: website_blog
 #. openerp-web
@@ -697,27 +698,27 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_blog.content_new_blogpost
 #, python-format
 msgid "New Blog Post"
-msgstr ""
+msgstr "Новий допис"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.header_footer_custom
 msgid "News"
-msgstr ""
+msgstr "Новини"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "No Cover"
-msgstr ""
+msgstr "Без обкладинки"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_short
 msgid "No blog post yet."
-msgstr ""
+msgstr "Ще немає жодного допису."
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.latest_blogs
 msgid "No keywords defined!"
-msgstr ""
+msgstr "Не визначено жодного ключового слова!"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_visits
@@ -734,25 +735,25 @@ msgstr "Немає"
 #: code:addons/website_blog/static/src/xml/website_blog.inline.discussion.xml:9
 #, python-format
 msgid "Not Published"
-msgstr ""
+msgstr "Не опубліковано"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_message_needaction_counter
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Кількість дій"
 
 #. module: website_blog
 #: model:ir.model.fields,help:website_blog.field_blog_blog_message_needaction_counter
 #: model:ir.model.fields,help:website_blog.field_blog_post_message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Кількість повідомлень, які потебують дії"
 
 #. module: website_blog
 #: model:ir.model.fields,help:website_blog.field_blog_blog_message_unread_counter
 #: model:ir.model.fields,help:website_blog.field_blog_post_message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "Кількість непрочитаних повідомлень"
 
 #. module: website_blog
 #: model:blog.post,website_meta_keywords:website_blog.blog_post_1
@@ -762,17 +763,17 @@ msgstr ""
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Opacity"
-msgstr ""
+msgstr "Непрозорість"
 
 #. module: website_blog
 #: model:blog.blog,name:website_blog.blog_blog_1
 msgid "Our Blog"
-msgstr ""
+msgstr "Наш блог"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_rc_blogs
 msgid "Our Blogs"
-msgstr ""
+msgstr "Наші блоги"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_rc_follow_us
@@ -784,7 +785,7 @@ msgstr ""
 #: code:addons/website_blog/static/src/xml/website_blog.inline.discussion.xml:28
 #, python-format
 msgid "Please"
-msgstr ""
+msgstr "Будь ласка"
 
 #. module: website_blog
 #. openerp-web
@@ -792,19 +793,19 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_post_complete_comment
 #, python-format
 msgid "Post"
-msgstr ""
+msgstr "Допис"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:44
 #, python-format
 msgid "Post Headline"
-msgstr ""
+msgstr "Заголовок допису"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_post_ids
 msgid "Posts"
-msgstr ""
+msgstr "Дописи"
 
 #. module: website_blog
 #: code:addons/website_blog/controllers/main.py:267
@@ -817,25 +818,25 @@ msgstr ""
 #: code:addons/website_blog/static/src/xml/website_blog.inline.discussion.xml:10
 #, python-format
 msgid "Published"
-msgstr ""
+msgstr "Опубліковано"
 
 #. module: website_blog
 #: model:mail.message.subtype,description:website_blog.mt_blog_blog_published
 #: model:mail.message.subtype,name:website_blog.mt_blog_blog_published
 msgid "Published Post"
-msgstr ""
+msgstr "Опублікований допис"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:116
 #, python-format
 msgid "Publishing status"
-msgstr ""
+msgstr "Статус публікації"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Purple"
-msgstr ""
+msgstr "Пурпур"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_ranking
@@ -850,7 +851,7 @@ msgstr ""
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Red"
-msgstr ""
+msgstr "Червона"
 
 #. module: website_blog
 #. openerp-web
@@ -864,14 +865,14 @@ msgstr "Зберегти"
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:93
 #, python-format
 msgid "Save Your Blog"
-msgstr ""
+msgstr "Зберегти ваш блог"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:109
 #, python-format
 msgid "Scroll to check rendering and then close the mobile preview."
-msgstr ""
+msgstr "Прокрутіть для перевірки перетворень, а потім закрийте мобільний перегляд."
 
 #. module: website_blog
 #. openerp-web
@@ -911,7 +912,7 @@ msgstr "Пропустити"
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:19
 #, python-format
 msgid "Start Tutorial"
-msgstr ""
+msgstr "Почати інструктаж"
 
 #. module: website_blog
 #. openerp-web
@@ -919,7 +920,7 @@ msgstr ""
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:90
 #, python-format
 msgid "Start writing here..."
-msgstr ""
+msgstr "Пишіть тут..."
 
 #. module: website_blog
 #. openerp-web
@@ -933,12 +934,12 @@ msgstr ""
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_subtitle
 msgid "Sub Title"
-msgstr ""
+msgstr "Підзаголовок"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_complete
 msgid "Subtitle"
-msgstr ""
+msgstr "Підзаголовок"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_tag_form
@@ -953,7 +954,7 @@ msgstr ""
 #. module: website_blog
 #: sql_constraint:blog.tag:0
 msgid "Tag name already exists !"
-msgstr ""
+msgstr "Таке ключове слово вже існує !"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_tag_ids
@@ -975,7 +976,7 @@ msgstr ""
 #. module: website_blog
 #: model:ir.model.fields,help:website_blog.field_blog_post_website_url
 msgid "The full URL to access the document through the website."
-msgstr ""
+msgstr "URL-адреса повністю, для доступу до документації через сайт"
 
 #. module: website_blog
 #. openerp-web
@@ -1016,12 +1017,12 @@ msgstr "Непрочитані повідомлення"
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_message_unread_counter
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Кількість непрочитаних повідомлень"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_short
 msgid "Untitled Post"
-msgstr ""
+msgstr "Допис без назви"
 
 #. module: website_blog
 #. openerp-web
@@ -1035,7 +1036,7 @@ msgstr ""
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_tag_form
 msgid "Used in:"
-msgstr ""
+msgstr "Використано:"
 
 #. module: website_blog
 #: model:ir.model.fields,help:website_blog.field_mail_message_path
@@ -1047,12 +1048,12 @@ msgstr ""
 #: code:addons/website_blog/models/website_blog.py:266
 #, python-format
 msgid "View Blog Post"
-msgstr ""
+msgstr "Переглянути допис блогу"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_website_published
 msgid "Visible in Website"
-msgstr ""
+msgstr "Видимий на сайті"
 
 #. module: website_blog
 #: model:ir.model,name:website_blog.model_website
@@ -1062,7 +1063,7 @@ msgstr "Веб-сайт"
 #. module: website_blog
 #: model:ir.actions.act_url,name:website_blog.action_open_website
 msgid "Website Blogs"
-msgstr ""
+msgstr "Блоги вебсайту"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_website_message_ids
@@ -1073,7 +1074,7 @@ msgstr "Повідомлення з веб-сайту"
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_website_url
 msgid "Website URL"
-msgstr ""
+msgstr "URL сайту"
 
 #. module: website_blog
 #: model:ir.model.fields,help:website_blog.field_blog_blog_website_message_ids
@@ -1086,47 +1087,47 @@ msgstr "Історія бесіди на веб-сайті"
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_website_meta_description
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_website_meta_description
 msgid "Website meta description"
-msgstr ""
+msgstr "Мета-опис сайту"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_website_meta_keywords
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_website_meta_keywords
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_website_meta_keywords
 msgid "Website meta keywords"
-msgstr ""
+msgstr "Мета-ключі сайту"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog_website_meta_title
 #: model:ir.model.fields,field_description:website_blog.field_blog_post_website_meta_title
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag_website_meta_title
 msgid "Website meta title"
-msgstr ""
+msgstr "Мета-заголовок сайту"
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/xml/website_blog.inline.discussion.xml:26
 #, python-format
 msgid "Write a comment..."
-msgstr ""
+msgstr "Написати коментар..."
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.opt_blog_rc_about_us
 msgid ""
 "Write a small text here for when <b>new visitors</b> find your website\n"
 "            through your <b>blog entries</b>, referenced in Google."
-msgstr ""
+msgstr "Напишіть невеликий текст сюди для <b>нових користувачів</b>, що знайдуть ваш вебсайт через ваші <b>дописи у блозі</b>, завдяки посиланням з Google."
 
 #. module: website_blog
 #. openerp-web
 #: code:addons/website_blog/static/src/js/website.tour.blog.js:46
 #, python-format
 msgid "Write a title, the subtitle is optional."
-msgstr ""
+msgstr "Напишіть заголовок, підзаголовок не обов’язковий."
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.website_blog
 msgid "Yellow"
-msgstr ""
+msgstr "Жовта"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.latest_blogs
@@ -1146,18 +1147,18 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_blog.blog_post_short
 #: model:ir.ui.view,arch_db:website_blog.latest_blogs
 msgid "comment"
-msgstr ""
+msgstr "кометар"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_short
 #: model:ir.ui.view,arch_db:website_blog.latest_blogs
 msgid "comments"
-msgstr ""
+msgstr "коментарі"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_short
 msgid "not published"
-msgstr ""
+msgstr "не опубліковано"
 
 #. module: website_blog
 #: model:ir.ui.view,arch_db:website_blog.blog_post_complete

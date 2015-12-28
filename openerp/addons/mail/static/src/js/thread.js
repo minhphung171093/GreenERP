@@ -2,7 +2,6 @@ odoo.define('mail.ChatThread', function (require) {
 "use strict";
 
 var core = require('web.core');
-var time = require('web.time');
 var Widget = require('web.Widget');
 
 var QWeb = core.qweb;
@@ -18,14 +17,29 @@ var Thread = Widget.extend({
 
     events: {
         "click .o_mail_redirect": "on_click_redirect",
+        "click .o_channel_redirect": "on_channel_redirect",
         "click .o_thread_show_more": "on_click_show_more",
         "click .o_thread_message_needaction": function (event) {
+            event.stopPropagation();
             var message_id = $(event.currentTarget).data('message-id');
             this.trigger("mark_as_read", message_id);
         },
         "click .o_thread_message_star": function (event) {
+            event.stopPropagation();
             var message_id = $(event.currentTarget).data('message-id');
             this.trigger("toggle_star_status", message_id);
+        },
+        "click .o_thread_message": function (event) {
+            var selected = $(event.currentTarget).hasClass('o_thread_selected_message');
+            this.$('.o_thread_message').removeClass('o_thread_selected_message');
+            $(event.currentTarget).toggleClass('o_thread_selected_message', !selected);
+        },
+        "click .oe_mail_expand": function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var $source = $(event.currentTarget);
+            $source.parents('.o_thread_message_core').find('.o_mail_body_short').toggle();
+            $source.parents('.o_thread_message_core').find('.o_mail_body_long').toggle();
         },
     },
 
@@ -35,9 +49,9 @@ var Thread = Widget.extend({
             display_order: ORDER.ASC,
             display_needactions: true,
             display_stars: true,
-            default_username: _t('Anonymous'),
             display_document_link: true,
             display_avatar: true,
+            squash_close_messages: true,
         });
     },
 
@@ -46,9 +60,25 @@ var Thread = Widget.extend({
         if (this.options.display_order === ORDER.DESC) {
             msgs.reverse();
         }
+        options = _.extend({}, this.options, options);
+
+        // Hide avatar and info of a message if that message and the previous
+        // one are both comments wrote by the same author at the same minute
+        var prev_msg;
+        _.each(msgs, function (msg) {
+            if (!prev_msg || (Math.abs(msg.date.diff(prev_msg.date)) > 60000) ||
+                prev_msg.message_type !== 'comment' || msg.message_type !== 'comment' ||
+                (prev_msg.author_id[0] !== msg.author_id[0])) {
+                msg.display_author = true;
+            } else {
+                msg.display_author = !options.squash_close_messages;
+            }
+            prev_msg = msg;
+        });
+
         this.$el.html(QWeb.render('mail.ChatThread', {
             messages: msgs,
-            options: _.extend({}, this.options, options),
+            options: options,
             ORDER: ORDER,
         }));
     },
@@ -57,8 +87,22 @@ var Thread = Widget.extend({
         event.preventDefault();
         var res_id = $(event.target).data('oe-id');
         var res_model = $(event.target).data('oe-model');
-        this.trigger('redirect', res_model, res_id);
+        this._redirect({model:res_model, id: res_id});
     },
+
+    on_channel_redirect: function (event) {
+        event.preventDefault();
+        var channel_id = $(event.target).data('oe-id');
+        this._redirect({channel_id: channel_id});
+    },
+
+    _redirect: _.debounce(function (options) {
+        if ('channel_id' in options) {
+            this.trigger('redirect_to_channel', options.channel_id);
+        } else {
+            this.trigger('redirect', options.model, options.id);
+        }
+    }, 200, true),
 
     on_click_show_more: function () {
         this.trigger('load_more_messages');
@@ -68,27 +112,20 @@ var Thread = Widget.extend({
         var msg = _.extend({}, message);
 
         // Set the date in the browser timezone
-        msg.date = moment(time.str_to_datetime(msg.date)).format('YYYY-MM-DD HH:mm:ss');
+        var date = msg.date.format('YYYY-MM-DD');
 
-        // Compute displayed author
-        if (!msg.author_id || !msg.author_id[1]) {
-            msg.displayed_author = msg.email_from || this.options.default_username;
-        }
-
-        // Compute the avatar_url
-        if (msg.author_id && msg.author_id[0]) {
-            msg.avatar_src = "/web/image/res.partner/" + msg.author_id[0] + "/image_small";
-        } else if (msg.msg_type === 'email') {
-            msg.avatar_src = "/mail/static/src/img/email_icon.png";
+        if (date === moment().format('YYYY-MM-DD')) {
+           msg.day = _t("Today");
+           msg.hour = msg.date.fromNow();
+        } else if (date === moment().subtract(1, 'days').format('YYYY-MM-DD')) {
+           msg.day = _t("Yesterday");
+           msg.hour = msg.date.format('LT');
         } else {
-            msg.avatar_src = "/mail/static/src/img/smiley/avatar.jpg";
+            msg.day = msg.date.format('LL');
+            msg.hour = msg.date.format('LT');
         }
 
-        // Compute url of attachments
-        _.each(msg.attachment_ids, function(a) {
-            a.url = '/web/content/' + a.id + '?download=true';
-        });
-
+        msg.display_subject = message.subject && message.message_type !== 'notification' && !(message.model && (message.model !== 'mail.channel'));
         return msg;
     },
 
@@ -100,9 +137,12 @@ var Thread = Widget.extend({
      */
     remove_message_and_render: function (message_id, messages, options) {
         var self = this;
+        var done = $.Deferred();
         this.$('.o_thread_message[data-message-id=' + message_id + ']').fadeOut({
-            done: function () { self.render(messages, options); }
+            done: function () { self.render(messages, options); done.resolve();},
+            duration: 200,
         });
+        return done;
     },
 
     /**

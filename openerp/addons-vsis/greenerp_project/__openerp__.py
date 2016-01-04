@@ -13,6 +13,7 @@
     'website': 'https://www.odoo.com/page/billing',
     'depends' : ['project'],
     'data': [
+             'security/ir.model.access.csv',
              'wizard/green_task_wizard_view.xml',
              'green_project_view.xml',
              

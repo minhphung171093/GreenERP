@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+    	<record model="ir.ui.view" id="view_account_analytic_account_list_inherit">
+	        <field name="name">account.analytic.account.list.inherit</field>
+	        <field name="model">account.analytic.account</field>
+	        <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+	        <field name="arch" type="xml">
+	        	<xpath expr="//field[@name='code']" position="after">
+	        		<field name="percent"/>
+	        	</xpath>
+	        	<xpath expr="//field[@name='company_id']" position="after">
+	        		<field name="parent_company_id" invisible='1'/>
+	        	</xpath>
+        	</field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_account_analytic_account_search_inherit">
+	        <field name="name">account.analytic.account.search.inherit</field>
+	        <field name="model">account.analytic.account</field>
+	        <field name="inherit_id" ref="analytic.view_account_analytic_account_search"/>
+	        <field name="arch" type="xml">
+	        	<xpath expr="//filter[@domain='[]']" position="after">
+	        		<filter string="Company" name='company' domain="[]" context="{'group_by':('parent_company_id','company_id')}"/>
+	        	</xpath>
+        	</field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_account_analytic_account_form_inherit">
+	        <field name="name">account.analytic.account.form.inherit</field>
+	        <field name="model">account.analytic.account</field>
+	        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+	        <field name="arch" type="xml">
+	        	<xpath expr="//field[@name='partner_id']" position="after">
+	        		<field name="percent"/>
+	        	</xpath>
+        	</field>
+        </record>
+
+    </data>
+</openerp>

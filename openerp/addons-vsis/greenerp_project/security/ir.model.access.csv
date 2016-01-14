@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_greenerp_project_1,loai.cv,greenerp_project.model_loai_cv,base.group_user,True,True,True,True
+access_greenerp_project_2,lichsu.task,greenerp_project.model_lichsu_task,base.group_user,True,True,True,True
+access_greenerp_project_3,task.cal.report,greenerp_project.model_task_cal_report,base.group_user,True,True,True,True

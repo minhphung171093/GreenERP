@@ -10,7 +10,7 @@
         <field name="inherit_id" ref="sale.product_template_form_view_sale_order_button"/>
         <field name="arch" type="xml">
             <field name="type" position="before">
-                <field name="test_ckeditor" widget="text_ckeditor4"/>
+                <!--<field name="test_ckeditor" widget="text_ckeditor4"/> -->
             </field>
         </field>
 </record>

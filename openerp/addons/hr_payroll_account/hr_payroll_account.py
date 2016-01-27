@@ -23,11 +23,11 @@ class hr_payslip_line(osv.osv):
             payslip_line.slip_id.employee_id.address_home_id.id
         if credit_account:
             if payslip_line.salary_rule_id.register_id.partner_id or \
-                    payslip_line.salary_rule_id.account_credit.type in ('receivable', 'payable'):
+                    payslip_line.salary_rule_id.account_credit.internal_type in ('receivable', 'payable'):
                 return partner_id
         else:
             if payslip_line.salary_rule_id.register_id.partner_id or \
-                    payslip_line.salary_rule_id.account_debit.type in ('receivable', 'payable'):
+                    payslip_line.salary_rule_id.account_debit.internal_type in ('receivable', 'payable'):
                 return partner_id
         return False
 
@@ -180,7 +180,7 @@ class hr_payslip(osv.osv):
 class hr_salary_rule(osv.osv):
     _inherit = 'hr.salary.rule'
     _columns = {
-        'analytic_account_id':fields.many2one('account.analytic.account', 'Analytic Account'),
+        'analytic_account_id':fields.many2one('account.analytic.account', 'Analytic Account', domain=[('account_type', '=', 'normal')]),
         'account_tax_id':fields.many2one('account.tax', 'Tax'),
         'account_debit': fields.many2one('account.account', 'Debit Account', domain=[('deprecated', '=', False)]),
         'account_credit': fields.many2one('account.account', 'Credit Account', domain=[('deprecated', '=', False)]),
@@ -191,7 +191,7 @@ class hr_contract(osv.osv):
     _inherit = 'hr.contract'
     _description = 'Employee Contract'
     _columns = {
-        'analytic_account_id':fields.many2one('account.analytic.account', 'Analytic Account'),
+        'analytic_account_id':fields.many2one('account.analytic.account', 'Analytic Account', domain=[('account_type', '=', 'normal')]),
         'journal_id': fields.many2one('account.journal', 'Salary Journal'),
     }
 

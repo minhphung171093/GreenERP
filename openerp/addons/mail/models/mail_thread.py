@@ -4,7 +4,7 @@ import base64
 import datetime
 import dateutil
 import email
-import json
+import lxml
 from lxml import etree
 import logging
 import pytz
@@ -56,6 +56,25 @@ class MailThread(models.AbstractModel):
                 are automatically attached to the first message posted on the
                 ressource. If set to False, the display of Chatter is done using
                 threads, and no parent_id is automatically set.
+
+    MailThread features can be somewhat controlled through context keys :
+
+     - ``mail_create_nosubscribe``: at create or message_post, do not subscribe
+       uid to the record thread
+     - ``mail_create_nolog``: at create, do not log the automatic '<Document>
+       created' message
+     - ``mail_notrack``: at create and write, do not perform the value tracking
+       creating messages
+     - ``tracking_disable``: at create and write, perform no MailThread features
+       (auto subscription, tracking, post, ...)
+     - ``mail_save_message_last_post``: at message_post, update message_last_post
+       datetime field
+     - ``mail_auto_delete``: auto delete mail notifications; True by default
+       (technical hack for templates)
+     - ``mail_notify_force_send``: if less than 50 email notifications to send,
+       send them directly instead of using the queue; True by default
+     - ``mail_notify_user_signature``: add the current user signature in
+       email notifications; True by default
     '''
     _name = 'mail.thread'
     _description = 'Email Thread'
@@ -63,7 +82,8 @@ class MailThread(models.AbstractModel):
     _mail_post_access = 'write'  # access required on the document to post on it
     _mail_mass_mailing = False  # enable mass mailing on this model
 
-    message_is_follower = fields.Boolean('Is Follower', compute='_compute_is_follower')
+    message_is_follower = fields.Boolean(
+        'Is Follower', compute='_compute_is_follower', search='_search_is_follower')
     message_follower_ids = fields.One2many(
         'mail.followers', 'res_id', string='Followers',
         domain=lambda self: [('res_model', '=', self._name)])
@@ -75,8 +95,7 @@ class MailThread(models.AbstractModel):
         compute='_get_followers', search='_search_follower_channels')
     message_ids = fields.One2many(
         'mail.message', 'res_id', string='Messages',
-        domain=lambda self: [('model', '=', self._name)], auto_join=True,
-        help="Messages and communication history")
+        domain=lambda self: [('model', '=', self._name)], auto_join=True)
     message_last_post = fields.Datetime('Last Message Date', help='Date of the last message posted on the record.')
     message_unread = fields.Boolean(
         'Unread Messages', compute='_get_message_unread',
@@ -134,6 +153,18 @@ class MailThread(models.AbstractModel):
         following_ids = followers.mapped('res_id')
         for record in self:
             record.message_is_follower = record.id in following_ids
+
+    @api.model
+    def _search_is_follower(self, operator, operand):
+        followers = self.env['mail.followers'].sudo().search([
+            ('res_model', '=', self._name),
+            ('partner_id', '=', self.env.user.partner_id.id),
+            ])
+        # Cases ('message_is_follower', '=', True) or  ('message_is_follower', '!=', False)
+        if (operator == '=' and operand) or (operator == '!=' and not operand):
+            return [('id', 'in', followers.mapped('res_id'))]
+        else:
+            return [('id', 'not in', followers.mapped('res_id'))]
 
     @api.multi
     def _get_message_unread(self):
@@ -333,7 +364,7 @@ class MailThread(models.AbstractModel):
             doc = etree.XML(res['arch'])
             for node in doc.xpath("//field[@name='message_ids']"):
                 # the 'Log a note' button is employee only
-                options = json.loads(node.get('options', '{}'))
+                options = eval(node.get('options', '{}'))
                 is_employee = self.env.user.has_group('base.group_user')
                 options['display_log_button'] = is_employee
                 if is_employee:
@@ -346,7 +377,7 @@ class MailThread(models.AbstractModel):
                 # emoji list
                 options['emoji_list'] = self.env['mail.shortcode'].search([('shortcode_type', '=', 'image')]).read(['source', 'description', 'substitution'])
                 # save options on the node
-                node.set('options', json.dumps(options))
+                node.set('options', repr(options))
             res['arch'] = etree.tostring(doc)
         return res
 
@@ -700,6 +731,17 @@ class MailThread(models.AbstractModel):
         res = dict()
         return res
 
+    @api.multi
+    def message_get_recipient_values(self, notif_message=None, recipient_ids=None):
+        """ Get specific notification recipient values to store on the notification
+        mail_mail. Basic method just set the recipient partners as mail_mail
+        recipients. Inherit this method to add custom behavior like using
+        recipient email_to to bypass the recipint_ids heuristics in the
+        mail sending mechanism. """
+        return {
+            'recipient_ids': [(4, pid) for pid in recipient_ids]
+        }
+
     # ------------------------------------------------------
     # Mail gateway
     # ------------------------------------------------------
@@ -836,7 +878,11 @@ class MailThread(models.AbstractModel):
                 obj = record_set[0]
             else:
                 obj = self.env[alias.alias_parent_model_id.model].browse(alias.alias_parent_thread_id)
-            if not author_id or author_id not in [fol.id for fol in obj.message_partner_ids]:
+            accepted_partner_ids = list(
+                set(partner.id for partner in obj.message_partner_ids) |
+                set(partner.id for channel in obj.message_channel_ids for partner in channel.channel_partner_ids)
+            )
+            if not author_id or author_id not in accepted_partner_ids:
                 _warn('alias %s restricted to internal followers, skipping' % alias.alias_name)
                 _create_bounce_email()
                 return False
@@ -1197,6 +1243,26 @@ class MailThread(models.AbstractModel):
             self.write(update_vals)
         return True
 
+    def _message_extract_payload_postprocess(self, message, body, attachments):
+        """ Perform some cleaning / postprocess in the body and attachments
+        extracted from the email. Note that this processing is specific to the
+        mail module, and should not contain security or generic html cleaning.
+        Indeed those aspects should be covered by html_email_clean and
+        html_sanitize methods located in tools. """
+        root = lxml.html.fromstring(body)
+        postprocessed = False
+        to_remove = []
+        for node in root.iter():
+            if 'o_mail_notification' in (node.get('class') or '') or 'o_mail_notification' in (node.get('summary') or ''):
+                postprocessed = True
+                if node.getparent() is not None:
+                    to_remove.append(node)
+        for node in to_remove:
+            node.getparent().remove(node)
+        if postprocessed:
+            body = etree.tostring(root, pretty_print=False, encoding='UTF-8')
+        return body, attachments
+
     def _message_extract_payload(self, message, save_original=False):
         """Extract body as HTML and attachments from the mail message"""
         attachments = []
@@ -1263,6 +1329,8 @@ class MailThread(models.AbstractModel):
                 # 4) Anything else -> attachment
                 else:
                     attachments.append((filename or 'attachment', part.get_payload(decode=True)))
+
+        body, attachments = self._message_extract_payload_postprocess(message, body, attachments)
         return body, attachments
 
     @api.model
@@ -1417,6 +1485,7 @@ class MailThread(models.AbstractModel):
                 followers = record.message_partner_ids
 
         Partner = self.env['res.partner'].sudo()
+        Users = self.env['res.users'].sudo()
         partner_ids = []
 
         for contact in emails:
@@ -1437,10 +1506,10 @@ class MailThread(models.AbstractModel):
             email_brackets = "<%s>" % email_address
             if not partner_id:
                 # exact, case-insensitive match
-                partners = Partner.search([('email', '=ilike', email_address), ('user_ids', '!=', False)], limit=1)
+                partners = Users.search([('email', '=ilike', email_address)], limit=1).mapped('partner_id')
                 if not partners:
                     # if no match with addr-spec, attempt substring match within name-addr pair
-                    partners = Partner.search([('email', 'ilike', email_brackets), ('user_ids', '!=', False)], limit=1)
+                    partners = Users.search([('email', 'ilike', email_brackets)], limit=1).mapped('partner_id')
                 if partners:
                     partner_id = partners[0].id
             # third try: check in partners
@@ -1569,8 +1638,6 @@ class MailThread(models.AbstractModel):
         # 1: Handle content subtype: if plaintext, converto into HTML
         if content_subtype == 'plaintext':
             body = tools.plaintext2html(body)
-        else:
-            body = tools.html_keep_url(body)
 
         # 2: Private message: add recipients (recipients and author of parent message) - current author
         #   + legacy-code management (! we manage only 4 and 6 commands)
@@ -1654,7 +1721,10 @@ class MailThread(models.AbstractModel):
         new_message = MailMessage.create(values)
 
         # Post-process: subscribe author, update message_last_post
-        if model and model != 'mail.thread' and self.ids and subtype_id:
+        # Note: the message_last_post mechanism is no longer used.  This
+        # will be removed in a later version.
+        if (self._context.get('mail_save_message_last_post') and
+                model and model != 'mail.thread' and self.ids and subtype_id):
             subtype_rec = self.env['mail.message.subtype'].sudo().browse(subtype_id)
             if not subtype_rec.internal:
                 # done with SUPERUSER_ID, because on some models users can post only with read access, not necessarily write access

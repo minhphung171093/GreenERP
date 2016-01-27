@@ -9,9 +9,9 @@
     </t>
 
     <t t-name="mail.chat.NotificationTopButton">
-        <li t-att-title='_t("Notifications")'>
+        <li title="Notifications">
             <a href="#">
-                <i class="fa fa-comment"/> <t t-esc="widget.get('counter') || ''"/>
+                <i class="fa fa-comment"/> <span class="o_notification_counter"/>
             </a>
         </li>
     </t>

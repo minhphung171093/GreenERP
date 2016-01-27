@@ -129,7 +129,6 @@ var ViewManager = Widget.extend(ControlPanelMixin, {
         var self = this;
         var view = this.views[view_type];
         var old_view = this.active_view;
-        var switched = $.Deferred();
 
         if (!view) {
             return $.Deferred().reject();
@@ -142,12 +141,6 @@ var ViewManager = Widget.extend(ControlPanelMixin, {
             this.view_stack.pop();
         }
         this.view_stack.push(view);
-
-        // Hide active view (at first rendering, there is no view to hide)
-        if (this.active_view && this.active_view !== view) {
-            if (this.active_view.controller) this.active_view.controller.do_hide();
-            if (this.active_view.$container) this.active_view.$container.hide();
-        }
         this.active_view = view;
 
         if (!view.created) {
@@ -163,13 +156,11 @@ var ViewManager = Widget.extend(ControlPanelMixin, {
                 self.searchview.do_search();
             });
         }
-        $.when(view.created, this.active_search).done(function () {
-            self._display_view(view_options, old_view).done(function() {
+        return $.when(view.created, this.active_search).then(function () {
+            return self._display_view(view_options, old_view).then(function () {
                 self.trigger('switch_mode', view_type, no_store, view_options);
-                switched.resolve();
             });
         });
-        return switched;
     },
     _display_view: function (view_options, old_view) {
         var self = this;
@@ -191,10 +182,16 @@ var ViewManager = Widget.extend(ControlPanelMixin, {
             };
             self.update_control_panel(cp_status);
 
-            // Detach the old view but not ui-autocomplete elements to let
-            // jquery-ui garbage-collect them
             if (old_view) {
+                // Detach the old view but not ui-autocomplete elements to let
+                // jquery-ui garbage-collect them
                 old_view.$container.contents().not('.ui-autocomplete').detach();
+
+                // Hide old view (at first rendering, there is no view to hide)
+                if (self.active_view !== old_view) {
+                    if (old_view.controller) old_view.controller.do_hide();
+                    if (old_view.$container) old_view.$container.hide();
+                }
             }
 
             // Append the view fragment to its $container

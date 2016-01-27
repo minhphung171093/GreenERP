@@ -125,6 +125,8 @@ DEFAULT_CDN_FILTERS = [
     "^/web/(css|js)/",
     "^/web/image",
     "^/web/content",
+    # retrocompatibility
+    "^/website/image/",
 ]
 
 def unslug(s):
@@ -288,12 +290,12 @@ class website(osv.osv):
             for page in View.browse(cr, uid, pages, context=context):
                 if page.page:
                     dep[page_key].append({
-                        'text': _('Page <b>%s</b> seems to have a link to this page !' % page.key),
+                        'text': _('Page <b>%s</b> seems to have a link to this page !') % page.key,
                         'link': '/page/%s' % page.key
                     })
                 else:
                     dep[page_key].append({
-                        'text': _('Template <b>%s (id:%s)</b> seems to have a link to this page !' % (page.key, page.id)),
+                        'text': _('Template <b>%s (id:%s)</b> seems to have a link to this page !') % (page.key, page.id),
                         'link': '#'
                     })
 
@@ -309,7 +311,7 @@ class website(osv.osv):
                 dep[menu_key] = []
             for menu in Menu.browse(cr, uid, menus, context=context):
                 dep[menu_key].append({
-                    'text': _('Menu <b>%s</b> seems to have a link to this page !' % menu.name),
+                    'text': _('Menu <b>%s</b> seems to have a link to this page !') % menu.name,
                     'link': False
                 })
 
@@ -466,7 +468,8 @@ class website(osv.osv):
         :rtype: bool
         """
         endpoint = rule.endpoint
-        methods = rule.methods or ['GET']
+        methods = endpoint.routing.get('method') or ['GET']
+
         converters = rule._converters.values()
         if not ('GET' in methods
             and endpoint.routing['type'] == 'http'
@@ -549,14 +552,6 @@ class website(osv.osv):
                 if len(res) == limit:
                     break
         return res
-
-    def _image_placeholder(self, response):
-        logger.warning("Deprecated _image_placeholder method, please use this method on ir.attachment")
-        return self.pool['ir.attachment']._image_placeholder(response)
-
-    def _image(self, cr, uid, model, id, field, response, max_width=maxint, max_height=maxint, cache=None, context=None):
-        logger.warning("Deprecated _image method, please use this method on ir.attachment")
-        return self.pool['ir.attachment']._image(cr, uid, model, id, field, response, max_width=max_width, max_height=max_height, cache=cache, context=context)
 
     def image_url(self, cr, uid, record, field, size=None, context=None):
         """Returns a local url that points to the image field of a given browse record."""
@@ -655,11 +650,11 @@ class res_partner(osv.osv):
         }
         return urlplus('//maps.googleapis.com/maps/api/staticmap' , params)
 
-    def google_map_link(self, cr, uid, ids, zoom=8, context=None):
+    def google_map_link(self, cr, uid, ids, zoom=10, context=None):
         partner = self.browse(cr, uid, ids[0], context=context)
         params = {
             'q': '%s, %s %s, %s' % (partner.street or '', partner.city  or '', partner.zip or '', partner.country_id and partner.country_id.name_get()[0][1] or ''),
-            'z': 10
+            'z': zoom,
         }
         return urlplus('https://maps.google.com/maps' , params)
 

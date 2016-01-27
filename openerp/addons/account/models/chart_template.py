@@ -677,10 +677,10 @@ class WizardMultiChartsAccounts(models.TransientModel):
         if not self.chart_template_id.complete_tax_set:
             value = self.sale_tax_rate
             ref_taxs = obj_tax_temp.search([('type_tax_use', '=', 'sale'), ('chart_template_id', 'in', all_parents)], order="sequence, id desc", limit=1)
-            ref_taxs.write({'amount': value, 'name': _('Tax %.2f%%') % value})
+            ref_taxs.write({'amount': value, 'name': _('Tax %.2f%%') % value, 'description': '%.2f%%' % value})
             value = self.purchase_tax_rate
             ref_taxs = obj_tax_temp.search([('type_tax_use', '=', 'purchase'), ('chart_template_id', 'in', all_parents)], order="sequence, id desc", limit=1)
-            ref_taxs.write({'amount': value, 'name': _('Purchase Tax %.2f%%') % value})
+            ref_taxs.write({'amount': value, 'name': _('Tax %.2f%%') % value, 'description': '%.2f%%' % value})
         return True
 
     @api.multi
@@ -734,7 +734,7 @@ class WizardMultiChartsAccounts(models.TransientModel):
 
         # Create the current year earning account (outside of the CoA)
         self.env['account.account'].create({
-            'code': '9999',
+            'code': '999999',
             'name': _('Undistributed Profits/Losses'),
             'user_type_id': self.env.ref("account.data_unaffected_earnings").id,
             'company_id': company.id,})

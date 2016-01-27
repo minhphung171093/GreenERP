@@ -966,7 +966,6 @@ var ClientListScreenWidget = ScreenWidget.extend({
         this.renderElement();
         this.details_visible = false;
         this.old_client = this.pos.get_order().get_client();
-        this.new_client = this.old_client;
 
         this.$('.back').click(function(){
             self.gui.back();
@@ -1016,6 +1015,10 @@ var ClientListScreenWidget = ScreenWidget.extend({
             self.clear_search();
         });
     },
+    hide: function () {
+        this._super();
+        this.new_client = null;
+    },
     barcode_client_action: function(code){
         if (this.editing_client) {
             this.$('.detail.barcode').val(code.code);
@@ -1058,7 +1061,7 @@ var ClientListScreenWidget = ScreenWidget.extend({
                 clientline = clientline.childNodes[1];
                 this.partner_cache.cache_node(partner.id,clientline);
             }
-            if( partners === this.new_client ){
+            if( partner === this.old_client ){
                 clientline.classList.add('highlight');
             }else{
                 clientline.classList.remove('highlight');
@@ -1297,7 +1300,7 @@ var ClientListScreenWidget = ScreenWidget.extend({
             contents.append($(QWeb.render('ClientDetailsEdit',{widget:this,partner:partner})));
             this.toggle_save_button();
 
-            contents.find('.image-uploader').on('change',function(){
+            contents.find('.image-uploader').on('change',function(event){
                 self.load_image_file(event.target.files[0],function(res){
                     if (res) {
                         contents.find('.client-picture img, .client-picture .fa').remove();
@@ -1516,7 +1519,7 @@ var PaymentScreenWidget = ScreenWidget.extend({
                             event.keyCode === 110 ||  // Decimal point (numpad)
                             event.keyCode === 188 ||  // Comma
                             event.keyCode === 46 ) {  // Numpad dot
-                    key = '.';
+                    key = self.decimal_point;
                 } else if (event.keyCode >= 48 && event.keyCode <= 57) { // Numbers
                     key = '' + (event.keyCode - 48);
                 } else if (event.keyCode === 45) { // Minus
@@ -1566,11 +1569,16 @@ var PaymentScreenWidget = ScreenWidget.extend({
             this.inputbuffer = newbuf;
             var order = this.pos.get_order();
             if (order.selected_paymentline) {
-                var amount = formats.parse_value(this.inputbuffer, {type: "float"}, 0.0);
+                var amount = this.inputbuffer;
+
+                if (this.inputbuffer !== "-") {
+                    amount = formats.parse_value(this.inputbuffer, {type: "float"}, 0.0);
+                }
+
                 order.selected_paymentline.set_amount(amount);
                 this.order_changes();
                 this.render_paymentlines();
-                this.$('.paymentline.selected .edit').text(this.inputbuffer);
+                this.$('.paymentline.selected .edit').text(this.format_currency_no_symbol(amount));
             }
         }
     },
@@ -1696,9 +1704,9 @@ var PaymentScreenWidget = ScreenWidget.extend({
 
         this.gui.show_popup('number',{
             'title': tip ? _t('Change Tip') : _t('Add Tip'),
-            'value': value,
+            'value': self.format_currency_no_symbol(value),
             'confirm': function(value) {
-                order.set_tip(Number(value));
+                order.set_tip(formats.parse_value(value, {type: "float"}, 0));
                 self.order_changes();
                 self.render_paymentlines();
             }
@@ -1808,6 +1816,11 @@ var PaymentScreenWidget = ScreenWidget.extend({
             });
             return;
         }
+
+        // get rid of payment lines with an amount of 0, because
+        // since accounting v9 we cannot have bank statement lines
+        // with an amount of 0
+        order.clean_empty_paymentlines();
 
         var plines = order.get_paymentlines();
         for (var i = 0; i < plines.length; i++) {

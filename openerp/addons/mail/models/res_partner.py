@@ -4,6 +4,7 @@ import logging
 import threading
 
 from openerp import _, api, fields, models, tools
+from openerp.osv import expression
 
 _logger = logging.getLogger(__name__)
 
@@ -101,15 +102,25 @@ class Partner(models.Model):
     @api.model
     def _notify_send(self, body, subject, recipients, **mail_values):
         emails = self.env['mail.mail']
-        recipients_nbr, recipients_max = 0, 50
+        recipients_nbr, recipients_max = len(recipients), 50
         email_chunks = [recipients[x:x + recipients_max] for x in xrange(0, len(recipients), recipients_max)]
         for email_chunk in email_chunks:
+            # TDE FIXME: missing message parameter. So we will find mail_message_id
+            # in the mail_values and browse it. It should already be in the
+            # cache so should not impact performances.
+            mail_message_id = mail_values.get('mail_message_id')
+            message = self.env['mail.message'].browse(mail_message_id) if mail_message_id else None
+            if message and message.model and message.res_id and message.model in self.env and hasattr(self.env[message.model], 'message_get_recipient_values'):
+                tig = self.env[message.model].browse(message.res_id)
+                recipient_values = tig.message_get_recipient_values(notif_message=message, recipient_ids=email_chunk.ids)
+            else:
+                recipient_values = self.env['mail.thread'].message_get_recipient_values(notif_message=None, recipient_ids=email_chunk.ids)
             create_values = {
                 'body_html': body,
                 'subject': subject,
-                'recipient_ids': [(4, recipient.id) for recipient in email_chunk],
             }
             create_values.update(mail_values)
+            create_values.update(recipient_values)
             emails |= self.env['mail.mail'].create(create_values)
         return emails, recipients_nbr
 
@@ -209,3 +220,29 @@ class Partner(models.Model):
             return self.env.cr.dictfetchall()[0].get('needaction_count')
         _logger.error('Call to needaction_count without partner_id')
         return 0
+
+    @api.model
+    def get_static_mention_suggestions(self):
+        """ To be overwritten to return the id, name and email of partners used as static mention
+            suggestions loaded once at webclient initialization and stored client side. """
+        return []
+
+    @api.model
+    def get_mention_suggestions(self, search, limit=8):
+        """ Return 'limit'-first partners' id, name and email such that the name or email matches a
+            'search' string. Prioritize users, and then extend the research to all partners. """
+        search_dom = expression.OR([[('name', 'ilike', search)], [('email', 'ilike', search)]])
+        fields = ['id', 'name', 'email']
+
+        # Search users
+        domain = expression.AND([[('user_ids.id', '!=', False)], search_dom])
+        users = self.search_read(domain, fields, limit=limit)
+
+        # Search partners if less than 'limit' users found
+        partners = []
+        if len(users) < limit:
+            partners = self.search_read(search_dom, fields, limit=limit)
+            # Remove duplicates
+            partners = [p for p in partners if not len([u for u in users if u['id'] == p['id']])] 
+
+        return [users, partners]

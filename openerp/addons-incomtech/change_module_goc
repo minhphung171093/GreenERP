@@ -1,0 +1,5 @@
+<record id="view_order_form" model="ir.ui.view">
+<page string="Other Information"> sua lai thanh <page name="other_information" string="Other Information">
+
+<record id="purchase_order_form" model="ir.ui.view">
+<page string="Deliveries &amp; Invoices"> sua lai thanh <page name="deliveries_invoices" string="Deliveries &amp; Invoices">

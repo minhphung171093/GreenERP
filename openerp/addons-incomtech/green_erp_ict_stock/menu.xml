@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+		<record model="ir.ui.menu" id="stock.menu_stock_config_settings">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="ir.ui.menu" id="stock.menu_stock_inventory_control">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="ir.ui.menu" id="stock.menu_stock_sched">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="ir.ui.menu" id="stock.menu_warehouse_report">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="ir.ui.menu" id="stock.menu_stock_warehouse_mgmt">
+			<field name="groups_id" eval="[(6,0,[])]"/>
+		</record>
+		
+		<menuitem id="stock.menu_stock_general_settings" name="Stock Settings" parent="green_erp_ict_base.menu_settings"
+            sequence="30" action="stock.action_stock_config_settings"/>
+            
+    </data>
+</openerp>
+	

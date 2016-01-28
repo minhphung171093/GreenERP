@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_thu_chi_pivot" model="ir.ui.view">
+            <field name="name">report.thu.chi.pivot</field>
+            <field name="model">report.thu.chi</field>
+            <field name="arch" type="xml">
+                <pivot string="Thu/Chi" disable_linking="True">
+                     <field name="company_id" type="row"/>
+                     <field name="date" type="col"/>
+                     <field name="thu" type="measure"/>
+                     <field name="chi" type="measure"/>
+                     <field name="con_lai" type="measure"/>
+                 </pivot>
+             </field>
+        </record>
+		
+		<record id="view_thu_chi_graph" model="ir.ui.view">
+            <field name="name">report.thu.chi.graph</field>
+            <field name="model">report.thu.chi</field>
+            <field name="arch" type="xml">
+                <graph string="Thu/Chi" type="bar">
+                     <field name="company_id" type="row"/>
+                     <field name="date" type="col"/>
+                     <field name="con_lai" type="measure"/>
+                 </graph>
+             </field>
+        </record>
+		
+        <record id="view_thu_chi_search" model="ir.ui.view">
+            <field name="name">report.thu.chi.search</field>
+            <field name="model">report.thu.chi</field>
+            <field name="arch" type="xml">
+                <search string="Thu/Chi">
+                    <field name="user_id"/>
+                    <field name="type"/>
+                    <separator/>
+                    <filter string="Thực thu" name="thucthu" domain="[('type', '=', 'thuc_thu')]"/>
+                    <filter string="Thực chi" name="thucchi" domain="[('type', '=', 'thuc_chi')]"/>
+                    <filter string="Dự thu" name="duthu" domain="[('type', '=', 'du_thu')]"/>
+                    <filter string="Dự chi" name="duchi" domain="[('type', '=', 'du_chi')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Nhân viên" name="nhanvien" context="{'group_by':'user_id'}"/>
+	                    <filter string="Dự án" name="duan" context="{'group_by':'project_id'}"/>
+	                    <filter string="Tháng" name="thang" context="{'group_by':'date'}"/>
+	                    <filter string="Ngày" name="ngay" context="{'group_by':'date_str'}"/>
+	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
+	                    <filter string="Phương thức thanh toán" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
+	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
+	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+       <record id="action_thu_chi_report" model="ir.actions.act_window">
+            <field name="name">Thu/Chi</field>
+            <field name="res_model">report.thu.chi</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="search_view_id" ref="view_thu_chi_search"/>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+        <record id="greenerp_thuchi" model="ir.sequence">
+            <field name="name">Thu/Chi</field>
+            <field name="code">greenerp_thuchi</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</openerp>

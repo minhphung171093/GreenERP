@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+    	<record id="du_an_tree_view" model="ir.ui.view">
+			<field name="name">du.an.tree</field>
+			<field name="model">du.an</field>
+			<field name="arch" type="xml">
+				<tree string="Dự án" editable='top'>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="action_du_an" model="ir.actions.act_window">
+            <field name="name">Dự án</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">du.an</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="du_an_tree_view"/>
+        </record>
+        
+        <record id="hang_muc_tree_view" model="ir.ui.view">
+			<field name="name">hang.muc.tree</field>
+			<field name="model">hang.muc</field>
+			<field name="arch" type="xml">
+				<tree string="Hạng mục" editable='top'>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="action_hang_muc" model="ir.actions.act_window">
+            <field name="name">Hạng mục</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hang.muc</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="hang_muc_tree_view"/>
+        </record>
+        
+        <record id="phuongthuc_thanhtoan_tree_view" model="ir.ui.view">
+			<field name="name">phuongthuc.thanhtoan.tree</field>
+			<field name="model">phuongthuc.thanhtoan</field>
+			<field name="arch" type="xml">
+				<tree string="Phương thức thanh toán" editable='top'>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="action_phuongthuc_thanhtoan" model="ir.actions.act_window">
+            <field name="name">Phương thức thanh toán</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">phuongthuc.thanhtoan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="phuongthuc_thanhtoan_tree_view"/>
+        </record>
+        
+        <record id="giai_doan_tree_view" model="ir.ui.view">
+			<field name="name">giai.doan.tree</field>
+			<field name="model">giai.doan</field>
+			<field name="arch" type="xml">
+				<tree string="Giai đoạn" editable='top'>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="action_giai_doan" model="ir.actions.act_window">
+            <field name="name">Giai đoạn</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">giai.doan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="giai_doan_tree_view"/>
+        </record>
+        
+        <record id="green_erp_voucher_search_view" model="ir.ui.view">
+	        <field name="name">green.erp.voucher.search</field>
+	        <field name="model">green.erp.voucher</field>
+	        <field name="arch" type="xml">
+	            <search string="Thu/Chi">
+	                <field name="user_id"/>
+	                <field name="date"/>
+					<field name="project_id"/>
+					<field name="hang_muc_id"/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="company_id"/>
+					<field name="giai_doan_id"/>
+	                <group expand="1" string="Group By">
+	                    <filter string="Nhân viên" name="nhanvien" context="{'group_by':'user_id'}"/>
+	                    <filter string="Dự án" name="duan" context="{'group_by':'project_id'}"/>
+	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
+	                    <filter string="Phương thức thanh toán" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
+	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
+	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
+	                </group>
+	            </search>
+	        </field>
+	    </record>
+	    
+        <record id="thucthu_tree_view" model="ir.ui.view">
+			<field name="name">thuc.thu.tree</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<tree string="Thực thu">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="user_id"/>
+					<field name="date"/>
+					<field name="project_id"/>
+					<field name="hang_muc_id"/>
+					<field name="thanh_tien" sum='Tồng'/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="giai_doan_id" invisible='1'/>
+					<field name="type" invisible='1'/>
+				</tree>
+			</field>
+		</record>
+		<record id="thucthu_form_view" model="ir.ui.view">
+			<field name="name">thuc.thu.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Thực thu" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+							<field name="type" invisible='1'/>
+						</h1>
+						<group col='4'>
+							<field name="company_id" required='1'/>
+							<newline/>
+							<field name="user_id" required='1'/>
+							<field name="date" required='1'/>
+							<field name="project_id" required='1'/>
+							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_thucthu" model="ir.actions.act_window">
+            <field name="name">Thực thu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'default_type': 'thuc_thu'}</field>
+            <field name="domain">[('type','=','thuc_thu')]</field>
+            <field name="view_id" ref="thucthu_tree_view"/>
+            <field name="search_view_id" ref="green_erp_voucher_search_view"/>
+        </record>
+        <record id="action_thucthu1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="thucthu_tree_view"/>
+            <field name="act_window_id" ref="action_thucthu"/>
+        </record>
+        <record id="action_thucthu2" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="thucthu_form_view"/>
+            <field name="act_window_id" ref="action_thucthu"/>
+        </record>
+
+		<record id="thucchi_tree_view" model="ir.ui.view">
+			<field name="name">thuc.chi.tree</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<tree string="Thực chi">
+					<field name="name"/>
+					<field name="user_id"/>
+					<field name="date"/>
+					<field name="project_id"/>
+					<field name="company_id"/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="thanh_tien" sum='Tồng'/>
+					<field name="giai_doan_id" invisible='1'/>
+					<field name="hang_muc_id" invisible='1'/>
+					<field name="type" invisible='1'/>
+				</tree>
+			</field>
+		</record>
+		<record id="thucchi_form_view" model="ir.ui.view">
+			<field name="name">thuc.chi.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Thực chi" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+							<field name="type" invisible='1'/>
+						</h1>
+						<group col='4'>
+							<field name="user_id" required='1'/>
+							<field name="date" required='1'/>
+							<field name="project_id" required='1'/>
+							<field name="hang_muc_id"/>
+							<field name="noi_dung" colspan='4' required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="company_id" required='1'/>
+							<field name="thanh_tien" required='1'/>
+							<field name="giai_doan_id"/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_thucchi" model="ir.actions.act_window">
+            <field name="name">Thực chi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'default_type': 'thuc_chi'}</field>
+            <field name="domain">[('type','=','thuc_chi')]</field>
+            <field name="view_id" ref="thucchi_tree_view"/>
+            <field name="search_view_id" ref="green_erp_voucher_search_view"/>
+        </record>
+        <record id="action_thucchi1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="thucchi_tree_view"/>
+            <field name="act_window_id" ref="action_thucchi"/>
+        </record>
+        <record id="action_thucchi2" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="thucchi_form_view"/>
+            <field name="act_window_id" ref="action_thucchi"/>
+        </record>
+		
+		<record id="duthu_tree_view" model="ir.ui.view">
+			<field name="name">du.thu.tree</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<tree string="Dự thu">
+					<field name="name"/>
+					<field name="user_id"/>
+					<field name="date"/>
+					<field name="project_id"/>
+					<field name="company_id"/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="thanh_tien" sum='Tồng'/>
+					<field name="giai_doan_id" invisible='1'/>
+					<field name="hang_muc_id" invisible='1'/>
+					<field name="type" invisible='1'/>
+				</tree>
+			</field>
+		</record>
+		<record id="duthu_form_view" model="ir.ui.view">
+			<field name="name">du.thu.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Dự thu" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+							<field name="type" invisible='1'/>
+						</h1>
+						<group col='4'>
+							<field name="user_id" required='1'/>
+							<field name="date" required='1'/>
+							<field name="project_id" required='1'/>
+							<field name="hang_muc_id"/>
+							<field name="noi_dung" colspan='4' required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="company_id" required='1'/>
+							<field name="thanh_tien" required='1'/>
+							<field name="giai_doan_id"/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_duthu" model="ir.actions.act_window">
+            <field name="name">Dự thu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'default_type': 'du_thu'}</field>
+            <field name="domain">[('type','=','du_thu')]</field>
+            <field name="view_id" ref="duthu_tree_view"/>
+            <field name="search_view_id" ref="green_erp_voucher_search_view"/>
+        </record>
+        <record id="action_duthu1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="duthu_tree_view"/>
+            <field name="act_window_id" ref="action_duthu"/>
+        </record>
+        <record id="action_duthu2" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="duthu_form_view"/>
+            <field name="act_window_id" ref="action_duthu"/>
+        </record>
+
+		<record id="duchi_tree_view" model="ir.ui.view">
+			<field name="name">du.chi.tree</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<tree string="Dự chi">
+					<field name="name"/>
+					<field name="user_id"/>
+					<field name="date"/>
+					<field name="project_id"/>
+					<field name="company_id"/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="thanh_tien" sum='Tồng'/>
+					<field name="giai_doan_id" invisible='1'/>
+					<field name="hang_muc_id" invisible='1'/>
+					<field name="type" invisible='1'/>
+				</tree>
+			</field>
+		</record>
+		<record id="duchi_form_view" model="ir.ui.view">
+			<field name="name">du.chi.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Dự chi" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+							<field name="type" invisible='1'/>
+						</h1>
+						<group col='4'>
+							<field name="user_id" required='1'/>
+							<field name="date" required='1'/>
+							<field name="project_id" required='1'/>
+							<field name="hang_muc_id"/>
+							<field name="noi_dung" colspan='4' required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="company_id" required='1'/>
+							<field name="thanh_tien" required='1'/>
+							<field name="giai_doan_id"/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_duchi" model="ir.actions.act_window">
+            <field name="name">Dự chi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'default_type': 'du_chi'}</field>
+            <field name="domain">[('type','=','du_chi')]</field>
+            <field name="view_id" ref="duchi_tree_view"/>
+            <field name="search_view_id" ref="green_erp_voucher_search_view"/>
+        </record>
+        <record id="action_duchi1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="duchi_tree_view"/>
+            <field name="act_window_id" ref="action_duchi"/>
+        </record>
+        <record id="action_duchi2" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="duchi_form_view"/>
+            <field name="act_window_id" ref="action_duchi"/>
+        </record>
+		
+    </data>
+</openerp>

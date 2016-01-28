@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		
+
+       	<menuitem name="Báo cáo"
+       		action="action_thu_chi_report"
+       		id="menu_action_thu_chi_report"
+       		sequence="0"/>
+       	
+       	<menuitem id="menu_root_voucher"
+            name="Quản lý Thu/Chi" sequence="1"/>
+            
+            <menuitem id="menu_thu_chi"
+            	name="Thu/Chi"
+            	parent="menu_root_voucher" sequence="10"/>
+            	
+            	<menuitem id="menu_action_thucthu"
+		           	name="Thực thu"
+		           	action="action_thucthu"
+		           	parent="menu_thu_chi" sequence="10"/>
+		           	
+	           	<menuitem id="menu_action_thucchi"
+		           	name="Thực chi"
+		           	action="action_thucchi"
+		           	parent="menu_thu_chi" sequence="20"/>
+		           	
+	           	<menuitem id="menu_action_duthu"
+		           	name="Dự thu"
+		           	action="action_duthu"
+		           	parent="menu_thu_chi" sequence="30"/>
+		           	
+	           	<menuitem id="menu_action_duchi"
+		           	name="Dự chi"
+		           	action="action_duchi"
+		           	parent="menu_thu_chi" sequence="40"/>
+            
+           	<menuitem id="menu_cauhinh"
+            	name="Cấu hình"
+            	parent="menu_root_voucher" sequence="50"/>
+            	
+            	<menuitem id="menu_action_du_an"
+	            	name="Dự án"
+	            	action="action_du_an"
+	            	parent="menu_cauhinh" sequence="5"/>
+	            	
+            	<menuitem id="menu_action_hang_muc"
+	            	name="Hạng mục"
+	            	action="action_hang_muc"
+	            	parent="menu_cauhinh" sequence="10"/>
+	            	
+            	<menuitem id="menu_action_phuongthuc_thanhtoan"
+	            	name="Phương thức thanh toán"
+	            	action="action_phuongthuc_thanhtoan"
+	            	parent="menu_cauhinh" sequence="15"/>
+	            	
+            	<menuitem id="menu_action_giai_doan"
+	            	name="Giai đoạn"
+	            	action="action_giai_doan"
+	            	parent="menu_cauhinh" sequence="20"/>
+    </data>
+</openerp>	

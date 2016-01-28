@@ -131,9 +131,9 @@
 						<group col='4'>
 							<field name="company_id" required='1'/>
 							<newline/>
-							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
 							<field name="thanh_tien" required='1'/>
 							<field name="phuongthuc_thanhtoan_id" required='1'/>
@@ -201,9 +201,9 @@
 						<group col='4'>
 							<field name="company_id" required='1'/>
 							<newline/>
-							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
 							<field name="thanh_tien" required='1'/>
 							<field name="phuongthuc_thanhtoan_id" required='1'/>
@@ -271,9 +271,9 @@
 						<group col='4'>
 							<field name="company_id" required='1'/>
 							<newline/>
-							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
 							<field name="thanh_tien" required='1'/>
 							<field name="phuongthuc_thanhtoan_id" required='1'/>
@@ -341,9 +341,9 @@
 						<group col='4'>
 							<field name="company_id" required='1'/>
 							<newline/>
-							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
 							<field name="thanh_tien" required='1'/>
 							<field name="phuongthuc_thanhtoan_id" required='1'/>
@@ -432,11 +432,11 @@
 							<field name="name" readonly='1'/>
 						</h1>
 						<group col='4'>
-							<field name="company_id" required='1' domain="[('company_id','=',company_id)]"/>
-							<field name="type"/>
-							<field name="user_id" required='1'/>
+							<field name="company_id" required='1'/>
+							<field name="type" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1'/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
 							<field name="thanh_tien" required='1'/>
 							<field name="phuongthuc_thanhtoan_id" required='1'/>

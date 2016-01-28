@@ -41,7 +41,7 @@ class green_erp_voucher(osv.osv):
         'project_id': fields.many2one('du.an', 'Dự án'),
         'noi_dung': fields.text('Nội dung'),
         'hang_muc_id': fields.many2one('hang.muc', 'Hạng mục'),
-        'thanh_tien': fields.float('Thành tiền'),
+        'thanh_tien': fields.float('Thành tiền', digits=(16,0)),
         'company_id': fields.many2one('res.company', 'Công ty'),
         'phuongthuc_thanhtoan_id': fields.many2one('phuongthuc.thanhtoan', 'Nguồn tài chính'),
         'type': fields.selection([('thuc_thu','Thực thu'),('thuc_chi','Thực chi'),('du_thu','Dự thu'),('du_chi','Dự chi')], 'Loại'),

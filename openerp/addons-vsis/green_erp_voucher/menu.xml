@@ -55,7 +55,7 @@
 	            	parent="menu_cauhinh" sequence="10"/>
 	            	
             	<menuitem id="menu_action_phuongthuc_thanhtoan"
-	            	name="Phương thức thanh toán"
+	            	name="Nguồn tài chính"
 	            	action="action_phuongthuc_thanhtoan"
 	            	parent="menu_cauhinh" sequence="15"/>
 	            	

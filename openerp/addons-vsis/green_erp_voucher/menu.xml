@@ -15,6 +15,11 @@
             	name="Thu/Chi"
             	parent="menu_root_voucher" sequence="10"/>
             	
+            	<menuitem id="menu_action_rawdata"
+		           	name="Raw Data"
+		           	action="action_rawdata"
+		           	parent="menu_thu_chi" sequence="5"/>
+            	
             	<menuitem id="menu_action_thucthu"
 		           	name="Thực thu"
 		           	action="action_thucthu"
@@ -34,11 +39,6 @@
 		           	name="Dự chi"
 		           	action="action_duchi"
 		           	parent="menu_thu_chi" sequence="40"/>
-		           	
-	           	<menuitem id="menu_action_rawdata"
-		           	name="Raw Data"
-		           	action="action_rawdata"
-		           	parent="menu_thu_chi" sequence="50"/>
             
            	<menuitem id="menu_cauhinh"
             	name="Cấu hình"

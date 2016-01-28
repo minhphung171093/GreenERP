@@ -4,3 +4,4 @@ access_green_erp_voucher_2,du_an,model_du_an,base.group_user,1,1,1,1
 access_green_erp_voucher_3,hang_muc,model_hang_muc,base.group_user,1,1,1,1
 access_green_erp_voucher_4,phuongthuc_thanhtoan,model_phuongthuc_thanhtoan,base.group_user,1,1,1,1
 access_green_erp_voucher_5,giai_doan,model_giai_doan,base.group_user,1,1,1,1
+access_green_erp_voucher_6,report_thu_chi,model_report_thu_chi,base.group_user,1,1,1,1

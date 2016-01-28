@@ -53,12 +53,17 @@ class green_erp_voucher(osv.osv):
         user = self.pool.get('res.users').browse(cr, uid, uid)
         return user.company_id and user.company_id.id or False
     
+    def _get_phuongthuc_thanhtoan(self, cr, uid, context=None):
+        pttt_ids = self.pool.get('phuongthuc.thanhtoan').search(cr, uid, [('code','=','TM')])
+        return pttt_ids and pttt_ids[0] or False
+    
     _defaults = {
         'user_id': lambda self, cr, uid, context=None: uid,
         'company_id': _get_company,
         'date': time.strftime('%Y-%m-%d'),
         'name': '/',
         'thanh_tien': 0,
+        'phuongthuc_thanhtoan_id': _get_phuongthuc_thanhtoan,
     }
     
     def create(self, cr, uid, vals, context=None):
@@ -75,6 +80,7 @@ class du_an(osv.osv):
     
     _columns = {
         'name': fields.char('Tên', size=1024, required=True),
+        'company_id': fields.many2one('res.company', 'Công ty', required=True),
     }
     
 du_an()
@@ -93,6 +99,7 @@ class phuongthuc_thanhtoan(osv.osv):
     
     _columns = {
         'name': fields.char('Tên', size=1024, required=True),
+        'code': fields.char('Mã', size=1024, required=True),
     }
     
 phuongthuc_thanhtoan()

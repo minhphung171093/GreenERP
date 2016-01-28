@@ -34,6 +34,11 @@
 		           	name="Dự chi"
 		           	action="action_duchi"
 		           	parent="menu_thu_chi" sequence="40"/>
+		           	
+	           	<menuitem id="menu_action_rawdata"
+		           	name="Raw Data"
+		           	action="action_rawdata"
+		           	parent="menu_thu_chi" sequence="50"/>
             
            	<menuitem id="menu_cauhinh"
             	name="Cấu hình"

@@ -8,6 +8,7 @@
 			<field name="arch" type="xml">
 				<tree string="Dự án" editable='top'>
 					<field name="name"/>
+					<field name="company_id"/>
 				</tree>
 			</field>
 		</record>
@@ -43,6 +44,7 @@
 			<field name="model">phuongthuc.thanhtoan</field>
 			<field name="arch" type="xml">
 				<tree string="Phương thức thanh toán" editable='top'>
+					<field name="code"/>
 					<field name="name"/>
 				</tree>
 			</field>
@@ -131,7 +133,7 @@
 							<newline/>
 							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1'/>
+							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
 							<field name="thanh_tien" required='1'/>
 							<field name="phuongthuc_thanhtoan_id" required='1'/>
@@ -174,14 +176,14 @@
 			<field name="arch" type="xml">
 				<tree string="Thực chi">
 					<field name="name"/>
+					<field name="company_id"/>
 					<field name="user_id"/>
 					<field name="date"/>
 					<field name="project_id"/>
-					<field name="company_id"/>
-					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="hang_muc_id"/>
 					<field name="thanh_tien" sum='Tồng'/>
+					<field name="phuongthuc_thanhtoan_id"/>
 					<field name="giai_doan_id" invisible='1'/>
-					<field name="hang_muc_id" invisible='1'/>
 					<field name="type" invisible='1'/>
 				</tree>
 			</field>
@@ -197,15 +199,17 @@
 							<field name="type" invisible='1'/>
 						</h1>
 						<group col='4'>
+							<field name="company_id" required='1'/>
+							<newline/>
 							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1'/>
-							<field name="hang_muc_id"/>
-							<field name="noi_dung" colspan='4' required='1'/>
-							<field name="phuongthuc_thanhtoan_id" required='1'/>
-							<field name="company_id" required='1'/>
-							<field name="thanh_tien" required='1'/>
+							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
 							<field name="ghi_chu" colspan='4'/>
 						</group>
 					</sheet>
@@ -242,14 +246,14 @@
 			<field name="arch" type="xml">
 				<tree string="Dự thu">
 					<field name="name"/>
+					<field name="company_id"/>
 					<field name="user_id"/>
 					<field name="date"/>
 					<field name="project_id"/>
-					<field name="company_id"/>
-					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="hang_muc_id"/>
 					<field name="thanh_tien" sum='Tồng'/>
+					<field name="phuongthuc_thanhtoan_id"/>
 					<field name="giai_doan_id" invisible='1'/>
-					<field name="hang_muc_id" invisible='1'/>
 					<field name="type" invisible='1'/>
 				</tree>
 			</field>
@@ -265,15 +269,17 @@
 							<field name="type" invisible='1'/>
 						</h1>
 						<group col='4'>
+							<field name="company_id" required='1'/>
+							<newline/>
 							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1'/>
-							<field name="hang_muc_id"/>
-							<field name="noi_dung" colspan='4' required='1'/>
-							<field name="phuongthuc_thanhtoan_id" required='1'/>
-							<field name="company_id" required='1'/>
-							<field name="thanh_tien" required='1'/>
+							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
 							<field name="ghi_chu" colspan='4'/>
 						</group>
 					</sheet>
@@ -310,14 +316,14 @@
 			<field name="arch" type="xml">
 				<tree string="Dự chi">
 					<field name="name"/>
+					<field name="company_id"/>
 					<field name="user_id"/>
 					<field name="date"/>
 					<field name="project_id"/>
-					<field name="company_id"/>
-					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="hang_muc_id"/>
 					<field name="thanh_tien" sum='Tồng'/>
+					<field name="phuongthuc_thanhtoan_id"/>
 					<field name="giai_doan_id" invisible='1'/>
-					<field name="hang_muc_id" invisible='1'/>
 					<field name="type" invisible='1'/>
 				</tree>
 			</field>
@@ -333,15 +339,17 @@
 							<field name="type" invisible='1'/>
 						</h1>
 						<group col='4'>
+							<field name="company_id" required='1'/>
+							<newline/>
 							<field name="user_id" required='1'/>
 							<field name="date" required='1'/>
-							<field name="project_id" required='1'/>
-							<field name="hang_muc_id"/>
-							<field name="noi_dung" colspan='4' required='1'/>
-							<field name="phuongthuc_thanhtoan_id" required='1'/>
-							<field name="company_id" required='1'/>
-							<field name="thanh_tien" required='1'/>
+							<field name="project_id" required='1' domain="[('company_id','=',company_id)]"/>
 							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
 							<field name="ghi_chu" colspan='4'/>
 						</group>
 					</sheet>
@@ -370,6 +378,99 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="duchi_form_view"/>
             <field name="act_window_id" ref="action_duchi"/>
+        </record>
+		
+		<record id="green_erp_voucher_rawdata_search_view" model="ir.ui.view">
+	        <field name="name">green.erp.voucher.rawdata.search</field>
+	        <field name="model">green.erp.voucher</field>
+	        <field name="arch" type="xml">
+	            <search string="Raw Data">
+	                <field name="user_id"/>
+	                <field name="date"/>
+					<field name="project_id"/>
+					<field name="hang_muc_id"/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="company_id"/>
+					<field name="giai_doan_id"/>
+	                <group expand="1" string="Group By">
+	                    <filter string="Nhân viên" name="nhanvien" context="{'group_by':'user_id'}"/>
+	                    <filter string="Dự án" name="duan" context="{'group_by':'project_id'}"/>
+	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
+	                    <filter string="Phương thức thanh toán" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
+	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
+	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
+	                    <filter string="Loại" name="loai" context="{'group_by':'type'}"/>
+	                </group>
+	            </search>
+	        </field>
+	    </record>
+        <record id="rawdata_tree_view" model="ir.ui.view">
+			<field name="name">rawdata.tree</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<tree string="Row Data">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="user_id"/>
+					<field name="date"/>
+					<field name="project_id"/>
+					<field name="hang_muc_id"/>
+					<field name="thanh_tien" sum='Tồng'/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="giai_doan_id" invisible='1'/>
+					<field name="type"/>
+				</tree>
+			</field>
+		</record>
+		<record id="rawdata_form_view" model="ir.ui.view">
+			<field name="name">rawdata.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Raw Data" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+						</h1>
+						<group col='4'>
+							<field name="company_id" required='1' domain="[('company_id','=',company_id)]"/>
+							<field name="type" invisible='1'/>
+							<field name="user_id" required='1'/>
+							<field name="date" required='1'/>
+							<field name="project_id" required='1'/>
+							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_rawdata" model="ir.actions.act_window">
+            <field name="name">Raw Data</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="rawdata_tree_view"/>
+            <field name="search_view_id" ref="green_erp_voucher_rawdata_search_view"/>
+        </record>
+        <record id="action_rawdata1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="rawdata_tree_view"/>
+            <field name="act_window_id" ref="action_rawdata"/>
+        </record>
+        <record id="action_rawdata2" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="rawdata_form_view"/>
+            <field name="act_window_id" ref="action_rawdata"/>
         </record>
 		
     </data>

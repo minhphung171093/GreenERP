@@ -3,7 +3,9 @@
 
 from openerp.osv import fields, osv
 from openerp import tools
-
+import time
+from dateutil.relativedelta import relativedelta
+from openerp.tools import config
 
 class report_thu_chi(osv.osv):
     _name = "report.thu.chi"
@@ -37,5 +39,6 @@ class report_thu_chi(osv.osv):
                 group by id, name, user_id, date, project_id, hang_muc_id, company_id, phuongthuc_thanhtoan_id, type, giai_doan_id, date_str
         '''
         cr.execute(sql)
-        
-        
+
+report_thu_chi()
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

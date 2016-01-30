@@ -46,7 +46,7 @@
 	                    <filter string="Tháng" name="thang" context="{'group_by':'date'}"/>
 	                    <filter string="Ngày" name="ngay" context="{'group_by':'date_str'}"/>
 	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
-	                    <filter string="Phương thức thanh toán" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
+	                    <filter string="Nguồn tài chính" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
 	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
 	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
                     </group>
@@ -54,13 +54,13 @@
             </field>
         </record>
 
-       <record id="action_thu_chi_report" model="ir.actions.act_window">
+        <record id="action_thu_chi_report" model="ir.actions.act_window">
             <field name="name">Thu/Chi</field>
             <field name="res_model">report.thu.chi</field>
             <field name="view_type">form</field>
             <field name="view_mode">pivot,graph</field>
             <field name="search_view_id" ref="view_thu_chi_search"/>
         </record>
-
+		
     </data>
 </openerp>

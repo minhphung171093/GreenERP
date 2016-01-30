@@ -92,7 +92,7 @@
 	                    <filter string="Nhân viên" name="nhanvien" context="{'group_by':'user_id'}"/>
 	                    <filter string="Dự án" name="duan" context="{'group_by':'project_id'}"/>
 	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
-	                    <filter string="Phương thức thanh toán" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
+	                    <filter string="Nguồn tài chính" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
 	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
 	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
 	                </group>
@@ -396,7 +396,7 @@
 	                    <filter string="Nhân viên" name="nhanvien" context="{'group_by':'user_id'}"/>
 	                    <filter string="Dự án" name="duan" context="{'group_by':'project_id'}"/>
 	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
-	                    <filter string="Phương thức thanh toán" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
+	                    <filter string="Nguồn tài chính" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
 	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
 	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
 	                    <filter string="Loại" name="loai" context="{'group_by':'type'}"/>
@@ -471,6 +471,184 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="rawdata_form_view"/>
             <field name="act_window_id" ref="action_rawdata"/>
+        </record>
+        
+        <record id="moi_thucchi_form_view" model="ir.ui.view">
+			<field name="name">moi.thuc.chi.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Thực chi" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+							<field name="type" invisible='1'/>
+						</h1>
+						<group col='4'>
+							<field name="company_id" required='1'/>
+							<newline/>
+							<field name="date" required='1'/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
+							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+					<footer>
+						<button name='bt_taothucchi' string="Tạo" type="object" class="oe_highlight"/>
+						hoặc
+						<button string="Hủy bỏ" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="action_moi_thucchi" model="ir.actions.act_window">
+            <field name="name">Tạo mới thực chi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_type': 'thuc_chi'}</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="moi_thucchi_form_view"/>
+        </record>
+
+		<record id="green_erp_tamung_search_view" model="ir.ui.view">
+	        <field name="name">green.erp.tamung.search</field>
+	        <field name="model">green.erp.tamung</field>
+	        <field name="arch" type="xml">
+	            <search string="Tạm ứng">
+	                <field name="user_id"/>
+	                <field name="date"/>
+					<field name="project_id"/>
+					<field name="hang_muc_id"/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="company_id"/>
+					<field name="state"/>
+	                <group expand="1" string="Group By">
+	                    <filter string="Nhân viên" name="nhanvien" context="{'group_by':'user_id'}"/>
+	                    <filter string="Dự án" name="duan" context="{'group_by':'project_id'}"/>
+	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
+	                    <filter string="Nguồn tài chính" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
+	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
+	                    <filter string="Trạng thái" name="trangthai" context="{'group_by':'state'}"/>
+	                </group>
+	            </search>
+	        </field>
+	    </record>
+        <record id="tamung_tree_view" model="ir.ui.view">
+			<field name="name">tamung.tree</field>
+			<field name="model">green.erp.tamung</field>
+			<field name="arch" type="xml">
+				<tree string="Row Data">
+					<field name="name"/>
+					<field name="company_id"/>
+					<field name="user_id"/>
+					<field name="date"/>
+					<field name="project_id"/>
+					<field name="hang_muc_id"/>
+					<field name="thanh_tien" sum='Tồng'/>
+					<field name="phuongthuc_thanhtoan_id"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		<record id="tamung_form_view" model="ir.ui.view">
+			<field name="name">tamung.form</field>
+			<field name="model">green.erp.tamung</field>
+			<field name="arch" type="xml">
+				<form string="Tạm ứng" version='7.0'>
+					<header>
+						<button name='%(action_moi_thucchi)d' states='moi_tao' string="Tạo phiếu chi" type="action" class="oe_highlight"
+							context="{'default_company_id': company_id,
+									  'default_user_id': user_id,
+									  'default_hang_muc_id': hang_muc_id,
+									  'default_project_id': project_id,
+									  'default_thanh_tien': thanh_tien,
+									  'default_noi_dung': noi_dung,
+									  'default_ghi_chu': ghi_chu,
+									  'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}"/>
+						<field name="state" widget="statusbar" statusbar_visible="moi_tao,da_chi,hoan_thanh"/>
+					</header>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+						</h1>
+						<group col='4'>
+							<field name="company_id" required='1'/>
+							<field name="date" required='1'/>
+							<field name="user_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
+							<newline/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="noi_dung" colspan='4'/>
+						</group>
+						<notebook>
+							<page string="Chi tiết quyết toán">
+								<field name="thucte_chi_line" nolabel='1' context="{'form_view_ref':'green_erp_voucher.thucchi_form_view',
+																					'default_company_id': company_id,
+																					'default_user_id': user_id,
+																					'default_hang_muc_id': hang_muc_id,
+																					'default_project_id': project_id,
+																					'default_thanh_tien': thanh_tien,
+																					'default_noi_dung': noi_dung,
+																					'default_ghi_chu': ghi_chu,
+																					'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}">
+										<tree>
+											<field name="name"/>
+											<field name="company_id"/>
+											<field name="user_id"/>
+											<field name="date"/>
+											<field name="project_id"/>
+											<field name="hang_muc_id"/>
+											<field name="thanh_tien"/>
+											<field name="phuongthuc_thanhtoan_id"/>
+											<field name="giai_doan_id" invisible='1'/>
+											<field name="type" invisible='1'/>
+										</tree>											
+								</field>
+								<group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+	                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+	                                    <label for="sotien_thucchi" />
+	                                </div>
+	                                <field name="sotien_thucchi" nolabel="1" class="oe_subtotal_footer_separator"/>
+	                                <div class="oe_clear"/>
+	                            </group>
+								<field name="ghi_chu" class="oe_inline" placeholder="Ghi chú ..."/>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_tamung" model="ir.actions.act_window">
+            <field name="name">Tạm ứng</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.tamung</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="tamung_tree_view"/>
+            <field name="search_view_id" ref="green_erp_tamung_search_view"/>
+        </record>
+        <record id="action_tamung1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="tamung_tree_view"/>
+            <field name="act_window_id" ref="action_tamung"/>
+        </record>
+        <record id="action_tamung2" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tamung_form_view"/>
+            <field name="act_window_id" ref="action_tamung"/>
         </record>
 		
     </data>

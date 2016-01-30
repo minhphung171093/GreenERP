@@ -80,6 +80,16 @@ class green_erp_voucher(osv.osv):
             self.pool.get('green.erp.tamung').write(cr, uid, [context['active_id']],{'state':'da_chi','thuc_chi_id':ids[0]})
         return True
     
+    def bt_hoanung_thucchi(self, cr, uid, ids, context=None):
+        if context.get('active_id', False):
+            self.pool.get('green.erp.tamung').write(cr, uid, [context['active_id']],{'state':'hoan_thanh','hoanung_chi_id':ids[0]})
+        return True
+    
+    def bt_hoanung_thucthu(self, cr, uid, ids, context=None):
+        if context.get('active_id', False):
+            self.pool.get('green.erp.tamung').write(cr, uid, [context['active_id']],{'state':'hoan_thanh','hoanung_thu_id':ids[0]})
+        return True
+    
 green_erp_voucher()
 
 class green_erp_tamung(osv.osv):
@@ -126,7 +136,9 @@ class green_erp_tamung(osv.osv):
             }),
         'state': fields.selection([('moi_tao','Mới tạo'),('da_chi','Chờ quyết toán'),('cho_tra','Chờ chi'),('cho_thu','Chờ thu'),('hoan_thanh','Hoàn thành')], 'Trạng thái'),
         'thuc_chi_id': fields.many2one('green.erp.voucher', 'Thực chi'),
-        'thucte_chi_line': fields.one2many('green.erp.voucher', 'tamung_id', 'Thực tế chi', readonly=True, states={'da_chi': [('readonly', False)]}),
+        'hoanung_chi_id': fields.many2one('green.erp.voucher', 'Hoàn ứng chi'),
+        'hoanung_thu_id': fields.many2one('green.erp.voucher', 'Hoàn ứng thu'),
+        'thucte_chi_line': fields.one2many('green.erp.voucher', 'tamung_id', 'Thực tế chi', readonly=False, states={'hoan_thanh': [('readonly', True)]}),
     }
     
     def _get_company(self, cr, uid, context=None):

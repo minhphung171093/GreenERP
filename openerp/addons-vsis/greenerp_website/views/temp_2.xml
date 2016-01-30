@@ -376,7 +376,7 @@
 							      			<li t-foreach="products" t-as="product">
 							      				<div class="thumb">
 							      					<a href="" title="">
-							      						<img src="/greenerp_website/static/src/img/dummy/img4.png" alt=""/>
+							      						<span itemprop="image" t-field="product.image" t-field-options='{"widget": "image", "class": "product_detail_img", "alt-field": "name"}'/>
 							      						<b t-field="product.name"/>
 							      					</a>
 							      					<div class="new">

@@ -516,6 +516,94 @@
             <field name="target">new</field>
             <field name="view_id" ref="moi_thucchi_form_view"/>
         </record>
+        
+        <record id="hoanung_thucchi_form_view" model="ir.ui.view">
+			<field name="name">hoanung.thuc.chi.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Thực chi" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+							<field name="type" invisible='1'/>
+						</h1>
+						<group col='4'>
+							<field name="company_id" required='1'/>
+							<newline/>
+							<field name="date" required='1'/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
+							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+					<footer>
+						<button name='bt_hoanung_thucchi' string="Tạo" type="object" class="oe_highlight"/>
+						hoặc
+						<button string="Hủy bỏ" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="action_hoanung_thucchi" model="ir.actions.act_window">
+            <field name="name">Tạo mới hoàn ứng thực chi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_type': 'thuc_chi'}</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="hoanung_thucchi_form_view"/>
+        </record>
+        
+        <record id="hoanung_thucthu_form_view" model="ir.ui.view">
+			<field name="name">hoanung.thuc.thu.form</field>
+			<field name="model">green.erp.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Thực thu" version='7.0'>
+					<sheet>
+						<h1>
+							<field name="name" readonly='1'/>
+							<field name="type" invisible='1'/>
+						</h1>
+						<group col='4'>
+							<field name="company_id" required='1'/>
+							<newline/>
+							<field name="date" required='1'/>
+							<field name="user_id" required='1'/>
+							<field name="project_id" required='1' context="{'default_company_id':company_id}" domain="[('company_id','=',company_id)]"/>
+							<field name="giai_doan_id"/>
+							<field name="thanh_tien" required='1'/>
+							<field name="phuongthuc_thanhtoan_id" required='1'/>
+							<field name="hang_muc_id" required='1'/>
+							<newline/>
+							<field name="noi_dung" colspan='4'/>
+							<field name="ghi_chu" colspan='4'/>
+						</group>
+					</sheet>
+					<footer>
+						<button name='bt_hoanung_thucthu' string="Tạo" type="object" class="oe_highlight"/>
+						hoặc
+						<button string="Hủy bỏ" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="action_hoanung_thucthu" model="ir.actions.act_window">
+            <field name="name">Tạo mới hoàn ứng thực thu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">green.erp.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_type': 'thuc_thu'}</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="hoanung_thucthu_form_view"/>
+        </record>
 
 		<record id="green_erp_tamung_search_view" model="ir.ui.view">
 	        <field name="name">green.erp.tamung.search</field>
@@ -569,6 +657,24 @@
 									  'default_hang_muc_id': hang_muc_id,
 									  'default_project_id': project_id,
 									  'default_thanh_tien': thanh_tien,
+									  'default_noi_dung': noi_dung,
+									  'default_ghi_chu': ghi_chu,
+									  'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}"/>
+						<button name='%(action_hoanung_thucchi)d' states='cho_tra' string="Tạo phiếu chi" type="action" class="oe_highlight"
+							context="{'default_company_id': company_id,
+									  'default_user_id': user_id,
+									  'default_hang_muc_id': hang_muc_id,
+									  'default_project_id': project_id,
+									  'default_thanh_tien': sotien_thucchi-thanh_tien,
+									  'default_noi_dung': noi_dung,
+									  'default_ghi_chu': ghi_chu,
+									  'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}"/>
+						<button name='%(action_hoanung_thucthu)d' states='cho_thu' string="Tạo phiếu thu" type="action" class="oe_highlight"
+							context="{'default_company_id': company_id,
+									  'default_user_id': user_id,
+									  'default_hang_muc_id': hang_muc_id,
+									  'default_project_id': project_id,
+									  'default_thanh_tien': thanh_tien-sotien_thucchi,
 									  'default_noi_dung': noi_dung,
 									  'default_ghi_chu': ghi_chu,
 									  'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}"/>

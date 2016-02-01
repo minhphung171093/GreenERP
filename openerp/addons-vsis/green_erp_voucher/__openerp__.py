@@ -26,10 +26,11 @@
     'sequence': 1,
     'author': 'minhphung171093@gmail.com',
     'website' : 'http://incomtech.com.vn/',
-    'depends': [],
+    'depends': ['report_aeroo'],
     'data': [
         'security/ir.model.access.csv',
         'report/thu_chi_report_view.xml',
+        'report/danhsach_raw_data_report_view.xml',
         'account_view.xml',
         'account_sequence.xml',
         'menu.xml',

@@ -392,6 +392,7 @@
 					<field name="phuongthuc_thanhtoan_id"/>
 					<field name="company_id"/>
 					<field name="giai_doan_id"/>
+					<filter icon="terp-go-month" name="thanghientai" string="Tháng hiện tại" domain="[('date','&lt;=',(context_today()+relativedelta(day=31)).strftime('%%Y-%%m-%%d')),('date','&gt;=',(context_today()-relativedelta(day=1)).strftime('%%Y-%%m-%%d'))]"/>
 	                <group expand="1" string="Group By">
 	                    <filter string="Nhân viên" name="nhanvien" context="{'group_by':'user_id'}"/>
 	                    <filter string="Dự án" name="duan" context="{'group_by':'project_id'}"/>
@@ -455,7 +456,7 @@
             <field name="res_model">green.erp.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
-            <field name="context">{}</field>
+            <field name="context">{'search_default_thanghientai':1}</field>
             <field name="domain">[]</field>
             <field name="view_id" ref="rawdata_tree_view"/>
             <field name="search_view_id" ref="green_erp_voucher_rawdata_search_view"/>
@@ -705,6 +706,7 @@
 																					'default_thanh_tien': thanh_tien,
 																					'default_noi_dung': noi_dung,
 																					'default_ghi_chu': ghi_chu,
+																					'default_type': 'thuc_chi',
 																					'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}">
 										<tree>
 											<field name="name"/>

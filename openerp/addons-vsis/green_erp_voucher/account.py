@@ -62,7 +62,7 @@ class green_erp_voucher(osv.osv):
     _defaults = {
         'user_id': lambda self, cr, uid, context=None: uid,
         'company_id': _get_company,
-        'date': time.strftime('%Y-%m-%d'),
+        'date': lambda *a: time.strftime('%Y-%m-%d'),
         'name': '/',
         'thanh_tien': 0,
         'phuongthuc_thanhtoan_id': _get_phuongthuc_thanhtoan,
@@ -96,8 +96,13 @@ class green_erp_tamung(osv.osv):
     _name = "green.erp.tamung"
     _order = 'date desc'
     
+    def _get_sotien_conlai(self, cr, uid, ids, field_name, arg, context=None):
+        res = {}
+        for tamung in self.browse(cr, uid, ids, context=context):
+            res[tamung.id] = tamung.thanh_tien-tamung.sotien_thucchi
+        return res
+    
     def _get_tongthuctechi(self, cr, uid, ids, field_name, arg, context=None):
-        cur_obj = self.pool.get('res.currency')
         res = {}
         for tamung in self.browse(cr, uid, ids, context=context):
             res[tamung.id] = 0
@@ -134,6 +139,7 @@ class green_erp_tamung(osv.osv):
                 'green.erp.tamung': (lambda self, cr, uid, ids, c={}: ids, ['thucte_chi_line'], 10),
                 'so.tien.lai': (_get_tamung, ['tamung_id', 'thanh_tien'], 10),
             }),
+        'sotien_conlai': fields.function(_get_sotien_conlai, string='Số tiền còn lại', digits=(16,0), type='float'),
         'state': fields.selection([('moi_tao','Mới tạo'),('da_chi','Chờ quyết toán'),('cho_tra','Chờ chi'),('cho_thu','Chờ thu'),('hoan_thanh','Hoàn thành')], 'Trạng thái'),
         'thuc_chi_id': fields.many2one('green.erp.voucher', 'Thực chi'),
         'hoanung_chi_id': fields.many2one('green.erp.voucher', 'Hoàn ứng chi'),
@@ -152,7 +158,7 @@ class green_erp_tamung(osv.osv):
     _defaults = {
         'user_id': lambda self, cr, uid, context=None: uid,
         'company_id': _get_company,
-        'date': time.strftime('%Y-%m-%d'),
+        'date': lambda *a: time.strftime('%Y-%m-%d'),
         'name': '/',
         'thanh_tien': 0,
         'phuongthuc_thanhtoan_id': _get_phuongthuc_thanhtoan,
@@ -175,6 +181,9 @@ class green_erp_tamung(osv.osv):
                     '''%(line.thuc_chi_id.id)
                     cr.execute(sql)
         return super(green_erp_tamung, self).write(cr, uid, ids, vals, context)
+    
+    def bt_dachi(self, cr, uid, ids, context=None):
+        return self.write(cr, uid, ids,{'state':'hoan_thanh'})
     
 green_erp_tamung()
 

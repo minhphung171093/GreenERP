@@ -95,6 +95,7 @@
 	                    <filter string="Nguồn tài chính" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
 	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
 	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
+	                    <filter string="Tháng" name="thang" context="{'group_by':'date'}"/>
 	                </group>
 	            </search>
 	        </field>
@@ -152,7 +153,7 @@
             <field name="res_model">green.erp.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
-            <field name="context">{'default_type': 'thuc_thu'}</field>
+            <field name="context">{'default_type': 'thuc_thu','search_default_thang':1,}</field>
             <field name="domain">[('type','=','thuc_thu')]</field>
             <field name="view_id" ref="thucthu_tree_view"/>
             <field name="search_view_id" ref="green_erp_voucher_search_view"/>
@@ -222,7 +223,7 @@
             <field name="res_model">green.erp.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
-            <field name="context">{'default_type': 'thuc_chi'}</field>
+            <field name="context">{'default_type': 'thuc_chi','search_default_thang':1,}</field>
             <field name="domain">[('type','=','thuc_chi')]</field>
             <field name="view_id" ref="thucchi_tree_view"/>
             <field name="search_view_id" ref="green_erp_voucher_search_view"/>
@@ -292,7 +293,7 @@
             <field name="res_model">green.erp.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
-            <field name="context">{'default_type': 'du_thu'}</field>
+            <field name="context">{'default_type': 'du_thu','search_default_thang':1,}</field>
             <field name="domain">[('type','=','du_thu')]</field>
             <field name="view_id" ref="duthu_tree_view"/>
             <field name="search_view_id" ref="green_erp_voucher_search_view"/>
@@ -362,7 +363,7 @@
             <field name="res_model">green.erp.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
-            <field name="context">{'default_type': 'du_chi'}</field>
+            <field name="context">{'default_type': 'du_chi','search_default_thang':1,}</field>
             <field name="domain">[('type','=','du_chi')]</field>
             <field name="view_id" ref="duchi_tree_view"/>
             <field name="search_view_id" ref="green_erp_voucher_search_view"/>
@@ -400,6 +401,7 @@
 	                    <filter string="Nguồn tài chính" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
 	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
 	                    <filter string="Giai đoạn" name="giaidoan" context="{'group_by':'giai_doan_id'}"/>
+	                    <filter string="Tháng" name="thang" context="{'group_by':'date'}"/>
 	                    <filter string="Loại" name="loai" context="{'group_by':'type'}"/>
 	                </group>
 	            </search>
@@ -456,7 +458,7 @@
             <field name="res_model">green.erp.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
-            <field name="context">{'search_default_thanghientai':1}</field>
+            <field name="context">{'search_default_thang':1,'search_default_loai':1}</field>
             <field name="domain">[]</field>
             <field name="view_id" ref="rawdata_tree_view"/>
             <field name="search_view_id" ref="green_erp_voucher_rawdata_search_view"/>
@@ -624,6 +626,7 @@
 	                    <filter string="Hạng mục" name="hangmuc" context="{'group_by':'hang_muc_id'}"/>
 	                    <filter string="Nguồn tài chính" name="phuongthucthanhtoan" context="{'group_by':'phuongthuc_thanhtoan_id'}"/>
 	                    <filter string="Công ty" name="congty" context="{'group_by':'company_id'}"/>
+	                    <filter string="Tháng" name="thang" context="{'group_by':'date'}"/>
 	                    <filter string="Trạng thái" name="trangthai" context="{'group_by':'state'}"/>
 	                </group>
 	            </search>
@@ -641,6 +644,8 @@
 					<field name="project_id"/>
 					<field name="hang_muc_id"/>
 					<field name="thanh_tien" sum='Tồng'/>
+					<field name="sotien_thucchi" string="Số tiền thực tế chi" sum='Tồng'/>
+					<field name="sotien_conlai" sum='Tồng'/>
 					<field name="phuongthuc_thanhtoan_id"/>
 					<field name="state"/>
 				</tree>
@@ -661,7 +666,7 @@
 									  'default_noi_dung': noi_dung,
 									  'default_ghi_chu': ghi_chu,
 									  'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}"/>
-						<button name='%(action_hoanung_thucchi)d' states='cho_tra' string="Tạo phiếu chi" type="action" class="oe_highlight"
+						<!-- <button name='%(action_hoanung_thucchi)d' states='cho_tra' string="Tạo phiếu chi" type="action" class="oe_highlight"
 							context="{'default_company_id': company_id,
 									  'default_user_id': user_id,
 									  'default_hang_muc_id': hang_muc_id,
@@ -669,7 +674,8 @@
 									  'default_thanh_tien': sotien_thucchi-thanh_tien,
 									  'default_noi_dung': noi_dung,
 									  'default_ghi_chu': ghi_chu,
-									  'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}"/>
+									  'default_phuongthuc_thanhtoan_id': phuongthuc_thanhtoan_id,}"/> -->
+						<button name='bt_dachi' states='cho_tra' string="Đã chi" type="object" class="oe_highlight"/>
 						<button name='%(action_hoanung_thucthu)d' states='cho_thu' string="Tạo phiếu thu" type="action" class="oe_highlight"
 							context="{'default_company_id': company_id,
 									  'default_user_id': user_id,
@@ -741,7 +747,7 @@
             <field name="res_model">green.erp.tamung</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
-            <field name="context">{}</field>
+            <field name="context">{'search_default_thang':1}</field>
             <field name="domain">[]</field>
             <field name="view_id" ref="tamung_tree_view"/>
             <field name="search_view_id" ref="green_erp_tamung_search_view"/>

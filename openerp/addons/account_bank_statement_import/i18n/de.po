@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Anja Funk <anja.funk@afimage.de>, 2015
+# Wolfgang Taferner, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-07 14:40+0000\n"
-"PO-Revision-Date: 2015-11-13 16:14+0000\n"
-"Last-Translator: Anja Funk <anja.funk@afimage.de>\n"
+"PO-Revision-Date: 2016-02-18 14:45+0000\n"
+"Last-Translator: Ralf Hilgenstock <rh@dialoge.info>\n"
 "Language-Team: German (http://www.transifex.com/odoo/odoo-9/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +29,7 @@ msgstr "%d Buchungen wurden bereits importiert und ignoriert."
 #: code:addons/account_bank_statement_import/account_bank_statement_import.py:226
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
-msgstr "1 Buchung wurde bereits importiert und ignoriert."
+msgstr "Eine Buchung wurde bereits importiert und ignoriert."
 
 #. module: account_bank_statement_import
 #: sql_constraint:account.bank.statement.line:0
@@ -122,7 +123,7 @@ msgstr "Kann das Journal mit diesem Eintrag nicht finden. Bitte Journal manuell 
 msgid ""
 "Check this box if you don't want to share the same sequence for invoices and"
 " refunds made from this journal"
-msgstr ""
+msgstr "Wählen Sie diese Option, wenn Rechnungen und Gutschriften von diesem Journal nicht den gleichen Nummernkreis verwenden sollen"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_update_posted
@@ -179,7 +180,7 @@ msgstr "Abbuchungsmethoden"
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_refund_sequence
 msgid "Dedicated Refund Sequence"
-msgstr ""
+msgstr "Dedizierter Gutschriftennummernkreis"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_default_credit_account_id
@@ -249,7 +250,7 @@ msgstr "Import"
 #. module: account_bank_statement_import
 #: model:ir.model,name:account_bank_statement_import.model_account_bank_statement_import
 msgid "Import Bank Statement"
-msgstr "Importiere Bankauszug "
+msgstr "Bankauszug importieren"
 
 #. module: account_bank_statement_import
 #: model:ir.model,name:account_bank_statement_import.model_account_bank_statement_import_journal_creation
@@ -269,7 +270,7 @@ msgstr "Import ID"
 #. module: account_bank_statement_import
 #: model:ir.ui.view,arch_db:account_bank_statement_import.journal_dashboard_view_inherit
 msgid "Import Statement"
-msgstr "Import Bankauszug"
+msgstr "Bankauszug importieren"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_default_credit_account_id
@@ -349,7 +350,7 @@ msgid ""
 "Means of payment for collecting money. Odoo modules offer various payments "
 "handling facilities, but you can always use the 'Manual' payment method in "
 "order to manage payments outside of the software."
-msgstr ""
+msgstr "Zahlwege um Geld einzufordern. Odoo-Module bieten verschiedene Einrichtungen um mit Zahlungen umzugehen, immer jedoch den 'manuelle' Zahlweg, um Zahlungen extern zur Software abzuwickeln."
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_outbound_payment_method_ids
@@ -357,7 +358,7 @@ msgid ""
 "Means of payment for sending money. Odoo modules offer various payments "
 "handling facilities, but you can always use the 'Manual' payment method in "
 "order to manage payments outside of the software."
-msgstr ""
+msgstr "Zahlwege um Geld zu überweisen. Odoo-Module bieten verschiedene Einrichtungen, um mit Zahlungen umzugehen, immer jedoch den 'manuelle' Zahlweg, um Zahlungen extern zur Software abzuwickeln."
 
 #. module: account_bank_statement_import
 #: code:addons/account_bank_statement_import/account_bank_statement_import.py:132

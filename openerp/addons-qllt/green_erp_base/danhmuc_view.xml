@@ -9,8 +9,8 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Tỉnh/Thành phố" editable='top'>
+                    <field name="code" />
                     <field name="name" />
-                    <field name="ten" />
                 </tree>
             </field>
         </record>  
@@ -31,6 +31,7 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Quận (Huyện)" editable='top'>
+                    <field name="code" />
                     <field name="name" />
                     <field name="tinh_tp_id" />
                 </tree>
@@ -53,6 +54,7 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Phường (Xã)" editable='top'>
+                	<field name="code" />
                     <field name="name" />
                     <field name="quan_huyen_id" options="{'create': false, 'create_edit': false}"/>
                 </tree>
@@ -156,16 +158,9 @@
 											<notebook>
 												<page string = "Phòng">
 													<field name="phong_ks_line" nolabel="1">
-														<tree>
+														<tree editable='bottom'>
 															<field name="name" />
 														</tree>
-														<form string="Phòng" version="7.0">
-															<sheet>
-																<group>
-																	<field name = "name" />
-																</group>
-															</sheet>
-														</form>
 													</field>
 												</page>
 											</notebook>	

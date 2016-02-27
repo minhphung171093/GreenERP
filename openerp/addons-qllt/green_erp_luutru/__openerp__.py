@@ -20,16 +20,14 @@
 ##############################################################################
 
 {
-    'name': 'GreenERP ICT PURCHASE',
+    'name': 'GreenERP Quản Lý Lưu Trú',
     'version': '1.0',
     'category': 'GreenERP',
     'sequence': 1,
     'author': 'minhphung171093@gmail.com',
     'website' : 'http://incomtech.com.vn/',
-    'depends': ['green_erp_ict_base','green_erp_ict_account','green_erp_ict_stock','purchase'],
+    'depends': ['green_erp_base'],
     'data': [
-        'menu.xml',
-        'purchase_view.xml',
     ],
     'css' : [
     ],

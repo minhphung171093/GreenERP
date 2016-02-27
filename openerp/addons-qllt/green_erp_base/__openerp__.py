@@ -20,15 +20,15 @@
 ##############################################################################
 
 {
-    'name': 'GreenERP ICT SALE',
+    'name': 'GreenERP BASE',
     'version': '1.0',
     'category': 'GreenERP',
     'sequence': 1,
     'author': 'minhphung171093@gmail.com',
     'website' : 'http://incomtech.com.vn/',
-    'depends': ['green_erp_ict_base','sale','sales_team','green_erp_ict_stock','green_erp_ict_account'],
+    'depends': ['base'],
     'data': [
-        'sale_view.xml',
+        'ir_ui_menu_view.xml',
         'menu.xml',
     ],
     'css' : [

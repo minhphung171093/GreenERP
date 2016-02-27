@@ -32,7 +32,7 @@
             <field name="arch" type="xml">
                 <tree string="Quận (Huyện)" editable='top'>
                     <field name="name" />
-                    <field name="tinh_thanh_id" />
+                    <field name="tinh_tp_id" />
                 </tree>
             </field>
         </record>  

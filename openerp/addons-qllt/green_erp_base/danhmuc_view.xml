@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+<!--tỉnh-->
+        <record model="ir.ui.view" id="tinh_tp_tree">
+            <field name="name">tinh.tp.tree</field>
+            <field name="model">tinh.tp</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tỉnh/Thành phố" editable='top'>
+                    <field name="name" />
+                    <field name="ten" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_tinh_tp">
+            <field name="name">Tỉnh/Thành phố</field>
+            <field name="res_model">tinh.tp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        					<!--quận-->   
+        					
+        					
+        					
+        <record model="ir.ui.view" id="quan_huyen_tree">
+            <field name="name">quan.huyen.tree</field>
+            <field name="model">quan.huyen</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Quận (Huyện)" editable='top'>
+                    <field name="name" />
+                    <field name="tinh_thanh_id" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_quan_huyen">
+            <field name="name">Quận (Huyện)</field>
+            <field name="res_model">quan.huyen</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+        
+        		<!--Phường xã-->   
+        					
+        					
+        					
+        <record model="ir.ui.view" id="phuong_xa_tree">
+            <field name="name">phuong.xa.tree</field>
+            <field name="model">phuong.xa</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Phường (Xã)" editable='top'>
+                    <field name="name" />
+                    <field name="quan_huyen_id" options="{'create': false, 'create_edit': false}"/>
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_phuong_xa">
+            <field name="name">Phường (Xã)</field>
+            <field name="res_model">phuong.xa</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>      					
+        	
+        					
+        					<!--Loại giấy tờ-->   
+        					
+        <record model="ir.ui.view" id="loai_giay_to_tree">
+            <field name="name">loai.giay.to.tree</field>
+            <field name="model">loai.giay.to</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Loại giấy tờ" editable='top'>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_loai_giay_to">
+            <field name="name">Loại giấy tờ</field>
+            <field name="res_model">loai.giay.to</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>     
+
+        					<!--Khách sạn-->   
+        					
+	    <record id="khach_san_search" model="ir.ui.view">
+            <field name="name">khach.san.search</field>
+            <field name="model">khach.san</field>
+            <field name="arch" type="xml">
+                <search string="Khách sạn">
+                	<field name="name" />
+                    <field name="tinh_tp_id" />
+                    <field name="quan_huyen_id" />
+                    <field name="phuong_xa_id" />
+                    <separator/>
+                    <group expand="0" string="Group By...">
+                    	<filter string="Tỉnh (thành phố)" domain="[]" context="{'group_by':'tinh_tp_id'}"/>
+                        <filter string="Quận (huyện)" domain="[]" context="{'group_by':'quan_huyen_id'}"/>
+                        <filter string="Phường (xã)" domain="[]"  context="{'group_by':'phuong_xa_id'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>					
+        					
+        <record model="ir.ui.view" id="khach_san_tree">
+            <field name="name">khach.san.tree</field>
+            <field name="model">khach.san</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Khách sạn" >
+                    <field name="name" />
+                    <field name="tinh_tp_id" />
+                    <field name="quan_huyen_id" />
+                    <field name="phuong_xa_id" />
+                    <field name="gpkd" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.ui.view" id="khach_san_form">
+            <field name="name">khach.san.form</field>
+            <field name="model">khach.san</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Khách sạn" version="7.0">
+               <!--  	<header>
+	            		<button name="bt_duyet" attrs="{'invisible': [('hien_an', '!=', True)]}" string="Duyệt" type="object" class="oe_highlight" />
+	            		
+	                    <field name="trang_thai_id" widget="statusbar"/>
+	            	</header>  -->
+	                <sheet>
+                		<group col="4"  string="Thông tin chung">
+		            		<field name="name" />
+		                    <field name="dien_thoai"/>
+		                    <field name="gpkd"/>
+                		</group>
+                		<group col="4"  string="Địa chỉ">
+							<field name="tinh_tp_id" options="{'create': false, 'create_edit': false}" />                   
+							<field name="quan_huyen_id" options="{'create': false, 'create_edit': false}" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
+							<field name="phuong_xa_id" options="{'create': false, 'create_edit': false}" domain="[('quan_huyen_id','=',quan_huyen_id)]" />
+                		</group>
+                		<notebook>
+							<page string = "Số Tầng">
+								<field name="tang_ks_line" nolabel="1" >
+									<tree>
+					                    <field name="name" />       
+					                </tree>
+									<form string="Tầng" version="7.0">
+										<sheet>
+								            <group>
+												<field name="name"/>
+											</group>	
+											<notebook>
+												<page string = "Phòng">
+													<field name="phong_ks_line" nolabel="1">
+														<tree>
+															<field name="name" />
+														</tree>
+														<form string="Phòng" version="7.0">
+															<sheet>
+																<group>
+																	<field name = "name" />
+																</group>
+															</sheet>
+														</form>
+													</field>
+												</page>
+											</notebook>	
+										</sheet>
+									</form>		                
+					            </field>
+							</page>
+						</notebook>  
+	                </sheet>
+                </form>
+            </field>
+        </record>
+       
+        <record model="ir.actions.act_window" id="action_khach_san">
+            <field name="name">Khách sạn</field>
+            <field name="res_model">khach.san</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="khach_san_search"/>
+        </record> 
+    </data>
+</openerp>

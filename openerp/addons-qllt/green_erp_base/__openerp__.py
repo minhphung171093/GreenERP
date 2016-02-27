@@ -29,6 +29,7 @@
     'depends': ['base'],
     'data': [
         'ir_ui_menu_view.xml',
+        'danhmuc_view.xml',
         'menu.xml',
     ],
     'css' : [

@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+    	<menuitem id="cauhinh_root"
+			name="Cấu hình" sequence="175"/>
+			
+			<menuitem id="menu_danh_muc"
+				name="Danh mục"
+				parent="cauhinh_root" sequence="10"/>
+				
+				<menuitem id="menu_action_tinh_tp"
+					action="action_tinh_tp"
+					name="Tỉnh/Thành phố"
+					parent="menu_danh_muc" sequence="10"/>
+
+				<menuitem id="menu_action_quan_huyen"
+					action="action_quan_huyen"
+					name="Quận/Huyện"
+					parent="menu_danh_muc" sequence="15"/>
+				<menuitem id="menu_action_phuong_xa"
+					action="action_phuong_xa"
+					name="Phường/Xã"
+					parent="menu_danh_muc" sequence="20"/>				
+				<menuitem id="menu_action_loai_giay_to"
+					action="action_loai_giay_to"
+					name="Loại giấy tờ"
+					parent="menu_danh_muc" sequence="25"/>
+				<menuitem id="menu_action_khach_san"
+					action="action_khach_san"
+					name="Khách sạn"
+					parent="menu_danh_muc" sequence="26"/>
     </data>
 </openerp>

@@ -26,7 +26,7 @@
     'sequence': 1,
     'author': 'minhphung171093@gmail.com',
     'website' : 'http://incomtech.com.vn/',
-    'depends': ['base'],
+    'depends': ['base','web_readonly_bypass'],
     'data': [
         'ir_ui_menu_view.xml',
         'danhmuc_view.xml',

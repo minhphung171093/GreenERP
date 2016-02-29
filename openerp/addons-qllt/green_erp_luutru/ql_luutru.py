@@ -37,7 +37,7 @@ class luu_tru(osv.osv):
         'so_giay_to': fields.char('Số giấy tờ',required = True,size = 1024),
         'quoc_tich': fields.char('Quốc tịch',required = True,size = 1024),
         'ngay_den':fields.datetime('Ngày giờ đến',required = True),
-        'ngay_di':fields.datetime('Ngày giờ đi',required = True),
+        'ngay_di':fields.datetime('Ngày giờ đi'),
         'tang_ks_id': fields.many2one('tang.ks','Tầng', required = True),
         'phong_ks_id': fields.many2one('phong.ks','Phòng', required = True),
         'dien_thoai': fields.char('Điện thoại',size = 1024, readonly = True),

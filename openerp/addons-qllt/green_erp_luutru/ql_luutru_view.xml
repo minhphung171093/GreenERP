@@ -35,7 +35,6 @@
                     <field name="name" />
                     <field name="ngay_sinh" />
                     <field name="so_giay_to" />
-                    <field name="name" />
                     <field name="gioi_tinh" />
                     <field name="ngay_den" />
                     <field name="ngay_di" />
@@ -64,6 +63,7 @@
 		            		<field name="tinh_tp_id" options="{'create': false, 'create_edit': false}" />                   
 							<field name="quan_huyen_id" options="{'create': false, 'create_edit': false}" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
 							<field name="phuong_xa_id" options="{'create': false, 'create_edit': false}" domain="[('quan_huyen_id','=',quan_huyen_id)]" />
+		                    <newline/>
 		                    <field name="dien_thoai"/>
 		                    <field name="ngay_den"/>
 		                    <field name="ngay_di"/>

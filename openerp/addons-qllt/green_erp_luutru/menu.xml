@@ -6,6 +6,10 @@
 				action="action_luu_tru"
 				name="Đăng ký lưu trú"
 				sequence="10"/>
+			<menuitem id="bao_cao" name="Thống kê - Báo cáo"/>
+	    		<menuitem id="menu_action_khach_luutru_form"
+	    		action="action_khach_luutru_form" 
+	    		parent="bao_cao" name="Danh sách khách lưu trú" sequence = '2'/>
 				
     </data>
 </openerp>

@@ -28,6 +28,7 @@
     'website' : 'http://incomtech.com.vn/',
     'depends': ['green_erp_base'],
     'data': [
+        'wizard/khach_luutru_wizard_view.xml',
         'ql_luutru_view.xml',
         'menu.xml',
     ],

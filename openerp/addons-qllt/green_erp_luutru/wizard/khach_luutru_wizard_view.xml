@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<record id="khach_luutru_form_view" model="ir.ui.view">
+	        <field name="name">khach.luutru.form.view</field>
+	        <field name="model">khach.luutru.form</field>
+	        <field name="arch" type="xml">
+	            <form string="Danh sách khách lưu trú" version="7.0">
+	            	<group colspan = '2' col = '4'>
+		            	<field name="tinh_tp_id" options="{'create': false, 'create_edit': false}" on_change="onchange_tinh_thanh()" />
+		            	<field name="quan_huyen_id" options="{'create': false, 'create_edit': false}" on_change="onchange_quan_huyen()" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
+		                <field name="phuong_xa_id" options="{'create': false, 'create_edit': false}" on_change="onchange_phuong_xa()" domain="[('quan_huyen_id','=',quan_huyen_id)]"/>
+		                
+		                <field name="khach_san_id" options="{'create': false, 'create_edit': false}" domain="[('quan_huyen_id','=',quan_huyen_id), ('phuong_xa_id','=',phuong_xa_id), ('tinh_tp_id','=',tinh_tp_id)]"/>
+		                <field name="tu_ngay"/>
+		                <field name="tu_ngay"/>
+	                </group>
+	                <footer>
+	                    <button name="print_report" type='object' string="OK" class="oe_highlight"/>
+	                    or
+	                    <button string="Cancel" class="oe_highlight" special="cancel" />
+	                </footer>
+	            </form>
+	        </field>
+    	</record>
+
+	    <record model="ir.actions.act_window" id="action_khach_luutru_form">
+	        <field name="name">Danh sách khách lưu trú</field>
+	        <field name="res_model">khach.luutru.form</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">form</field>
+	        <field name="view_id" ref="khach_luutru_form_view" />
+	        <field name="target">new</field>
+	    </record>
+	    
+
+        
+	 
+	    
+    </data>
+</openerp>
+

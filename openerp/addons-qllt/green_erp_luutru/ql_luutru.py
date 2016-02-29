@@ -45,7 +45,7 @@ class luu_tru(osv.osv):
         'ghi_chu': fields.char('Ghi chú',size = 1024),
                 }
     _defaults = {
-        'ngay_den':  lambda *a: time.strftime('%Y-%m-%d'),        
+        'ngay_den':  lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),        
                  }
     def on_change_diachi(self, cr, uid, ids, khach_san_id=False):
         res = {'value':{

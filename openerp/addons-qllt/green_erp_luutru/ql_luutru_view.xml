@@ -60,7 +60,7 @@
 	                		<field name="tiep_nhan" />
 	                	</group>
                 		<group col="4"  string="Thông tin lưu trú">
-		            		<field name="khach_san_id" onchange="on_change_diachi(khach_san_id)" />
+		            		<field name="khach_san_id" on_change="on_change_diachi(khach_san_id)" />
 		            		<field name="tinh_tp_id" options="{'create': false, 'create_edit': false}" />                   
 							<field name="quan_huyen_id" options="{'create': false, 'create_edit': false}" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
 							<field name="phuong_xa_id" options="{'create': false, 'create_edit': false}" domain="[('quan_huyen_id','=',quan_huyen_id)]" />

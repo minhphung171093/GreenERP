@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<record id="khach_luutru_report" model="ir.actions.report.xml">
+	        <field name="name">khach_luutru_report</field>
+	        <field name="type">ir.actions.report.xml</field>
+	        <field name="model">khach.luutru.form</field>
+	        <field name="report_name">khach_luutru_report</field>
+	        <field name="report_type">aeroo</field>
+	        <field name="in_format">oo-ods</field>
+	        <field name="out_format" model="report.mimetypes" search="[('code','=','oo-xls')]"/>
+	        <field name="parser_loc">green_erp_luutru/report/khach_luutru_report.py</field>
+	        <field name="report_rml">green_erp_luutru/report/khach_luutru_report.ods</field>
+	        <field name="parser_state">loc</field>
+	        <field name="tml_source">file</field>
+	        <field name="attachment_use" eval="0"/>
+    	</record>		    
+		
+		<report 
+			auto="True" 
+			menu="False"
+			id="khach_luutru_report" 
+			model="khach.luutru.form" 
+			name="khach_luutru_report"
+	        string="Danh sách khách lưu trú"
+	        rml="green_erp_luutru/report/khach_luutru_report.ods"/>	
+    </data>
+</openerp>
+

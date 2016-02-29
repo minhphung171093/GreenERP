@@ -78,8 +78,8 @@
 							<field name="loai_giay_to_id" options="{'create': false, 'create_edit': false}" />
 							<field name="so_giay_to"  />
 							<field name="khach_tinhtp_id" options="{'create': false, 'create_edit': false}" />                   
-							<field name="khach_quanhuyen_id" options="{'create': false, 'create_edit': false}" domain="[('khach_quanhuyen_id','=',tinh_tp_id)]" />
-							<field name="khach_phuongxa_id" options="{'create': false, 'create_edit': false}" domain="[('khach_phuongxa_id','=',quan_huyen_id)]" />
+							<field name="khach_quanhuyen_id" options="{'create': false, 'create_edit': false}" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
+							<field name="khach_phuongxa_id" options="{'create': false, 'create_edit': false}" domain="[('quan_huyen_id','=',quan_huyen_id)]" />
                 		</group>
 	                </sheet>
                 </form>

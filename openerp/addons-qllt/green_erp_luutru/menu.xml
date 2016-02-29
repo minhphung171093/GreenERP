@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-    	<menuitem id="ql_luutru"
-			name="Quản lý lưu trú" sequence="200"/>
 			
 			<menuitem id="menu_action_luu_tru"
 				action="action_luu_tru"
 				name="Đăng ký lưu trú"
-				parent="ql_luutru" sequence="10"/>
+				sequence="10"/>
 				
     </data>
 </openerp>

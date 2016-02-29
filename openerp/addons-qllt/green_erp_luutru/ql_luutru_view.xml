@@ -67,8 +67,8 @@
 		                    <field name="dien_thoai"/>
 		                    <field name="ngay_den"/>
 		                    <field name="ngay_di"/>
-		                    <field name="tang_ks_id" options="{'create': false, 'create_edit': false}" domain="[('tang_ks_id','=',tang_ks_id)]"/>
-		                    <field name="phong_ks_id" options="{'create': false, 'create_edit': false}" domain="[('tinh_tp_id','=',phong_ks_id)]"/>
+		                    <field name="tang_ks_id" options="{'create': false, 'create_edit': false}" domain="[('tang_ks_id','=',khach_san_id)]"/>
+		                    <field name="phong_ks_id" options="{'create': false, 'create_edit': false}" domain="[('phong_ks_id','=',tang_ks_id)]"/>
                 		</group>
                 		<group col="4"  string="Thông tin người lưu trú">
 							<field name="name"  />

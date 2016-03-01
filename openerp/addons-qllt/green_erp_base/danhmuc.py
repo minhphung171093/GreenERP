@@ -103,16 +103,45 @@ class khach_san(osv.osv):
         'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)', required = True),
         'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)', required = True),
         'gpkd': fields.char('Giấy phép KD',size = 1024),
-        'tang_ks_line':fields.one2many('tang.ks','tang_ks_id','Tang line'),
+        'tang_ks_line':fields.one2many('tang.ks','ks_id','Tang line'),
         'dien_thoai': fields.char('Điện thoại',size = 1024, required = True),
                 }
+    
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+        if context is None:
+            context = {}
+        if context.get('search_khach_san'):
+            sql = '''
+                select id from khach_san
+                where tinh_tp_id is not null
+            '''
+            if context.get('tinh_tp_id'):
+                sql+='''
+                    and tinh_tp_id = %s 
+                '''%(context.get('tinh_tp_id'))
+            if context.get('quan_huyen_id'):
+                sql+='''
+                    and quan_huyen_id = %s 
+                '''%(context.get('quan_huyen_id'))
+            if context.get('phuong_xa_id'):
+                sql+='''
+                    and phuong_xa_id = %s 
+                '''%(context.get('phuong_xa_id'))
+            cr.execute(sql)
+            ks_ids = [row[0] for row in cr.fetchall()]
+            args += [('id','in',ks_ids)]
+        return super(dai_ly, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+       ids = self.search(cr, user, args, context=context, limit=limit)
+       return self.name_get(cr, user, ids, context=context)
+   
 khach_san()
 class tang_ks(osv.osv):
     _name = "tang.ks"
     _columns = {
         'name': fields.char('Tầng',size = 1024, required = True),
-        'tang_ks_id': fields.many2one('khach.san','Tầng'),
-        'phong_ks_line':fields.one2many('phong.ks','phong_ks_id','Phòng line'),
+        'ks_id': fields.many2one('khach.san','Khách sạn'),
+        'phong_ks_line':fields.one2many('phong.ks','tang_ks_id','Phòng line'),
                 }
 tang_ks()
 
@@ -120,7 +149,7 @@ class phong_ks(osv.osv):
     _name = "phong.ks"
     _columns = {
         'name': fields.char('Phòng',size = 1024, required = True),
-        'phong_ks_id': fields.many2one('tang.ks','Phòng'),
+        'tang_ks_id': fields.many2one('tang.ks','Tầng'),
 #         'ks_id_rel':fields.related('tang_ks_line', 'tang_ks_id', type="many2one", relation="khach.san", string="Khach san"),
                 }
 phong_ks()

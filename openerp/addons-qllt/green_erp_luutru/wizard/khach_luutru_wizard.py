@@ -11,12 +11,13 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FO
 class khach_luutru_form(osv.osv_memory):
     _name = "khach.luutru.form"
     _columns = {    
+                'quoc_tich_id': fields.many2one('quoc.tich','Quốc tịch'),
                 'khach_san_id': fields.many2one( 'khach.san','Khách sạn'),
                 'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)'),
                 'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/TP'),
                 'quan_huyen_id': fields.many2one( 'quan.huyen','Quận (huyện)' ),
                 'tu_ngay':fields.date('Từ ngày'),
-                'tu_ngay':fields.date('Đến ngày'),
+                'den_ngay':fields.date('Đến ngày'),
                 }
     def onchange_quan_huyen(self, cr, uid, ids, context=None):
         vals = {}

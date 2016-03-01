@@ -69,31 +69,43 @@ class Parser(report_sxw.rml_parse):
         phuong_xa_id = wizard_data['phuong_xa_id']
         tinh_tp_id = wizard_data['tinh_tp_id']
         khach_san_id = wizard_data['khach_san_id']
-        ngay_den = wizard_data['tu_ngay']
-        ngay_di = wizard_data['den_ngay']
+        quoc_tich_id = wizard_data['quoc_tich_id']
+        tu_ngay = wizard_data['tu_ngay']
+        den_ngay = wizard_data['den_ngay']
         sql='''
             select name,ngay_sinh,khach_san_id,khach_tinhtp_id,khach_phuongxa_id,
-                        khach_quanhuyen_id,gioi_tinh,so_giay_to,quoc_tich
-            from luu_tru
+                        khach_quanhuyen_id,gioi_tinh,so_giay_to,quoc_tich_id,phong_ks_id
+            from luu_tru where name is not null 
         '''
         if tinh_tp_id:
             sql+='''
-                and tinh_tp_id = %s
+                and tinh_tp_id = %s 
             '''%(tinh_tp_id[0])
-        if tinh_tp_id and quan_huyen_id:
+        if quan_huyen_id:
             sql+='''
-                and tinh_tp_id = %s and quan_huyen_id = %s
-            '''%(tinh_tp_id[0],quan_huyen_id[0])
-        if tinh_tp_id and quan_huyen_id and phuong_xa_id:
+                and quan_huyen_id = %s 
+            '''%(quan_huyen_id[0])
+        if phuong_xa_id:
             sql+='''
-                and tinh_tp_id = %s and quan_huyen_id = %s and phuong_xa_id = %s 
-            '''%(tinh_tp_id[0],quan_huyen_id[0],phuong_xa_id[0])
-        if tinh_tp_id and quan_huyen_id and phuong_xa_id and khach_san_id:
+                and phuong_xa_id = %s 
+            '''%(phuong_xa_id[0])
+        if khach_san_id:
             sql+='''
-                and tinh_tp_id = %s and quan_huyen_id = %s and phuong_xa_id = %s and khach_san_id = %s
-            '''%(tinh_tp_id[0],quan_huyen_id[0],phuong_xa_id[0], khach_san_id[0])
+                and khach_san_id = %s 
+            '''%(khach_san_id[0])
+        if quoc_tich_id:
+            sql+='''
+                and quoc_tich_id = %s 
+            '''%(quoc_tich_id[0])
+        if tu_ngay:
+            sql+='''
+                and ngay_den >= '%s'
+            '''%(tu_ngay)
+        if den_ngay:
+            sql+='''
+                and ngay_den <= '%s'
+            '''%(den_ngay)
         sql+='''
-             group by khach_san_id
             order by khach_san_id 
         '''
         self.cr.execute(sql)

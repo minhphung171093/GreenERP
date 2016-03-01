@@ -59,27 +59,28 @@
 	                		<field name="tiep_nhan" />
 	                	</group>
                 		<group col="4"  string="Thông tin lưu trú">
-		            		<field name="khach_san_id" on_change="on_change_diachi(khach_san_id)" />
-		            		<field name="tinh_tp_id" options="{'create': false, 'create_edit': false}" />                   
-							<field name="quan_huyen_id" options="{'create': false, 'create_edit': false}" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
-							<field name="phuong_xa_id" options="{'create': false, 'create_edit': false}" domain="[('quan_huyen_id','=',quan_huyen_id)]" />
+		            		<field name="khach_san_id" on_change="on_change_diachi(khach_san_id)" options="{'no_create':True}"/>
+		            		<field name="tinh_tp_id" options="{'no_create':True}"/>                   
+							<field name="quan_huyen_id" options="{'no_create':True}" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
+							<field name="phuong_xa_id" options="{'no_create':True}" domain="[('quan_huyen_id','=',quan_huyen_id)]" />
 		                    <field name="dien_thoai"/>
 		                    <newline/>
 		                    <field name="ngay_den"/>
 		                    <field name="ngay_di"/>
-		                    <field name="tang_ks_id" options="{'create': false, 'create_edit': false}" domain="[('tang_ks_id','=',khach_san_id)]"/>
-		                    <field name="phong_ks_id" options="{'create': false, 'create_edit': false}" domain="[('phong_ks_id','=',tang_ks_id)]"/>
+		                    <field name="tang_ks_id" options="{'no_create':True}" domain="[('tang_ks_id','=',khach_san_id)]"/>
+		                    <field name="phong_ks_id" options="{'no_create':True}" domain="[('phong_ks_id','=',tang_ks_id)]"/>
                 		</group>
                 		<group col="4"  string="Thông tin người lưu trú">
 							<field name="name"  />
 							<field name="ngay_sinh"  />
 							<field name="gioi_tinh"  />
-							<field name="quoc_tich"  />
-							<field name="loai_giay_to_id" options="{'create': false, 'create_edit': false}" />
+							<field name="quoc_tich_id" options="{'no_create':True}"/>
+							<field name="loai_giay_to_id" options="{'no_create':True}" />
 							<field name="so_giay_to"  />
-							<field name="khach_tinhtp_id" options="{'create': false, 'create_edit': false}" />                   
-							<field name="khach_quanhuyen_id" options="{'create': false, 'create_edit': false}" domain="[('tinh_tp_id','=',khach_tinhtp_id)]" />
-							<field name="khach_phuongxa_id" options="{'create': false, 'create_edit': false}" domain="[('quan_huyen_id','=',khach_quanhuyen_id)]" />
+							<field name="khach_tinhtp_id" options="{'no_create':True}" />                   
+							<field name="khach_quanhuyen_id" options="{'no_create':True}" domain="[('tinh_tp_id','=',khach_tinhtp_id)]" />
+							<field name="khach_phuongxa_id" options="{'no_create':True}" domain="[('quan_huyen_id','=',khach_quanhuyen_id)]" />
+							<field name="dia_chi"/>
                 		</group>
 	                </sheet>
                 </form>

@@ -130,7 +130,7 @@ class khach_san(osv.osv):
             cr.execute(sql)
             ks_ids = [row[0] for row in cr.fetchall()]
             args += [('id','in',ks_ids)]
-        return super(dai_ly, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
+        return super(khach_san, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
        ids = self.search(cr, user, args, context=context, limit=limit)
        return self.name_get(cr, user, ids, context=context)

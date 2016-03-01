@@ -124,4 +124,19 @@ class phong_ks(osv.osv):
 #         'ks_id_rel':fields.related('tang_ks_line', 'tang_ks_id', type="many2one", relation="khach.san", string="Khach san"),
                 }
 phong_ks()
+
+class chau_luc(osv.osv):
+    _name = "chau.luc"
+    _columns = {
+        'name': fields.char('Châu lục',size = 1024, required = True),
+                }
+chau_luc()
+
+class quoc_tich(osv.osv):
+    _name = "quoc.tich"
+    _columns = {
+        'name': fields.char('Quốc tịch',size = 1024, required = True),
+        'chau_luc_id': fields.many2one('chau.luc','Châu lục', required = True),
+                }
+quoc_tich()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

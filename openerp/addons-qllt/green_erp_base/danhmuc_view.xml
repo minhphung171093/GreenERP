@@ -85,7 +85,46 @@
             <field name="res_model">loai.giay.to</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-        </record>     
+        </record>   
+        
+        <!--Châu lục-->   
+        					
+        <record model="ir.ui.view" id="chau_luc_tree">
+            <field name="name">chau.luc.tree</field>
+            <field name="model">chau.luc</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Châu lục" editable='top'>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_chau_luc">
+            <field name="name">Châu lục</field>
+            <field name="res_model">chau.luc</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>    
+        
+        <!--Quốc tịch-->   
+        					
+        <record model="ir.ui.view" id="quoc_tich_tree">
+            <field name="name">quoc.tich.tree</field>
+            <field name="model">quoc.tich</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Quốc tịch" editable='top'>
+                    <field name="name" />
+                    <field name="chau_luc_id" options="{'no_create':True}"/>
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_quoc_tich">
+            <field name="name">Quốc tịch</field>
+            <field name="res_model">quoc.tich</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>       
 
         					<!--Khách sạn-->   
         					

@@ -28,6 +28,16 @@
 				<menuitem id="menu_action_khach_san"
 					action="action_khach_san"
 					name="Khách sạn"
-					parent="menu_danh_muc" sequence="26"/>
+					parent="menu_danh_muc" sequence="30"/>
+					
+				<menuitem id="menu_action_chau_luc"
+					action="action_chau_luc"
+					name="Châu lục"
+					parent="menu_danh_muc" sequence="35"/>
+					
+				<menuitem id="menu_action_quoc_tich"
+					action="action_quoc_tich"
+					name="Quốc tịch"
+					parent="menu_danh_muc" sequence="40"/>
     </data>
 </openerp>

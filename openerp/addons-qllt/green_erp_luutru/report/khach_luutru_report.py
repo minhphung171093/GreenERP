@@ -38,29 +38,14 @@ class Parser(report_sxw.rml_parse):
         pool = pooler.get_pool(self.cr.dbname)
         self.localcontext.update({
             'get_khach_san': self.get_khach_san,
-#             'get_cell': self.get_cell,
-#             'get_col': self.get_col,
-#             'get_ho_row': self.get_ho_row,
-#             'get_loaivat': self.get_loaivat,
-#             'convert_date':self.convert_date,
-#             'get_tongcong': self.get_tongcong,
+            
+            'convert_date':self.convert_date,
         })
 
-#     def convert_date(self, ten_ho_id):
-#         sql = '''
-#             select ngay_ghi_so from co_cau where ten_ho_id = %s and trang_thai_id in (select id from trang_thai where stt = 3)
-#             group by ngay_ghi_so
-#             order by ngay_ghi_so desc
-#         '''%(ten_ho_id)
-#         self.cr.execute(sql)
-#         date = self.cr.dictfetchone()['ngay_ghi_so']
-#         if date:
-#             date = datetime.strptime(date, DATE_FORMAT)
-#         return date.strftime('%d/%m/%Y')
-#         
-#     def get_tenho(self,ten_ho_id):
-#         ten = self.pool.get('chan.nuoi').browse(self.cr,self.uid,ten_ho_id)
-#         return ten.name
+    def convert_date(self, date):
+        if date:
+            date = datetime.strptime(date, DATE_FORMAT)
+            return date.strftime('%d/%m/%Y')
     
 
     def get_khach_san(self):
@@ -111,20 +96,6 @@ class Parser(report_sxw.rml_parse):
         self.cr.execute(sql)
         return self.cr.dictfetchall()
     
-#     def get_tongcong(self, row):
-#         wizard_data = self.localcontext['data']['form']
-#         ten_ho_id = wizard_data['ten_ho_id']
-#         soluong = 0
-#         if row:
-#             sql = '''
-#                 select case when sum(tong_sl)!=0 then sum(tong_sl) else 0 end tong_sl from chi_tiet_loai_line where
-#                     co_cau_id in (select id from co_cau where ten_ho_id = %s and trang_thai = 'new'
-#                     and trang_thai_id in (select id from trang_thai where stt = 3))
-#             '''%(row)
-#             self.cr.execute(sql)
-#             test = self.cr.dictfetchone()
-#             soluong = test and test['tong_sl'] or False
-#         return soluong
     
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

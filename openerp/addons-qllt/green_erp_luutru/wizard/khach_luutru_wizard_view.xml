@@ -10,8 +10,9 @@
 		            	<field name="tinh_tp_id" options="{'no_create':True}" on_change="onchange_tinh_thanh()" />
 		            	<field name="quan_huyen_id" options="{'no_create':True}" on_change="onchange_quan_huyen()" domain="[('tinh_tp_id','=',tinh_tp_id)]" />
 		                <field name="phuong_xa_id" options="{'no_create':True}" on_change="onchange_phuong_xa()" domain="[('quan_huyen_id','=',quan_huyen_id)]"/>
-		                <field name="quoc_tich_id" options="{'no_create':True}"/>
 		                <field name="khach_san_id" options="{'no_create':True}" context="{'search_khach_san':1,'tinh_tp_id':tinh_tp_id,'quan_huyen_id':quan_huyen_id,'phuong_xa_id':phuong_xa_id}"/>
+		                <field name="quoc_tich_id" options="{'no_create':True}"/>
+		                <newline/>
 		                <field name="tu_ngay"/>
 		                <field name="den_ngay"/>
 	                </group>

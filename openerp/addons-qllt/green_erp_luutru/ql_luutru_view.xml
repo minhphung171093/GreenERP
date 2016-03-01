@@ -67,8 +67,8 @@
 		                    <newline/>
 		                    <field name="ngay_den"/>
 		                    <field name="ngay_di"/>
-		                    <field name="tang_ks_id" options="{'no_create':True}" domain="[('tang_ks_id','=',khach_san_id)]"/>
-		                    <field name="phong_ks_id" options="{'no_create':True}" domain="[('phong_ks_id','=',tang_ks_id)]"/>
+		                    <field name="tang_ks_id" options="{'no_create':True}" domain="[('ks_id','=',khach_san_id)]"/>
+		                    <field name="phong_ks_id" options="{'no_create':True}" domain="[('tang_ks_id','=',tang_ks_id)]"/>
                 		</group>
                 		<group col="4"  string="Thông tin người lưu trú">
 							<field name="name"  />

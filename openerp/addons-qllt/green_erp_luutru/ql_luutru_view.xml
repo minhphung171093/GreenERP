@@ -14,7 +14,6 @@
                     <field name="khach_tinhtp_id"/>
                     <field name="khach_quanhuyen_id"/>
                     <field name="khach_phuongxa_id"/>
-                    <field name="khach_san_id"/>
                     <field name="quoc_tich_id"/>
                     <separator/>
                     <group expand="0" string="Group By...">

@@ -38,7 +38,7 @@ class Parser(report_sxw.rml_parse):
         pool = pooler.get_pool(self.cr.dbname)
         self.localcontext.update({
             'get_khach_san': self.get_khach_san,
-            
+            'convert_datetime': self.convert_datetime,
             'convert_date':self.convert_date,
         })
 
@@ -46,6 +46,11 @@ class Parser(report_sxw.rml_parse):
         if date:
             date = datetime.strptime(date, DATE_FORMAT)
             return date.strftime('%d/%m/%Y')
+        
+    def convert_datetime(self, date):
+        if datetime:
+            date = datetime.strptime(date, DATETIME_FORMAT)
+            return date.strftime('%d/%m/%Y %H:%M:%S')
     
 
     def get_khach_san(self):

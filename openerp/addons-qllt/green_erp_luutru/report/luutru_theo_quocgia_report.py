@@ -96,12 +96,13 @@ class Parser(report_sxw.rml_parse):
                                      })
                     total_tong_cong += tong_cong['total']
                     total_theongay += theo_ngay['theo_ngay']
-            mang.append({
-                         'seq': '',
-                         'ten': chau_luc['name'],
-                         'total': total_tong_cong,
-                         'theo_ngay': total_theongay,
-                         })
+            if total_theongay!=0:
+                mang.append({
+                             'seq': '',
+                             'ten': chau_luc['name'],
+                             'total': total_tong_cong,
+                             'theo_ngay': total_theongay,
+                             })
             for line in line_ids:
                 mang.append({
                          'ten': line['ten'],

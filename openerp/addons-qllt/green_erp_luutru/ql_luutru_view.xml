@@ -15,6 +15,7 @@
                     <field name="khach_quanhuyen_id"/>
                     <field name="khach_phuongxa_id"/>
                     <field name="quoc_tich_id"/>
+                    <field name="khach_san_id"/>
                     <separator/>
                     <group expand="0" string="Group By...">
                     	<filter string="Tỉnh (thành phố)" domain="[]" context="{'group_by':'khach_tinhtp_id'}"/>

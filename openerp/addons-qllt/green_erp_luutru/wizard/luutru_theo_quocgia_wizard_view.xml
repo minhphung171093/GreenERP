@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<record id="luutru_quocgia_form_view" model="ir.ui.view">
+	        <field name="name">luutru.quocgia.form.view</field>
+	        <field name="model">luutru.quocgia.form</field>
+	        <field name="arch" type="xml">
+	            <form string="Lưu trú theo quốc gia" version="7.0">
+	            	<group colspan = '2' col = '4'>
+		                <field name="tu_ngay"/>
+		                <field name="den_ngay"/>
+	                </group>
+	                <footer>
+	                    <button name="print_report" type='object' string="OK" class="oe_highlight"/>
+	                    or
+	                    <button string="Cancel" class="oe_highlight" special="cancel" />
+	                </footer>
+	            </form>
+	        </field>
+    	</record>
+
+	    <record model="ir.actions.act_window" id="action_luutru_quocgia_form">
+	        <field name="name">Lưu trú theo quốc gia</field>
+	        <field name="res_model">luutru.quocgia.form</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">form</field>
+	        <field name="view_id" ref="luutru_quocgia_form_view" />
+	        <field name="target">new</field>
+	    </record>
+	    
+
+        
+	 
+	    
+    </data>
+</openerp>
+

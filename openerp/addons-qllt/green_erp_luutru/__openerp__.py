@@ -29,7 +29,9 @@
     'depends': ['green_erp_base'],
     'data': [
         'wizard/khach_luutru_wizard_view.xml',
+        'wizard/luutru_theo_quocgia_wizard_view.xml',
         'report/khach_luutru_report_view.xml',
+        'report/luutru_theo_quocgia_report_view.xml',
         'ql_luutru_view.xml',
         'menu.xml',
     ],

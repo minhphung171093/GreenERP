@@ -109,7 +109,7 @@ class Parser(report_sxw.rml_parse):
                          'theo_ngay': line['theo_ngay'],
                          'seq': line['seq']
                          })
-            return mang
+        return mang
             
     
     

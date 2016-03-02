@@ -23,7 +23,7 @@ class luu_tru(osv.osv):
     _columns = {
         'name': fields.char('Họ và Tên',size = 1024, required = True),
         'ngay_sinh':fields.date('Ngày tháng năm sinh',required = True),
-        'khach_san_id': fields.many2one( 'khach.san','Nơi lưu trú', required = True),
+        'khach_san_id': fields.many2one('khach.san','Nơi lưu trú', required = True),
         'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/TP', readonly = True),
         'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)', readonly = True),
         'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)', readonly = True),

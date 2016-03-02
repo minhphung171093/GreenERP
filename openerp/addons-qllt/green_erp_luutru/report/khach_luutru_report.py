@@ -91,16 +91,16 @@ class Parser(report_sxw.rml_parse):
     def get_dia_chi(self, dia_chi, khach_tinhtp_id, khach_quanhuyen_id, khach_phuongxa_id):
         address = ''
         if dia_chi:
-            address += dia_chi
-        if khach_tinhtp_id:
-            tinh = self.pool.get('tinh.tp').browse(self.cr,self.uid,khach_tinhtp_id)
-            address += ', ' + tinh.name
-        if khach_quanhuyen_id:
-            quan = self.pool.get('quan.huyen').browse(self.cr,self.uid,khach_quanhuyen_id)
-            address += ', ' + quan.name
+            address += dia_chi + ', '
         if khach_phuongxa_id:
             phuong = self.pool.get('phuong.xa').browse(self.cr,self.uid,khach_phuongxa_id)
-            address += ', ' + phuong.name
+            address += phuong.name + ', ' 
+        if khach_quanhuyen_id:
+            quan = self.pool.get('quan.huyen').browse(self.cr,self.uid,khach_quanhuyen_id)
+            address += quan.name + ', ' 
+        if khach_tinhtp_id:
+            tinh = self.pool.get('tinh.tp').browse(self.cr,self.uid,khach_tinhtp_id)
+            address += tinh.name
         return address
 
     def get_khach_san(self):

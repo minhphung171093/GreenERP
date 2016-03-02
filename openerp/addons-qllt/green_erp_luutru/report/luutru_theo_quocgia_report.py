@@ -66,6 +66,8 @@ class Parser(report_sxw.rml_parse):
         tu_ngay = wizard_data['tu_ngay']
         den_ngay = wizard_data['den_ngay']
         mang = []
+        toTal_tong_cong = 0
+        toTal_theongay = 0
         sql='''
             select id, name from chau_luc
         '''
@@ -97,6 +99,8 @@ class Parser(report_sxw.rml_parse):
                     total_tong_cong += tong_cong['total']
                     total_theongay += theo_ngay['theo_ngay']
             if total_theongay!=0:
+                toTal_tong_cong += total_tong_cong
+                toTal_theongay += total_theongay
                 mang.append({
                              'seq': '',
                              'ten': chau_luc['name'],
@@ -108,8 +112,14 @@ class Parser(report_sxw.rml_parse):
                          'ten': line['ten'],
                          'total': line['total'],
                          'theo_ngay': line['theo_ngay'],
-                         'seq': line['seq']
+                         'seq': line['seq'],
                          })
+        mang.append({
+                     'ten': u'TỔNG CỘNG',
+                     'total': toTal_tong_cong,
+                     'theo_ngay': toTal_theongay,
+                     'seq': '',
+                     })
         return mang
             
     

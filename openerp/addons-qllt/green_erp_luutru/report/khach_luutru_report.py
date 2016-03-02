@@ -24,6 +24,7 @@ from openerp import pooler
 from openerp.osv import osv
 from openerp.tools.translate import _
 import random
+from datetime import datetime, timedelta
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -40,6 +41,11 @@ class Parser(report_sxw.rml_parse):
             'get_khach_san': self.get_khach_san,
             'convert_datetime': self.convert_datetime,
             'convert_date':self.convert_date,
+            'get_gioi_tinh': self.get_gioi_tinh,
+            'get_quoc_tich': self.get_quoc_tich,
+            'get_luu_tru': self.get_luu_tru,
+            'get_phong': self.get_phong,
+            'get_dia_chi': self.get_dia_chi,
         })
 
     def convert_date(self, date):
@@ -49,9 +55,53 @@ class Parser(report_sxw.rml_parse):
         
     def convert_datetime(self, date):
         if datetime:
-            date = datetime.strptime(date, DATETIME_FORMAT)
+            date = datetime.strptime(date, DATETIME_FORMAT) + timedelta(hours=7)
             return date.strftime('%d/%m/%Y %H:%M:%S')
     
+    def get_gioi_tinh(self, gioi_tinh):
+        if gioi_tinh:
+            if gioi_tinh=='name':
+                return 'Nam'
+            else:
+                return 'Nữ'
+        else:
+            return ''
+    
+    def get_quoc_tich(self, quoc_tich_id):
+        if quoc_tich_id:
+            quoc_tich = self.pool.get('quoc.tich').browse(self.cr,self.uid,quoc_tich_id)
+            return quoc_tich.name
+        else:
+            return ''
+        
+    def get_luu_tru(self, khach_san_id):
+        if khach_san_id:
+            khach_san = self.pool.get('khach.san').browse(self.cr,self.uid,khach_san_id)
+            return khach_san.name
+        else:
+            return ''
+        
+    def get_phong(self, phong_ks_id):
+        if phong_ks_id:
+            phong_ks = self.pool.get('phong.ks').browse(self.cr,self.uid,phong_ks_id)
+            return phong_ks.name
+        else:
+            return ''
+    
+    def get_dia_chi(self, dia_chi, khach_tinhtp_id, khach_quanhuyen_id, khach_phuongxa_id):
+        address = ''
+        if dia_chi:
+            address += dia_chi
+        if khach_tinhtp_id:
+            tinh = self.pool.get('tinh.tp').browse(self.cr,self.uid,khach_tinhtp_id)
+            address += ', ' + tinh.name
+        if khach_quanhuyen_id:
+            quan = self.pool.get('quan.huyen').browse(self.cr,self.uid,khach_quanhuyen_id)
+            address += ', ' + quan.name
+        if khach_phuongxa_id:
+            phuong = self.pool.get('phuong.xa').browse(self.cr,self.uid,khach_phuongxa_id)
+            address += ', ' + phuong.name
+        return address
 
     def get_khach_san(self):
         wizard_data = self.localcontext['data']['form']
@@ -63,8 +113,8 @@ class Parser(report_sxw.rml_parse):
         tu_ngay = wizard_data['tu_ngay']
         den_ngay = wizard_data['den_ngay']
         sql='''
-            select name,ngay_sinh,khach_san_id,khach_tinhtp_id,khach_phuongxa_id,
-                        khach_quanhuyen_id,gioi_tinh,so_giay_to,quoc_tich_id,phong_ks_id
+            select name,gioi_tinh,ngay_sinh,so_giay_to,quoc_tich_id,dia_chi,khach_tinhtp_id,khach_quanhuyen_id,khach_phuongxa_id,
+                        khach_san_id,ngay_den,ngay_di,phong_ks_id
             from luu_tru where name is not null 
         '''
         if tinh_tp_id:
@@ -89,11 +139,11 @@ class Parser(report_sxw.rml_parse):
             '''%(quoc_tich_id[0])
         if tu_ngay:
             sql+='''
-                and ngay_den >= '%s'
+                and to_date(to_char(ngay_den, 'YYYY-MM-DD'), 'YYYY-MM-DD') >= '%s'
             '''%(tu_ngay)
         if den_ngay:
             sql+='''
-                and ngay_den <= '%s'
+                and to_date(to_char(ngay_den, 'YYYY-MM-DD'), 'YYYY-MM-DD') <= '%s'
             '''%(den_ngay)
         sql+='''
             order by khach_san_id 

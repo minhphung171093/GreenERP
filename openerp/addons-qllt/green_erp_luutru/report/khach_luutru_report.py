@@ -61,9 +61,9 @@ class Parser(report_sxw.rml_parse):
     def get_gioi_tinh(self, gioi_tinh):
         if gioi_tinh:
             if gioi_tinh=='name':
-                return 'Nam'
+                return u'Nam'
             else:
-                return 'Nữ'
+                return u'Nữ'
         else:
             return ''
     

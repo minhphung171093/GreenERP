@@ -38,14 +38,10 @@ class Parser(report_sxw.rml_parse):
         super(Parser, self).__init__(cr, uid, name, context=context)
         pool = pooler.get_pool(self.cr.dbname)
         self.localcontext.update({
-            'get_khach_san': self.get_khach_san,
+            'get_lines': self.get_lines,
             'convert_datetime': self.convert_datetime,
             'convert_date':self.convert_date,
-            'get_gioi_tinh': self.get_gioi_tinh,
-            'get_quoc_tich': self.get_quoc_tich,
-            'get_luu_tru': self.get_luu_tru,
-            'get_phong': self.get_phong,
-            'get_dia_chi': self.get_dia_chi,
+            'get_ngay': self.get_ngay,
         })
 
     def convert_date(self, date):
@@ -58,98 +54,63 @@ class Parser(report_sxw.rml_parse):
             date = datetime.strptime(date, DATETIME_FORMAT) + timedelta(hours=7)
             return date.strftime('%d/%m/%Y %H:%M:%S')
     
-    def get_gioi_tinh(self, gioi_tinh):
-        if gioi_tinh:
-            if gioi_tinh=='name':
-                return u'Nam'
-            else:
-                return u'Nữ'
-        else:
-            return ''
-    
-    def get_quoc_tich(self, quoc_tich_id):
-        if quoc_tich_id:
-            quoc_tich = self.pool.get('quoc.tich').browse(self.cr,self.uid,quoc_tich_id)
-            return quoc_tich.name
-        else:
-            return ''
-        
-    def get_luu_tru(self, khach_san_id):
-        if khach_san_id:
-            khach_san = self.pool.get('khach.san').browse(self.cr,self.uid,khach_san_id)
-            return khach_san.name
-        else:
-            return ''
-        
-    def get_phong(self, phong_ks_id):
-        if phong_ks_id:
-            phong_ks = self.pool.get('phong.ks').browse(self.cr,self.uid,phong_ks_id)
-            return phong_ks.name
-        else:
-            return ''
-    
-    def get_dia_chi(self, dia_chi, khach_tinhtp_id, khach_quanhuyen_id, khach_phuongxa_id):
-        address = ''
-        if dia_chi:
-            address += dia_chi + ', '
-        if khach_phuongxa_id:
-            phuong = self.pool.get('phuong.xa').browse(self.cr,self.uid,khach_phuongxa_id)
-            address += phuong.name + ', ' 
-        if khach_quanhuyen_id:
-            quan = self.pool.get('quan.huyen').browse(self.cr,self.uid,khach_quanhuyen_id)
-            address += quan.name + ', ' 
-        if khach_tinhtp_id:
-            tinh = self.pool.get('tinh.tp').browse(self.cr,self.uid,khach_tinhtp_id)
-            address += tinh.name
-        return address
-
-    def get_khach_san(self):
+    def get_ngay(self):
         wizard_data = self.localcontext['data']['form']
-        quan_huyen_id = wizard_data['quan_huyen_id']
-        phuong_xa_id = wizard_data['phuong_xa_id']
-        tinh_tp_id = wizard_data['tinh_tp_id']
-        khach_san_id = wizard_data['khach_san_id']
-        quoc_tich_id = wizard_data['quoc_tich_id']
         tu_ngay = wizard_data['tu_ngay']
         den_ngay = wizard_data['den_ngay']
+        return self.convert_date(tu_ngay)+' - '+self.convert_date(den_ngay)
+    
+
+    def get_lines(self):
+        wizard_data = self.localcontext['data']['form']
+        tu_ngay = wizard_data['tu_ngay']
+        den_ngay = wizard_data['den_ngay']
+        mang = []
         sql='''
-            select name,gioi_tinh,ngay_sinh,so_giay_to,quoc_tich_id,dia_chi,khach_tinhtp_id,khach_quanhuyen_id,khach_phuongxa_id,
-                        khach_san_id,ngay_den,ngay_di,phong_ks_id
-            from luu_tru where name is not null 
-        '''
-        if tinh_tp_id:
-            sql+='''
-                and tinh_tp_id = %s 
-            '''%(tinh_tp_id[0])
-        if quan_huyen_id:
-            sql+='''
-                and quan_huyen_id = %s 
-            '''%(quan_huyen_id[0])
-        if phuong_xa_id:
-            sql+='''
-                and phuong_xa_id = %s 
-            '''%(phuong_xa_id[0])
-        if khach_san_id:
-            sql+='''
-                and khach_san_id = %s 
-            '''%(khach_san_id[0])
-        if quoc_tich_id:
-            sql+='''
-                and quoc_tich_id = %s 
-            '''%(quoc_tich_id[0])
-        if tu_ngay:
-            sql+='''
-                and to_date(to_char(ngay_den, 'YYYY-MM-DD'), 'YYYY-MM-DD') >= '%s'
-            '''%(tu_ngay)
-        if den_ngay:
-            sql+='''
-                and to_date(to_char(ngay_den, 'YYYY-MM-DD'), 'YYYY-MM-DD') <= '%s'
-            '''%(den_ngay)
-        sql+='''
-            order by khach_san_id 
+            select id, name from chau_luc
         '''
         self.cr.execute(sql)
-        return self.cr.dictfetchall()
+        for chau_luc in self.cr.dictfetchall():
+            total_tong_cong = 0
+            total_theongay = 0
+            line_ids = []
+            sql='''
+                select quoc_tich_id, count(id) as total from luu_tru where quoc_tich_id in (select id from quoc_tich where chau_luc_id = %s)
+                group by quoc_tich_id
+            '''%(chau_luc['id'])
+            self.cr.execute(sql)
+            for tong_cong in self.cr.dictfetchall():
+                quoc_tich = self.pool.get('quoc.tich').browse(self.cr,self.uid,tong_cong['quoc_tich_id'])
+                sql='''
+                    select quoc_tich_id, count(id) as theo_ngay from luu_tru where quoc_tich_id = %s 
+                    and to_char(ngay_den + interval '7 hour', 'YYYY-MM-DD') between '%s' and '%s'
+                    group by quoc_tich_id
+                '''%(tong_cong['quoc_tich_id'], tu_ngay, den_ngay)
+                self.cr.execute(sql)
+                for theo_ngay in self.cr.dictfetchall(): 
+                    line_ids.append({
+                                     'seq': '1',
+                                     'ten': quoc_tich.name,
+                                     'total': tong_cong['total'],
+                                     'theo_ngay': theo_ngay['theo_ngay'],
+                                     })
+                    total_tong_cong += tong_cong['total']
+                    total_theongay += theo_ngay['theo_ngay']
+            mang.append({
+                         'seq': '',
+                         'ten': chau_luc['name'],
+                         'total': total_tong_cong,
+                         'theo_ngay': total_theongay,
+                         })
+            for line in line_ids:
+                mang.append({
+                         'ten': line['ten'],
+                         'total': line['total'],
+                         'theo_ngay': line['theo_ngay'],
+                         'seq': line['seq']
+                         })
+            return mang
+            
     
     
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -139,11 +139,11 @@ class Parser(report_sxw.rml_parse):
             '''%(quoc_tich_id[0])
         if tu_ngay:
             sql+='''
-                and to_date(to_char(ngay_den, 'YYYY-MM-DD'), 'YYYY-MM-DD') >= '%s'
+                and to_char(ngay_den + interval '7 hour', 'YYYY-MM-DD') >= '%s'
             '''%(tu_ngay)
         if den_ngay:
             sql+='''
-                and to_date(to_char(ngay_den, 'YYYY-MM-DD'), 'YYYY-MM-DD') <= '%s'
+                and to_char(ngay_den + interval '7 hour', 'YYYY-MM-DD') <= '%s'
             '''%(den_ngay)
         sql+='''
             order by khach_san_id 

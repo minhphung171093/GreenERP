@@ -11,8 +11,8 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FO
 class luutru_quocgia_form(osv.osv_memory):
     _name = "luutru.quocgia.form"
     _columns = {    
-                'tu_ngay':fields.date('Từ ngày'),
-                'den_ngay':fields.date('Đến ngày'),
+                'tu_ngay':fields.date('Từ ngày', required = True),
+                'den_ngay':fields.date('Đến ngày', required = True),
                 }
     def print_report(self, cr, uid, ids, context=None):
         if context is None:

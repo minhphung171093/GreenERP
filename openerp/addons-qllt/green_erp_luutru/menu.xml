@@ -9,7 +9,11 @@
 			<menuitem id="bao_cao" name="Thống kê - Báo cáo"/>
 	    		<menuitem id="menu_action_khach_luutru_form"
 	    		action="action_khach_luutru_form" 
-	    		parent="bao_cao" name="Danh sách khách lưu trú" sequence = '2'/>
+	    		parent="bao_cao" name="Danh sách khách lưu trú" sequence = '1'/>
+	    		
+	    		<menuitem id="menu_action_luutru_quocgia_form"
+	    		action="action_luutru_quocgia_form" 
+	    		parent="bao_cao" name="Khách lưu trú theo quốc gia" sequence = '5'/>
 				
     </data>
 </openerp>

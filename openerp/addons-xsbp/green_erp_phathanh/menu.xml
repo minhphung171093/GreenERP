@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<menuitem id="quanly_root"
+			name="Quản lý" sequence="1"/>
+			
+			<menuitem id="menu_quanly_phanphoi"
+				name="Quản lý phân phối vé"
+				parent="quanly_root" sequence="1"/>
+				
+				<menuitem id="menu_action_phanphoi_truyenthong"
+					action="action_phanphoi_truyenthong"
+					name="DSKH phân phối vé truyền thống"
+					parent="menu_quanly_phanphoi" sequence="1"/>
+				
+				<menuitem id="menu_action_dieuchinh_phanphoi_ve"
+					action="action_dieuchinh_phanphoi_ve"
+					name="Điều chỉnh KH phân phối vé"
+					parent="menu_quanly_phanphoi" sequence="3"/>
+					
+				<menuitem id="menu_action_nhap_ve_e"
+					action="action_nhap_ve_e"
+					name="Nhập vé ế theo khu vực"
+					parent="menu_quanly_phanphoi" sequence="2"/>
+				<menuitem id="menu_action_kh_in_ve_tt"
+					action="action_kh_in_ve_tt"
+					name="KH in vé số truyền thống"
+					parent="menu_quanly_phanphoi" sequence="4"/>
+				<menuitem id="menu_action_doanhthu_theo_loaihinh"
+					action="action_doanhthu_theo_loaihinh"
+					name="KH doanh thu"
+					parent="menu_quanly_phanphoi" sequence="7"/>
+				<menuitem id="menu_action_nhap_ve"
+					action="action_nhap_ve"
+					name="KH in vé số tự chọn"
+					parent="menu_quanly_phanphoi" sequence="8"/>
+				<menuitem id="menu_action_xuat_ve"
+					action="action_xuat_ve"
+					name="Xuất vé số tự chọn"
+					parent="menu_quanly_phanphoi" sequence="9"/>					
+			<menuitem id="menu_baocao"
+				name="Báo cáo"
+				parent="quanly_root" sequence="2"/>
+				<menuitem id="menu_action_baocao_nhanh_kyve"
+					action="action_baocao_nhanh_kyve"
+					name="Nhanh theo kỳ vé"
+					parent="menu_baocao" sequence="1"/>
+				<menuitem id="menu_action_baocao_tieuthu_kyve"
+					action="action_baocao_tieuthu_kyve"
+					name="Tiêu thụ theo kỳ vé"
+					parent="menu_baocao" sequence="2"/>
+				<menuitem id="menu_action_baocao_thitruong_kyve"
+					action="action_baocao_thitruong_kyve"
+					name="Thị trường theo kỳ vé"
+					parent="menu_baocao" sequence="5"/>
+				<menuitem id="menu_action_baocao_thuhoi_ve"
+					action="action_baocao_thuhoi_ve"
+					name="Thu hồi vé ế theo khu vực"
+					parent="menu_baocao" sequence="6"/>
+				<menuitem id="menu_action_baocao_tonghop_tieuthu"
+					action="action_baocao_tonghop_tieuthu"
+					name="Tổng hợp kết quả tiêu thụ vé"
+					parent="menu_baocao" sequence="8"/>
+				<menuitem id="menu_action_baocao_kehoach_doanhthu"
+					action="action_baocao_kehoach_doanhthu"
+					name="Tổng hợp kế hoạch doanh thu"
+					parent="menu_baocao" sequence="9"/>
+				<menuitem id="menu_action_tonghop_nhapxuat_ton"
+					action="action_tonghop_nhapxuat_ton"
+					name="Tổng hợp nhập - xuất - tồn kho vé số tự chọn"
+					parent="menu_baocao" sequence="10"/>
+				<menuitem id="menu_action_doanhthu_veso"
+					action="action_doanhthu_veso"
+					name="Doanh thu vé số"
+					parent="menu_baocao" sequence="12"/>
+				<menuitem id="menu_action_dthu_phanh_veso"
+					action="action_dthu_phanh_veso"
+					name="Doanh thu / Phát hành vé số"
+					parent="menu_baocao" sequence="13"/>
+				<menuitem id="menu_action_doanhthu_veso_time_form"
+					action="action_doanhthu_veso_time"
+					name="Doanh thu vé số tuần, tháng, quý, năm"
+					parent="menu_baocao" sequence="14"/>
+    </data>	
+</openerp>

@@ -208,7 +208,7 @@
                                 <tree string="Stock Moves">
                                     <field name="name"/>
                                     <field name="product_id"/>
-                                    <field name="qty" on_change="onchange_quantity(product_id, product_qty, product_uom)"/>
+                                    <field name="qty"/>
                                     <field name="location_id" groups="stock.group_locations"/>
                                 </tree>
                              </field>
@@ -881,8 +881,8 @@
                             </field>
                             <button class="oe_link oe_right" name="put_in_pack" type="object" string="&#8627;Put in Pack" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}" groups="stock.group_tracking_lot"/>
                         </page>
-                        <page string="Initial Demand" attrs="{'invisible': [('state', 'not in', ('draft', 'confirmed', 'waiting'))]}">
-                            <field name="move_lines" options="{'reload_on_button': True}" mode="tree,kanban" context="{'address_in_id': partner_id, 'form_view_ref':'stock.view_move_picking_form', 'tree_view_ref':'stock.view_move_picking_tree', 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}">
+                        <page string="Initial Demand">
+                            <field name="move_lines" attrs="{'invisible': [('state', 'not in', ('draft', 'confirmed', 'waiting'))]}" options="{'reload_on_button': True}" mode="tree,kanban" context="{'address_in_id': partner_id, 'form_view_ref':'stock.view_move_picking_form', 'tree_view_ref':'stock.view_move_picking_tree', 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}">
                                     <kanban class="o_kanban_mobile">
                                     <field name="product_id"/>
                                     <field name="availability"/>
@@ -910,11 +910,9 @@
                                     </templates>
                                 </kanban>
                             </field>
+                            <field name="move_lines_related" attrs="{'invisible': [('state', 'in', ('draft', 'confirmed', 'waiting', 'done'))]}" readonly="1" context="{'address_in_id': partner_id, 'form_view_ref':'stock.view_move_picking_form', 'tree_view_ref':'stock.view_move_picking_tree', 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}"/>
                             <field name="pack_operation_exist" invisible="1"/>
                             <field name="note" placeholder="Add an internal note..." class="oe_inline"/>
-                        </page>
-                        <page string="Initial Demand" attrs="{'invisible': [('state', 'in', ('draft', 'confirmed', 'waiting', 'done'))]}">
-                            <field name="move_lines_related" readonly="1" context="{'address_in_id': partner_id, 'form_view_ref':'stock.view_move_picking_form', 'tree_view_ref':'stock.view_move_picking_tree', 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}"/>
                         </page>
                         <page string="Additional Info" name="extra">
                             <group>
@@ -1000,7 +998,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1023,7 +1021,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1047,7 +1045,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1071,7 +1069,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1096,7 +1094,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1120,7 +1118,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1145,7 +1143,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1170,7 +1168,7 @@
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
             <field name="domain"></field>
             <field name="context">{
                     'search_default_picking_type_id': [active_id],
@@ -1338,6 +1336,7 @@
                         <group name="destination_grp" string="Destination" groups="stock.group_locations">
                             <field name="location_dest_id" />
                             <field name="partner_id" context="{'contact_display':'partner'}" />
+                            <field name="picking_partner_id" context="{'contact_display':'partner'}"/>
                             <field name="move_dest_id" groups="base.group_no_one" readonly="1"/>
                         </group>
                         <group name="quants_grp" string="Reserved Quants" colspan="2" groups="base.group_no_one" attrs="{'invisible': [('state', '=', 'done')]}">
@@ -1501,7 +1500,6 @@
                     <field name="picking_id" string="Reference" invisible="1"/>
                     <field name="sequence" invisible="1"/>
                     <field name="origin"/>
-                    <field name="partner_id" string="Vendor"/>
                     <field name="product_id"/>
                     <field name="product_uom_qty"/>
                     <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit of Measure" groups="product.group_uom"/>
@@ -1958,7 +1956,7 @@
             <field name="model">stock.quant</field>
             <field eval="10" name="priority"/>
             <field name="arch" type="xml">
-                <form string="Quants" create="false" edit="false">
+                <form string="Quants" create="false" edit="false" delete="false">
                     <group>
                         <group>
                             <field name="product_id"/>
@@ -2042,8 +2040,8 @@
         </record>
 
         <!-- Procurements are located in Warehouse menu hierarchy, MRP users should come to Stock application to use it.  -->
-        <menuitem id="menu_stock_sched" name="Schedulers" parent="stock.menu_stock_root" sequence="50" groups="base.group_no_one"/>
-        <menuitem action="action_procurement_compute" id="menu_procurement_compute" parent="menu_stock_sched" groups="base.group_no_one" sequence="2"/>
+        <menuitem id="menu_stock_sched" name="Schedulers" parent="stock.menu_stock_root" groups="group_stock_manager" sequence="50"/>
+        <menuitem action="action_procurement_compute" id="menu_procurement_compute" parent="menu_stock_sched" sequence="2"/>
         <menuitem action="procurement.action_compute_schedulers" id="menu_stock_proc_schedulers" parent="menu_stock_sched" sequence="1" groups="stock.group_stock_manager"/>
         <menuitem id="menu_stock_procurement" name="Automatic Procurements" parent="stock.menu_stock_config_settings" sequence="5"/>
         <menuitem id="stock.menu_warehouse_report" name="Reports" sequence="99" parent="stock.menu_stock_root" groups="group_stock_manager"/>

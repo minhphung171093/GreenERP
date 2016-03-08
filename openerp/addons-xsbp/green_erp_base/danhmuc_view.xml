@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+<!--tỉnh-->
+        <record model="ir.ui.view" id="tinh_tp_tree">
+            <field name="name">tinh.tp.tree</field>
+            <field name="model">tinh.tp</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tỉnh/Thành phố" editable='top'>
+                    <field name="name" />
+                    <field name="ten" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_tinh_tp">
+            <field name="name">Tỉnh/Thành phố</field>
+            <field name="res_model">tinh.tp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+<!--đại lý-->   
+        <record model="ir.ui.view" id="dai_ly_tree">
+            <field name="name">dai.ly.tree</field>
+            <field name="model">dai.ly</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Đại lý" >
+                    <field name="name" />
+                    <field name="ten" />
+                    <field name="tinh_tp_id" />
+                    
+                </tree>
+            </field>
+        </record>  
+        
+       	<record model="ir.ui.view" id="dai_ly_form">
+	        <field name="name">dai.ly.form</field>
+	        <field name="model">dai.ly</field>
+	        <field name="arch" type="xml">
+	            <form string="Đại lý" version="7.0">
+	            	<sheet>
+		            	<group col="4" colspan="4">
+	                		<field name="name" colspan="1"/>
+		                    <field name="ten" colspan="1"/>
+		                    <field name="tinh_tp_id" colspan="1" options="{'no_create':True}"/>
+	                    	<field name="lat" colspan="1" />
+	                        <field name="lng" colspan="1" />
+	                        <field name="radius" colspan="1" invisible="1" />
+	                        <field name="mo_ta" colspan="4" widget="text_ckeditor4"/>
+	                        <field name="map" nolabel="1"
+	                               widget="gmap" colspan="4" />
+	                        
+	                        <field name="points" colspan="1" invisible="1" />
+			            </group>
+		            </sheet>		                
+	            </form>
+	        </field>
+		</record>
+        <record model="ir.actions.act_window" id="dai_ly_action">
+            <field name="name">Đại lý</field>
+            <field name="res_model">dai.ly</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+<!--Điểm trả ế-->   
+        <record model="ir.ui.view" id="khu_vuc_tree">
+            <field name="name">khu.vuc.tree</field>
+            <field name="model">khu.vuc</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Điểm trả ế" editable='top'>
+                    <field name="name" />
+                    <field name="ten" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_khu_vuc">
+            <field name="name">Điểm trả ế</field>
+            <field name="res_model">khu.vuc</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        
+<!--Phường xã-->   
+  <!--      <record model="ir.ui.view" id="phuong_xa_tree">
+            <field name="name">phuong.xa.tree</field>
+            <field name="model">phuong.xa</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Phường/Xã" editable='top'>
+                    <field name="name" />
+                    <field name="quan_huyen_id" options="{'no_create':True}"/>
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_phuong_xa">
+            <field name="name">Phường/Xã</field>
+            <field name="res_model">phuong.xa</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+        -->
+<!--Kỳ vé-->   
+        <record model="ir.ui.view" id="ky_ve_tree">
+            <field name="name">ky.ve.tree</field>
+            <field name="model">ky.ve</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Kỳ vé" editable='top'>
+                    <field name="name" />
+                    <field name="ngay_mo_thuong" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_ky_ve">
+            <field name="name">Kỳ vé</field>
+            <field name="res_model">ky.ve</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+    
+<!--Loại vé-->   
+        <record model="ir.ui.view" id="loai_ve_tree">
+            <field name="name">loai.ve.tree</field>
+            <field name="model">loai.ve</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Loại vé" editable='top'>
+                    <field name="name" />
+                    <field name="gia_tri" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_loai_ve">
+            <field name="name">Loại vé</field>
+            <field name="res_model">loai.ve</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+        
+<!--Phân loại-->   
+        <record model="ir.ui.view" id="phan_loai_tree">
+            <field name="name">phan.loai.tree</field>
+            <field name="model">phan.loai</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Phân loại" editable='top'>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_phan_loai">
+            <field name="name">Phân loại</field>
+            <field name="res_model">phan.loai</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+        
+
+<!--Loại hình kinh doanh-->   
+        <record model="ir.ui.view" id="loai_hinh_tree">
+            <field name="name">loai.hinh.tree</field>
+            <field name="model">loai.hinh</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Loại hình kinh doanh" >
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>  
+        
+       	<record model="ir.ui.view" id="loai_hinh_form">
+	        <field name="name">loai.hinh.form</field>
+	        <field name="model">loai.hinh</field>
+	        <field name="arch" type="xml">
+	            <form string="Loại hình kinh doanh" version="7.0">
+	            	<sheet>
+		            	<group col="4" colspan="2">
+		                    <field name="name" />
+		                    <field name="doanh_thu" />
+			            </group>
+			            <notebook>
+							<page string = "Chi tiết chỉ tiêu">
+								<field name="loai_hinh_line" nolabel='1'>
+									<tree editable='bottom'>
+										<field name="name" />
+										<field name="is_ty_le" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+		            </sheet>		                
+	            </form>
+	        </field>
+		</record>
+        <record model="ir.actions.act_window" id="action_loai_hinh">
+            <field name="name">Loại hình kinh doanh</field>
+            <field name="res_model">loai.hinh</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+    
+    </data>
+</openerp>

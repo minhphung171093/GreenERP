@@ -3,12 +3,13 @@
 # * crm
 # 
 # Translators:
+# Yoshi Tashiro <tashiro@roomsfor.hk>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-09 09:17+0000\n"
-"PO-Revision-Date: 2015-10-10 09:47+0000\n"
+"PO-Revision-Date: 2016-02-20 10:37+0000\n"
 "Last-Translator: Martin Trigaux\n"
 "Language-Team: Japanese (http://www.transifex.com/odoo/odoo-9/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -302,6 +303,22 @@ msgstr ""
 msgid ""
 "<span class=\"panel-title\"><span data-icon=\"&#57463;\"/><strong> Exercise 2</strong></span>\n"
 "                                    <span>(Sales Manager)</span>"
+msgstr ""
+
+#. module: crm
+#: model:web.tip,description:crm.crm_tip_4
+msgid ""
+"<span><b>This is a business opportunity.</b> Drag and drop it to another "
+"column while you move forward in the sales cycle. Click to zoom in the "
+"opportunity.</span>"
+msgstr ""
+
+#. module: crm
+#: model:web.tip,description:crm.crm_tip_6
+msgid ""
+"<span><strong>Click to register a new business opportunity</strong>. Once "
+"the opportunity is created, you will be able to drag and drop it in your "
+"sales pipeline.</span>"
 msgstr ""
 
 #. module: crm
@@ -701,14 +718,14 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_case_kanban_view_leads
 msgid "Archive"
-msgstr ""
+msgstr "アーカイブ"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_opportunity_report_view_search
 #: model:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
 #: model:ir.ui.view,arch_db:crm.view_crm_case_opportunities_filter
 msgid "Archived"
-msgstr ""
+msgstr "アーカイブ済"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.base_partner_merge_automatic_wizard_form
@@ -954,6 +971,11 @@ msgid "Click to set a new stage in your lead/opportunity pipeline."
 msgstr ""
 
 #. module: crm
+#: model:web.tip,description:crm.crm_tip_2
+msgid "Click to view the opportunities related to this customer."
+msgstr ""
+
+#. module: crm
 #: model:ir.ui.view,arch_db:crm.base_partner_merge_automatic_wizard_form
 msgid "Close"
 msgstr "閉じる"
@@ -1018,6 +1040,11 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Consumers"
+msgstr ""
+
+#. module: crm
+#: model:ir.ui.view,arch_db:crm.crm_case_form_view_oppor
+msgid "Contact Information"
 msgstr ""
 
 #. module: crm
@@ -1102,7 +1129,7 @@ msgstr "国"
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Create Customers"
-msgstr ""
+msgstr "顧客を作成"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.view_crm_lead2opportunity_partner
@@ -1112,7 +1139,7 @@ msgstr "商談作成"
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Create Vendors"
-msgstr ""
+msgstr "仕入先を作成"
 
 #. module: crm
 #: selection:crm.lead2opportunity.partner,action:0
@@ -1143,7 +1170,7 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Create your products"
-msgstr ""
+msgstr "製品を作成"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1355,7 +1382,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:crm.field_crm_partner_binding_display_name
 #: model:ir.model.fields,field_description:crm.field_crm_stage_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "表示名"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1500,7 +1527,7 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Excel template"
-msgstr ""
+msgstr "Excelテンプレート"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
@@ -1702,7 +1729,7 @@ msgstr "グループ化"
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_base_partner_merge_automatic_wizard_number_group
 msgid "Group of Contacts"
-msgstr ""
+msgstr "連絡先のグループ"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1854,13 +1881,6 @@ msgid "Import using the top left button in"
 msgstr ""
 
 #. module: crm
-#: model:ir.ui.view,arch_db:crm.crm_case_kanban_view_leads
-#: model:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
-#: model:ir.ui.view,arch_db:crm.view_crm_case_opportunities_filter
-msgid "Important Messages"
-msgstr ""
-
-#. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Improve average revenue per salesperson"
 msgstr ""
@@ -1880,7 +1900,7 @@ msgstr ""
 #: code:addons/crm/sales_team.py:15
 #, python-format
 msgid "Incoming"
-msgstr ""
+msgstr "入庫"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1966,7 +1986,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:crm.field_crm_partner_binding___last_update
 #: model:ir.model.fields,field_description:crm.field_crm_stage___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "最終更新日"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_date_last_stage_update
@@ -2027,6 +2047,14 @@ msgstr "リード / 顧客"
 #: model:mail.message.subtype,name:crm.mt_lead_create
 #: model:mail.message.subtype,name:crm.mt_salesteam_lead
 msgid "Lead Created"
+msgstr ""
+
+#. module: crm
+#: model:ir.actions.act_window,name:crm.crm_lead_tag_action
+#: model:ir.ui.menu,name:crm.menu_crm_lead_categ
+#: model:ir.ui.view,arch_db:crm.crm_lead_tag_form
+#: model:ir.ui.view,arch_db:crm.crm_lead_tag_tree
+msgid "Lead Tags"
 msgstr ""
 
 #. module: crm
@@ -2249,6 +2277,8 @@ msgstr "連絡先グループの最大値"
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_medium_id
 #: model:ir.model.fields,field_description:crm.field_crm_opportunity_report_medium_id
+#: model:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
+#: model:ir.ui.view,arch_db:crm.view_crm_case_opportunities_filter
 msgid "Medium"
 msgstr "中程度"
 
@@ -2285,7 +2315,7 @@ msgstr "すべてのプロセスを自動的にマージ"
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.base_partner_merge_automatic_wizard_form
 msgid "Merge Contacts"
-msgstr ""
+msgstr "連絡先を統合"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.merge_opportunity_form
@@ -2295,7 +2325,7 @@ msgstr ""
 #. module: crm
 #: model:ir.actions.act_window,name:crm.action_partner_merge
 msgid "Merge Selected Contacts"
-msgstr ""
+msgstr "選択した連絡先を統合"
 
 #. module: crm
 #: model:ir.actions.act_window,name:crm.action_merge_opportunities
@@ -2311,7 +2341,7 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.base_partner_merge_automatic_wizard_form
 msgid "Merge the following contacts"
-msgstr ""
+msgstr "次の連絡先を統合"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.base_partner_merge_automatic_wizard_form
@@ -2430,6 +2460,11 @@ msgstr "月"
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Motivation letter from the management"
+msgstr ""
+
+#. module: crm
+#: model:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
+msgid "My Leads"
 msgstr ""
 
 #. module: crm
@@ -2586,7 +2621,7 @@ msgstr ""
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead_message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "未読メッセージの件数"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -3086,7 +3121,7 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Sales Settings"
-msgstr ""
+msgstr "販売設定"
 
 #. module: crm
 #: model:ir.actions.act_window,name:crm.crm_lead_tag_action
@@ -3395,6 +3430,13 @@ msgid "Subscription Management"
 msgstr ""
 
 #. module: crm
+#: model:web.tip,description:crm.crm_tip_5
+msgid ""
+"Switch to the graph view to get a clear reporting on your opportunities "
+"pipeline."
+msgstr ""
+
+#. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid ""
 "Systematic organization is what makes the difference\n"
@@ -3679,13 +3721,16 @@ msgstr ""
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_message_unread
+#: model:ir.ui.view,arch_db:crm.crm_case_kanban_view_leads
+#: model:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
+#: model:ir.ui.view,arch_db:crm.view_crm_case_opportunities_filter
 msgid "Unread Messages"
 msgstr "未読メッセージ"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "未読メッセージカウンター"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_res_users_unreconciled_aml_ids

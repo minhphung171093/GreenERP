@@ -3,14 +3,14 @@
 # * event
 # 
 # Translators:
-# Bogdan, 2015
+# Bogdan, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-01 06:27+0000\n"
-"PO-Revision-Date: 2015-10-07 11:23+0000\n"
-"Last-Translator: Bogdan\n"
+"PO-Revision-Date: 2016-02-20 16:31+0000\n"
+"Last-Translator: Martin Trigaux\n"
 "Language-Team: Ukrainian (http://www.transifex.com/odoo/odoo-9/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,7 +92,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:event.event_event_report_template_badge
 #: model:ir.ui.view,arch_db:event.event_registration_report_template_badge
 msgid "<i>to</i>"
-msgstr ""
+msgstr " <i>до</i>"
 
 #. module: event
 #: model:mail.template,body_html:event.event_reminder
@@ -143,7 +143,7 @@ msgstr ""
 #: model:event.event,description:event.event_1
 #: model:event.event,description:event.event_3
 msgid "<small>John Doe, CEO</small>"
-msgstr ""
+msgstr "<small>John Doe, Генеральний директор</small>"
 
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_event_form
@@ -214,7 +214,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_event_event_message_needaction
 #: model:ir.model.fields,field_description:event.field_event_registration_message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Необхідна дія"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_active
@@ -266,7 +266,7 @@ msgstr "Застосувати"
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_event_search
 msgid "Archived"
-msgstr ""
+msgstr "Заархівовано"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -297,7 +297,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_event_mail_registration_registration_id
 #: model:ir.ui.view,arch_db:event.view_event_registration_form
 msgid "Attendee"
-msgstr ""
+msgstr "Учасник"
 
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_report_event_registration_search
@@ -317,7 +317,7 @@ msgstr ""
 #: model:ir.ui.menu,name:event.menu_action_registration
 #: model:ir.ui.view,arch_db:event.view_event_form
 msgid "Attendees"
-msgstr ""
+msgstr "Учасники"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_auto_confirmation
@@ -349,7 +349,7 @@ msgstr ""
 #: model:event.event,description:event.event_1
 #: model:event.event,description:event.event_3
 msgid "Banner Odoo Image"
-msgstr ""
+msgstr "Зображення банера Odoo"
 
 #. module: event
 #: selection:event.mail,interval_type:0
@@ -440,7 +440,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_report_event_registration_company_id
 #: model:ir.ui.view,arch_db:event.view_report_event_registration_search
 msgid "Company"
-msgstr "Company"
+msgstr "Компанія"
 
 #. module: event
 #: code:addons/event/models/event.py:397
@@ -461,7 +461,7 @@ msgstr ""
 #. module: event
 #: model:ir.ui.menu,name:event.menu_event_configuration
 msgid "Configuration"
-msgstr "Configuration"
+msgstr "Налаштування"
 
 #. module: event
 #: model:ir.actions.act_window,name:event.action_event_configuration
@@ -537,6 +537,13 @@ msgid "Course Summary"
 msgstr ""
 
 #. module: event
+#: model:web.tip,description:event.event_tip_1
+msgid ""
+"Create and manage registrations for this event, send emails to attendees and"
+" print identification badges."
+msgstr ""
+
+#. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_create_uid
 #: model:ir.model.fields,field_description:event.field_event_confirm_create_uid
 #: model:ir.model.fields,field_description:event.field_event_event_create_uid
@@ -545,7 +552,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_event_registration_create_uid
 #: model:ir.model.fields,field_description:event.field_event_type_create_uid
 msgid "Created by"
-msgstr "Created by"
+msgstr "Створив"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_create_date
@@ -556,7 +563,7 @@ msgstr "Created by"
 #: model:ir.model.fields,field_description:event.field_event_registration_create_date
 #: model:ir.model.fields,field_description:event.field_event_type_create_date
 msgid "Created on"
-msgstr "Created on"
+msgstr "Дата створення"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_report_event_registration_create_date
@@ -567,7 +574,7 @@ msgstr "Дата створення"
 #: code:addons/event/models/event.py:378
 #, python-format
 msgid "Customer"
-msgstr "Покупець"
+msgstr "Клієнт"
 
 #. module: event
 #: code:addons/event/models/event.py:376
@@ -605,7 +612,7 @@ msgstr ""
 #. module: event
 #: selection:event.mail,interval_unit:0
 msgid "Day(s)"
-msgstr ""
+msgstr "День (дні)"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_type_default_registration_max
@@ -625,7 +632,7 @@ msgstr "Вилучити"
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_description
 msgid "Description"
-msgstr "Description"
+msgstr "Опис"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -644,7 +651,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_event_type_display_name
 #: model:ir.model.fields,field_description:event.field_report_event_registration_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Показати ім'я"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_mail_sequence
@@ -668,7 +675,7 @@ msgstr "Done"
 #: selection:report.event.registration,event_state:0
 #: selection:report.event.registration,registration_state:0
 msgid "Draft"
-msgstr "Чернетка"
+msgstr "Чорновий"
 
 #. module: event
 #: model:event.event,description:event.event_2
@@ -700,7 +707,7 @@ msgstr ""
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_date_end
 msgid "End Date"
-msgstr "End Date"
+msgstr "Кінцева дата"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_date_end_located
@@ -897,13 +904,13 @@ msgstr "Підписники"
 #: model:ir.model.fields,field_description:event.field_event_event_message_channel_ids
 #: model:ir.model.fields,field_description:event.field_event_registration_message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Підписники (Канали)"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_message_partner_ids
 #: model:ir.model.fields,field_description:event.field_event_registration_message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Підписники (Партнери)"
 
 #. module: event
 #: model:event.event,description:event.event_2
@@ -964,7 +971,7 @@ msgstr ""
 #. module: event
 #: selection:event.mail,interval_unit:0
 msgid "Hour(s)"
-msgstr ""
+msgstr "Година (години)"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -1004,7 +1011,7 @@ msgstr "Якщо позначено, то повідомленя потребу�
 #: model:ir.model.fields,help:event.field_event_event_message_needaction
 #: model:ir.model.fields,help:event.field_event_registration_message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Якщо відмічено, то нові повідомлення будуть потребувати вашої уваги."
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_event_state
@@ -1018,12 +1025,6 @@ msgstr ""
 #. module: event
 #: selection:event.mail,interval_unit:0
 msgid "Immediately"
-msgstr ""
-
-#. module: event
-#: model:ir.ui.view,arch_db:event.view_event_search
-#: model:ir.ui.view,arch_db:event.view_registration_search
-msgid "Important Messages"
 msgstr ""
 
 #. module: event
@@ -1090,7 +1091,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_event_event_message_is_follower
 #: model:ir.model.fields,field_description:event.field_event_registration_message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Стежить"
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_type_default_registration_max
@@ -1123,7 +1124,7 @@ msgstr "Дата останнього повідомлення"
 #: model:ir.model.fields,field_description:event.field_event_type___last_update
 #: model:ir.model.fields,field_description:event.field_report_event_registration___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Остання модифікація"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_write_uid
@@ -1134,7 +1135,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_event_registration_write_uid
 #: model:ir.model.fields,field_description:event.field_event_type_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Востаннє оновив"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_write_date
@@ -1145,12 +1146,12 @@ msgstr "Last Updated by"
 #: model:ir.model.fields,field_description:event.field_event_registration_write_date
 #: model:ir.model.fields,field_description:event.field_event_type_write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Останнє оновлення"
 
 #. module: event
 #: selection:event.event,seats_availability:0
 msgid "Limited"
-msgstr ""
+msgstr "Обмежений"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_address_id
@@ -1252,12 +1253,12 @@ msgstr "Модулі"
 #. module: event
 #: selection:event.mail,interval_unit:0
 msgid "Month(s)"
-msgstr ""
+msgstr "Місяць (місяці)"
 
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_event_search
 msgid "My Events"
-msgstr ""
+msgstr "Мої події"
 
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_report_event_registration_search
@@ -1300,7 +1301,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event.field_event_event_message_needaction_counter
 #: model:ir.model.fields,field_description:event.field_event_registration_message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Кількість дій"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_report_event_registration_nbevent
@@ -1326,13 +1327,13 @@ msgstr ""
 #: model:ir.model.fields,help:event.field_event_event_message_needaction_counter
 #: model:ir.model.fields,help:event.field_event_registration_message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Кількість повідомлень, які потебують дії"
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_event_message_unread_counter
 #: model:ir.model.fields,help:event.field_event_registration_message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "Кількість непрочитаних повідомлень"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -1359,7 +1360,7 @@ msgstr ""
 #. module: event
 #: model:event.event,name:event.event_0
 msgid "Open Days in Los Angeles"
-msgstr ""
+msgstr "Відкриті дні у Лос-Анджелесі"
 
 #. module: event
 #: model:ir.actions.client,name:event.action_client_event_menu
@@ -1369,7 +1370,7 @@ msgstr ""
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_organizer_id
 msgid "Organizer"
-msgstr ""
+msgstr "Організатор"
 
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_registration_search
@@ -1402,7 +1403,7 @@ msgstr ""
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_registration_search
 msgid "Partner"
-msgstr "Partner"
+msgstr "Партнер"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_registration_phone
@@ -1621,7 +1622,7 @@ msgstr "Початковий документ"
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_date_begin
 msgid "Start Date"
-msgstr "Start Date"
+msgstr "Початкова дата"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_date_begin_located
@@ -1631,7 +1632,7 @@ msgstr ""
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_event_search
 msgid "Start Month"
-msgstr ""
+msgstr "Місяць початку"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_state
@@ -1644,7 +1645,7 @@ msgstr "Статус"
 #. module: event
 #: model:ir.actions.act_window,name:event.act_register_event_partner
 msgid "Subscribe"
-msgstr ""
+msgstr "Підписатися"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_module_website_event_questions
@@ -1688,7 +1689,7 @@ msgstr ""
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_module_event_sale
 msgid "Tickets"
-msgstr ""
+msgstr "Білети"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_date_tz
@@ -1723,7 +1724,7 @@ msgstr ""
 #: selection:event.event,state:0 selection:event.registration,state:0
 #: model:ir.ui.view,arch_db:event.view_event_search
 msgid "Unconfirmed"
-msgstr ""
+msgstr "Непідтверджено"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_seats_unconfirmed
@@ -1757,11 +1758,13 @@ msgstr "Одиниця"
 #. module: event
 #: selection:event.event,seats_availability:0
 msgid "Unlimited"
-msgstr ""
+msgstr "Необмежено"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_message_unread
 #: model:ir.model.fields,field_description:event.field_event_registration_message_unread
+#: model:ir.ui.view,arch_db:event.view_event_search
+#: model:ir.ui.view,arch_db:event.view_registration_search
 msgid "Unread Messages"
 msgstr "Непрочитані повідомлення"
 
@@ -1769,7 +1772,7 @@ msgstr "Непрочитані повідомлення"
 #: model:ir.model.fields,field_description:event.field_event_event_message_unread_counter
 #: model:ir.model.fields,field_description:event.field_event_registration_message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Кількість непрочитаних повідомлень"
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_config_settings_auto_confirmation
@@ -1812,9 +1815,19 @@ msgid ""
 msgstr ""
 
 #. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: event
+#: model:ir.model.fields,help:event.field_event_event_website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: event
 #: selection:event.mail,interval_unit:0
 msgid "Week(s)"
-msgstr ""
+msgstr "Тиждень (тижні)"
 
 #. module: event
 #: model:event.event,description:event.event_0

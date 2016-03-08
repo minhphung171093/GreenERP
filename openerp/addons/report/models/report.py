@@ -25,6 +25,7 @@ from contextlib import closing
 from distutils.version import LooseVersion
 from functools import partial
 from pyPdf import PdfFileWriter, PdfFileReader
+from reportlab.graphics.barcode import createBarcodeDrawing
 
 
 #--------------------------------------------------------------------------
@@ -88,7 +89,7 @@ class Report(osv.Model):
 
         view_obj = self.pool['ir.ui.view']
 
-        user = self.pool['res.users'].browse(cr, uid, uid)
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
         website = None
         if request and hasattr(request, 'website'):
             if request.website is not None:
@@ -131,8 +132,8 @@ class Report(osv.Model):
 
     @api.v8
     def get_html(self, records, report_name, data=None):
-        return self._model.get_html(self._cr, self._uid, records.ids, report_name,
-                                    data=data, context=self._context)
+        return Report.get_html(self._model, self._cr, self._uid, records.ids,
+                               report_name, data=data, context=self._context)
 
     @api.v7
     def get_pdf(self, cr, uid, ids, report_name, html=None, data=None, context=None):
@@ -140,6 +141,17 @@ class Report(osv.Model):
         """
         if context is None:
             context = {}
+
+        # As the assets are generated during the same transaction as the rendering of the
+        # templates calling them, there is a scenario where the assets are unreachable: when
+        # you make a request to read the assets while the transaction creating them is not done.
+        # Indeed, when you make an asset request, the controller has to read the `ir.attachment`
+        # table.
+        # This scenario happens when you want to print a PDF report for the first time, as the
+        # assets are not in cache and must be generated. To workaround this issue, we manually
+        # commit the writes in the `ir.attachment` table. It is done thanks to a key in the context.
+        if not config['test_enable']:
+            context = dict(context, commit_assetsbundle=True)
 
         if html is None:
             html = self.get_html(cr, uid, ids, report_name, data=data, context=context)
@@ -234,8 +246,8 @@ class Report(osv.Model):
 
     @api.v8
     def get_pdf(self, records, report_name, html=None, data=None):
-        return self._model.get_pdf(self._cr, self._uid, records.ids, report_name,
-                                   html=html, data=data, context=self._context)
+        return Report.get_pdf(self._model, self._cr, self._uid, records.ids,
+                              report_name, html=html, data=data, context=self._context)
 
     @api.v7
     def get_action(self, cr, uid, ids, report_name, data=None, context=None):
@@ -268,8 +280,8 @@ class Report(osv.Model):
 
     @api.v8
     def get_action(self, records, report_name, data=None):
-        return self._model.get_action(self._cr, self._uid, records.ids, report_name,
-                                      data=data, context=self._context)
+        return Report.get_action(self._model, self._cr, self._uid, records.ids,
+                                 report_name, data=data, context=self._context)
 
     #--------------------------------------------------------------------------
     # Report generation helpers
@@ -315,8 +327,8 @@ class Report(osv.Model):
 
     @api.v8
     def _check_attachment_use(self, records, report):
-        return self._model._check_attachment_use(
-            self._cr, self._uid, records.ids, report, context=self._context)
+        return Report._check_attachment_use(
+            self._model, self._cr, self._uid, records.ids, report, context=self._context)
 
     def _check_wkhtmltopdf(self):
         return wkhtmltopdf_state
@@ -531,3 +543,18 @@ class Report(osv.Model):
             stream.close()
 
         return merged_file_path
+
+    def barcode(self, barcode_type, value, width=600, height=100, humanreadable=0):
+        if barcode_type == 'UPCA' and len(value) in (11, 12, 13):
+            barcode_type = 'EAN13'
+            if len(value) in (11, 12):
+                value = '0%s' % value
+        try:
+            width, height, humanreadable = int(width), int(height), bool(int(humanreadable))
+            barcode = createBarcodeDrawing(
+                barcode_type, value=value, format='png', width=width, height=height,
+                humanReadable=humanreadable
+            )
+            return barcode.asString('png')
+        except (ValueError, AttributeError):
+            raise ValueError("Cannot convert into barcode.")

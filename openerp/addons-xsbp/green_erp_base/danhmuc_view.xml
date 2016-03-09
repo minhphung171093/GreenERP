@@ -9,7 +9,7 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Tỉnh/Thành phố" editable='top'>
-                    <field name="code" />
+                	<field name="code" />
                     <field name="name" />
                 </tree>
             </field>
@@ -21,7 +21,7 @@
             <field name="view_mode">tree,form</field>
         </record>  
         
-<!--quận-->   
+       <!--quận-->   
         					
         <record model="ir.ui.view" id="quan_huyen_tree">
             <field name="name">quan.huyen.tree</field>
@@ -61,8 +61,26 @@
             <field name="res_model">phuong.xa</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-        </record>      					
-        	
+        </record>     
+
+<!--đại lý-->   
+        
+       	<record id="res_partner_dai_ly_inherit" model="ir.ui.view">
+	            <field name="name">res.partner.dai.ly.inherit</field>
+	            <field name="model">res.partner</field>
+	            <field name="inherit_id" ref="base.view_partner_form"/>
+	            <field name="arch" type="xml">
+	            	<xpath expr="//page[@string='Contacts &amp; Addresses']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	                <xpath expr="//page[@string='Internal Notes']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	                <xpath expr="//page[@string='Sales &amp; Purchases']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	            </field>
+	    </record>
 
 <!--Điểm trả ế-->   
         <record model="ir.ui.view" id="khu_vuc_tree">

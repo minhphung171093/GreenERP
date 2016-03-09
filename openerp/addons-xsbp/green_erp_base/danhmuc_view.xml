@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
                 <tree string="Tỉnh/Thành phố" editable='top'>
                     <field name="name" />
-                    <field name="ten" />
+                    <field name="code" />
                 </tree>
             </field>
         </record>  

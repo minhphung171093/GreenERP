@@ -21,50 +21,111 @@ from math import radians, cos, sin, asin, sqrt
 class tinh_tp(osv.osv):
     _name = "tinh.tp"
     _columns = {
-        'name': fields.char('Mã Tỉnh/Thành Phố',size = 1024, required = True),
-        'ten': fields.char('Tên Tỉnh/Thành Phố',size = 1024, required = True),
+        'name': fields.char('Tên Tỉnh/Thành Phố',size = 1024, required = True),
+        'code': fields.char('Mã Tỉnh/Thành Phố',size = 1024, required = True),
                 }
+    
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+        if not args:
+            args = []
+        if context is None:
+            context = {}
+        if not name:
+            ids = self.search(cr, user, args, limit=limit, context=context)
+        else:
+            ids = self.search(cr, user, [('code',operator,name)] + args, limit=limit, context=context)
+            if not ids:
+                ids = self.search(cr, user, [('name',operator,name)] + args, limit=limit, context=context)
+            
+        return self.name_get(cr, user, ids, context=context)
 tinh_tp()
+class phuong_xa(osv.osv):
+    _name = "phuong.xa"
+    _columns = {
+        'name': fields.char('Phường (xã)',size = 50, required = True),
+        'code': fields.char('Mã Phường/Xã',size = 1024, required = True),
+        'quan_huyen_id': fields.many2one( 'quan.huyen','Quận (huyện)', required = True),
+                }
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+        if not args:
+            args = []
+        if context is None:
+            context = {}
+        if not name:
+            ids = self.search(cr, user, args, limit=limit, context=context)
+        else:
+            ids = self.search(cr, user, [('code',operator,name)] + args, limit=limit, context=context)
+            if not ids:
+                ids = self.search(cr, user, [('name',operator,name)] + args, limit=limit, context=context)
+            
+        return self.name_get(cr, user, ids, context=context)
+phuong_xa()
+class quan_huyen(osv.osv):
+    _name = "quan.huyen"
+    _columns = {
+        'name': fields.char('Quận (huyện)',size = 50, required = True),
+        'code': fields.char('Mã Quận/Huyện',size = 1024, required = True),
+        'tinh_tp_id':fields.many2one('tinh.tp','Thuộc Tỉnh/Thành phố', required = True),
+                }
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+        if not args:
+            args = []
+        if context is None:
+            context = {}
+        if not name:
+            ids = self.search(cr, user, args, limit=limit, context=context)
+        else:
+            ids = self.search(cr, user, [('code',operator,name)] + args, limit=limit, context=context)
+            if not ids:
+                ids = self.search(cr, user, [('name',operator,name)] + args, limit=limit, context=context)
+            
+        return self.name_get(cr, user, ids, context=context)
+quan_huyen()
 
-# class res_partner(osv.osv):
-#     _inherit = "res.partner"
-#     _columns = {
-#         'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/Thành Phố', required = True),
-#         'mo_ta': fields.text('Mo ta'),
-#                 }
-#     
-#     def name_get(self, cr, uid, ids, context=None):
-#         if not ids:
-#             return []
-#         res = []
-#         reads = self.read(cr, uid, ids, ['name','ten'], context)
-#    
-#         for record in reads:
-#             name = record['name'] + '-' +'['+record['ten']+']'
-#             res.append((record['id'], name))
-#         return res  
-#     
-#     def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
-#         if context is None:
-#             context = {}
-#         if context.get('search_dai_ly'):
-#             if context.get('ky_ve_id') and context.get('loai_ve_id'):
-#                 sql = '''
-#                     select daily_id from phanphoi_tt_line
-#                     where phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s and loai_ve_id = %s)
-#                 '''%(context.get('ky_ve_id'), context.get('loai_ve_id'))
-#                 cr.execute(sql)
-#                 dai_ly_ids = [row[0] for row in cr.fetchall()]
-#                 args += [('id','in',dai_ly_ids)]
-#             if not context.get('ky_ve_id') or not context.get('loai_ve_id'):
-#                 dai_ly_ids = False
-#                 args += [('id','in',dai_ly_ids)]
-#         return super(dai_ly, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
-#     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
-#        ids = self.search(cr, user, args, context=context, limit=limit)
-#        return self.name_get(cr, user, ids, context=context)
-#    
-# res_partner()
+class res_partner(osv.osv):
+    _inherit = "res.partner"
+    _columns = {
+        'ma_dl': fields.char('Mã đại lý', size=1024, required = True),
+        'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/Thành Phố'),
+        'dia_chi': fields.char('Địa chỉ', size=1024),
+        'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)'),
+        'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
+        'ngay': fields.date('Ngày sinh'),
+        'ten_gd': fields.char('Địa chỉ', size=1024),
+                }
+     
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+        res = []
+        reads = self.read(cr, uid, ids, ['ma_dl','name'], context)
+    
+        for record in reads:
+            name = record['ma_dl'] + '-' +'['+record['name']+']'
+            res.append((record['id'], name))
+        return res  
+     
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+        if context is None:
+            context = {}
+        if context.get('search_dai_ly'):
+            if context.get('ky_ve_id') and context.get('loai_ve_id'):
+                sql = '''
+                    select daily_id from phanphoi_tt_line
+                    where phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s and loai_ve_id = %s)
+                '''%(context.get('ky_ve_id'), context.get('loai_ve_id'))
+                cr.execute(sql)
+                dai_ly_ids = [row[0] for row in cr.fetchall()]
+                args += [('id','in',dai_ly_ids)]
+            if not context.get('ky_ve_id') or not context.get('loai_ve_id'):
+                dai_ly_ids = False
+                args += [('id','in',dai_ly_ids)]
+        return super(dai_ly, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+       ids = self.search(cr, user, args, context=context, limit=limit)
+       return self.name_get(cr, user, ids, context=context)
+    
+res_partner()
 
 class dai_ly(osv.osv):
     _name = "dai.ly"

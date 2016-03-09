@@ -22,49 +22,23 @@
         </record>  
 
 <!--đại lý-->   
-        <record model="ir.ui.view" id="dai_ly_tree">
-            <field name="name">dai.ly.tree</field>
-            <field name="model">dai.ly</field>
-            <field name="type">tree</field>
-            <field name="arch" type="xml">
-                <tree string="Đại lý" >
-                    <field name="name" />
-                    <field name="ten" />
-                    <field name="tinh_tp_id" />
-                    
-                </tree>
-            </field>
-        </record>  
         
-       	<record model="ir.ui.view" id="dai_ly_form">
-	        <field name="name">dai.ly.form</field>
-	        <field name="model">dai.ly</field>
-	        <field name="arch" type="xml">
-	            <form string="Đại lý" version="7.0">
-	            	<sheet>
-		            	<group col="4" colspan="4">
-	                		<field name="name" colspan="1"/>
-		                    <field name="ten" colspan="1"/>
-		                    <field name="tinh_tp_id" colspan="1" options="{'no_create':True}"/>
-	                    	<field name="lat" colspan="1" />
-	                        <field name="lng" colspan="1" />
-	                        <field name="radius" colspan="1" invisible="1" />
-	                        <field name="mo_ta" colspan="4" widget="text_ckeditor4"/>
-	                        <field name="map" nolabel="1"
-	                               widget="gmap" colspan="4" />
-	                        
-	                        <field name="points" colspan="1" invisible="1" />
-			            </group>
-		            </sheet>		                
-	            </form>
-	        </field>
-		</record>
-        <record model="ir.actions.act_window" id="dai_ly_action">
-            <field name="name">Đại lý</field>
-            <field name="res_model">dai.ly</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>  
+       	<record id="res_partner_dai_ly_inherit" model="ir.ui.view">
+	            <field name="name">res.partner.dai.ly.inherit</field>
+	            <field name="model">res.partner</field>
+	            <field name="inherit_id" ref="base.view_partner_form"/>
+	            <field name="arch" type="xml">
+	            	<xpath expr="//page[@string='Contacts &amp; Addresses']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	                <xpath expr="//page[@string='Internal Notes']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	                <xpath expr="//page[@string='Sales &amp; Purchases']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	            </field>
+	    </record>
 
 <!--Điểm trả ế-->   
         <record model="ir.ui.view" id="khu_vuc_tree">

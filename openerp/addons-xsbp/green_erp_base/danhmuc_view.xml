@@ -63,6 +63,24 @@
             <field name="view_mode">tree,form</field>
         </record>     
 
+<!--đại lý-->   
+        
+      	<record id="res_partner_dai_ly_inherit" model="ir.ui.view">
+	            <field name="name">res.partner.dai.ly.inherit</field>
+	            <field name="model">res.partner</field>
+	            <field name="inherit_id" ref="base.view_partner_form"/>
+	            <field name="arch" type="xml">
+	            	<xpath expr="//page[@string='Contacts &amp; Addresses']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	                <xpath expr="//page[@string='Internal Notes']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	                <xpath expr="//page[@string='Sales &amp; Purchases']" position="attributes">
+	                    <attribute name="invisible">1</attribute>
+	                </xpath>
+	            </field>
+	    </record>   
 
 <!--Điểm trả ế-->   
         <record model="ir.ui.view" id="khu_vuc_tree">
@@ -84,25 +102,6 @@
         </record>  
 
         
-<!--Phường xã-->   
-  <!--      <record model="ir.ui.view" id="phuong_xa_tree">
-            <field name="name">phuong.xa.tree</field>
-            <field name="model">phuong.xa</field>
-            <field name="type">tree</field>
-            <field name="arch" type="xml">
-                <tree string="Phường/Xã" editable='top'>
-                    <field name="name" />
-                    <field name="quan_huyen_id" options="{'no_create':True}"/>
-                </tree>
-            </field>
-        </record>  
-        <record model="ir.actions.act_window" id="action_phuong_xa">
-            <field name="name">Phường/Xã</field>
-            <field name="res_model">phuong.xa</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>  
-        -->
 <!--Kỳ vé-->   
         <record model="ir.ui.view" id="ky_ve_tree">
             <field name="name">ky.ve.tree</field>

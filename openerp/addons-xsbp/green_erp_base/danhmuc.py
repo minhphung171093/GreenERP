@@ -82,17 +82,17 @@ class quan_huyen(osv.osv):
         return self.name_get(cr, user, ids, context=context)
 quan_huyen()
 
-class res_partner(osv.osv):
-    _inherit = "res.partner"
-    _columns = {
-        'ma_dl': fields.char('Mã đại lý', size=1024, required = True),
-        'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/Thành Phố'),
-        'dia_chi': fields.char('Địa chỉ', size=1024),
-        'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)'),
-        'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
-        'ngay': fields.date('Ngày sinh'),
-        'ten_gd': fields.char('Địa chỉ', size=1024),
-                }
+# class res_partner(osv.osv):
+#     _inherit = "res.partner"
+#     _columns = {
+#         'ma_dl': fields.char('Mã đại lý', size=1024, required = True),
+#         'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/Thành Phố'),
+#         'dia_chi': fields.char('Địa chỉ', size=1024),
+#         'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)'),
+#         'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
+#         'ngay': fields.date('Ngày sinh'),
+#         'ten_gd': fields.char('Địa chỉ', size=1024),
+#                 }
      
 #     def name_get(self, cr, uid, ids, context=None):
 #         if not ids:
@@ -125,7 +125,7 @@ class res_partner(osv.osv):
 #        ids = self.search(cr, user, args, context=context, limit=limit)
 #        return self.name_get(cr, user, ids, context=context)
     
-res_partner()
+# res_partner()
 
 class dai_ly(osv.osv):
     _name = "dai.ly"

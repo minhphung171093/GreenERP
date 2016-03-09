@@ -26,7 +26,7 @@
     'sequence': 1,
     'author': 'nguyentoanit@gmail.com',
     'website' : 'http://incomtech.com/',
-    'depends': ['base','report_aeroo','report_aeroo_controller','web','web_readonly_bypass'],
+    'depends': ['report_aeroo','report_aeroo_controller','web','web_readonly_bypass'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',

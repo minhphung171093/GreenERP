@@ -65,7 +65,7 @@
 
 <!--đại lý-->   
         
-      	<record id="res_partner_dai_ly_inherit" model="ir.ui.view">
+<!--      	<record id="res_partner_dai_ly_inherit" model="ir.ui.view">
 	            <field name="name">res.partner.dai.ly.inherit</field>
 	            <field name="model">res.partner</field>
 	            <field name="inherit_id" ref="base.view_partner_form"/>
@@ -80,7 +80,7 @@
 	                    <attribute name="invisible">1</attribute>
 	                </xpath>
 	            </field>
-	    </record>   
+	    </record>   -->
 
 <!--Điểm trả ế-->   
         <record model="ir.ui.view" id="khu_vuc_tree">

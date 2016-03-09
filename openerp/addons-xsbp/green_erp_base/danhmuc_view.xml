@@ -9,8 +9,8 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Tỉnh/Thành phố" editable='top'>
-                    <field name="name" />
                     <field name="code" />
+                    <field name="name" />
                 </tree>
             </field>
         </record>  
@@ -21,7 +21,47 @@
             <field name="view_mode">tree,form</field>
         </record>  
         
-  					
+<!--quận-->   
+        					
+        <record model="ir.ui.view" id="quan_huyen_tree">
+            <field name="name">quan.huyen.tree</field>
+            <field name="model">quan.huyen</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Quận (Huyện)" editable='top'>
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="tinh_tp_id" />
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_quan_huyen">
+            <field name="name">Quận (Huyện)</field>
+            <field name="res_model">quan.huyen</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+        
+        		<!--Phường xã-->   
+        					
+        <record model="ir.ui.view" id="phuong_xa_tree">
+            <field name="name">phuong.xa.tree</field>
+            <field name="model">phuong.xa</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Phường (Xã)" editable='top'>
+                	<field name="code" />
+                    <field name="name" />
+                    <field name="quan_huyen_id" options="{'create': false, 'create_edit': false}"/>
+                </tree>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="action_phuong_xa">
+            <field name="name">Phường (Xã)</field>
+            <field name="res_model">phuong.xa</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>      					
         	
 
 <!--Điểm trả ế-->   

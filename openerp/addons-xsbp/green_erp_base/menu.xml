@@ -17,6 +17,9 @@
 					action="dai_ly_action"
 					name="Đại lý"
 					parent="menu_danh_muc" sequence="12"/>
+				
+				<menuitem id="base.menu_partner_form" parent="menu_danh_muc" 
+					action="base.action_partner_form" sequence="13"/>
 
 				<menuitem id="menu_action_khu_vuc"
 					action="action_khu_vuc"

@@ -26,6 +26,46 @@ class tinh_tp(osv.osv):
                 }
 tinh_tp()
 
+# class res_partner(osv.osv):
+#     _inherit = "res.partner"
+#     _columns = {
+#         'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/Thành Phố', required = True),
+#         'mo_ta': fields.text('Mo ta'),
+#                 }
+#     
+#     def name_get(self, cr, uid, ids, context=None):
+#         if not ids:
+#             return []
+#         res = []
+#         reads = self.read(cr, uid, ids, ['name','ten'], context)
+#    
+#         for record in reads:
+#             name = record['name'] + '-' +'['+record['ten']+']'
+#             res.append((record['id'], name))
+#         return res  
+#     
+#     def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+#         if context is None:
+#             context = {}
+#         if context.get('search_dai_ly'):
+#             if context.get('ky_ve_id') and context.get('loai_ve_id'):
+#                 sql = '''
+#                     select daily_id from phanphoi_tt_line
+#                     where phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s and loai_ve_id = %s)
+#                 '''%(context.get('ky_ve_id'), context.get('loai_ve_id'))
+#                 cr.execute(sql)
+#                 dai_ly_ids = [row[0] for row in cr.fetchall()]
+#                 args += [('id','in',dai_ly_ids)]
+#             if not context.get('ky_ve_id') or not context.get('loai_ve_id'):
+#                 dai_ly_ids = False
+#                 args += [('id','in',dai_ly_ids)]
+#         return super(dai_ly, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
+#     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+#        ids = self.search(cr, user, args, context=context, limit=limit)
+#        return self.name_get(cr, user, ids, context=context)
+#    
+# res_partner()
+
 class dai_ly(osv.osv):
     _name = "dai.ly"
     _columns = {

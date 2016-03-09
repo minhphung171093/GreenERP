@@ -13,15 +13,6 @@
 					name="Tỉnh/Thành phố"
 					parent="menu_danh_muc" sequence="10"/>
 				
-				<menuitem id="menu_action_quan_huyen"
-					action="action_quan_huyen"
-					name="Quận/Huyện"
-					parent="menu_danh_muc" sequence="11"/>
-					
-				<menuitem id="menu_action_phuong_xa"
-					action="action_phuong_xa"
-					name="Phường/Xã"
-					parent="menu_danh_muc" sequence="12"/>
 
 				<menuitem id="base.menu_partner_form" parent="menu_danh_muc" 
 					name="Đại lý"

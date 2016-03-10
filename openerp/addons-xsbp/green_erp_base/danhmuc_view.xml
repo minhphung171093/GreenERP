@@ -73,7 +73,6 @@
                 <tree string="Đại lý" >
                 	<field name="ma_dl" />
                     <field name="name" />
-                    <field name="dai_ly" invisible='1'/>
                 </tree>
             </field>
         </record>  
@@ -87,7 +86,6 @@
 		            	<group col="4" colspan="2">
 		                    <field name="ma_dl" />
 		                    <field name="name" />
-		                    <field name="dai_ly" invisible='1'/>
 			            </group>
 		            </sheet>		                
 	            </form>
@@ -98,8 +96,6 @@
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('dai_ly','=',True)]</field>
-	        <field name="context">{'default_dai_ly': True}</field>
         </record>  
         <record id="action_dai_ly_partner2" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>

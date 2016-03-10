@@ -92,6 +92,7 @@ class res_partner(osv.osv):
         'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
         'ngay': fields.date('Ngày sinh'),
         'ten_gd': fields.char('Địa chỉ', size=1024),
+        'dai_ly': fields.boolean('is_dai_ly'),
                 }
       
 #     def name_get(self, cr, uid, ids, context=None):

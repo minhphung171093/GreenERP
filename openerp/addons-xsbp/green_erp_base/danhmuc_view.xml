@@ -65,22 +65,50 @@
 
 <!--đại lý-->   
         
-<!--      	<record id="res_partner_dai_ly_inherit" model="ir.ui.view">
-	            <field name="name">res.partner.dai.ly.inherit</field>
-	            <field name="model">res.partner</field>
-	            <field name="inherit_id" ref="base.view_partner_form"/>
-	            <field name="arch" type="xml">
-	            	<xpath expr="//page[@string='Contacts &amp; Addresses']" position="attributes">
-	                    <attribute name="invisible">1</attribute>
-	                </xpath>
-	                <xpath expr="//page[@string='Internal Notes']" position="attributes">
-	                    <attribute name="invisible">1</attribute>
-	                </xpath>
-	                <xpath expr="//page[@string='Sales &amp; Purchases']" position="attributes">
-	                    <attribute name="invisible">1</attribute>
-	                </xpath>
-	            </field>
-	    </record>   -->
+      	<record model="ir.ui.view" id="dai_ly_partner_tree">
+            <field name="name">dai.ly.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Đại lý" >
+                	<field name="ma_dl" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>  
+        
+       	<record model="ir.ui.view" id="dai_ly_partner_form">
+	        <field name="name">dai.ly.partner.form</field>
+	        <field name="model">res.partner</field>
+	        <field name="arch" type="xml">
+	            <form string="Đại lý" version="7.0">
+	            	<sheet>
+		            	<group col="4" colspan="2">
+		                    <field name="ma_dl" />
+		                    <field name="name" />
+			            </group>
+		            </sheet>		                
+	            </form>
+	        </field>
+		</record>
+        <record model="ir.actions.act_window" id="action_dai_ly_partner">
+            <field name="name">Đại lý</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+        <record id="action_dai_ly_partner2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="dai_ly_partner_form"/>
+            <field name="act_window_id" ref="action_dai_ly_partner"/>
+        </record>
+        <record id="action_dai_ly_partner1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="dai_ly_partner_tree"/>
+            <field name="act_window_id" ref="action_dai_ly_partner"/>
+        </record>
 
 <!--Điểm trả ế-->   
         <record model="ir.ui.view" id="khu_vuc_tree">

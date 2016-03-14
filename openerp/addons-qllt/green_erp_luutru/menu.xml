@@ -4,10 +4,14 @@
 			<menuitem id="menu_action_luu_tru_today"
 				action="action_luu_tru_today"
 				name="Khai báo lưu trú"
+				sequence="1"/>
+			<menuitem id="menu_action_luu_tru_nhanh"
+				action="action_luu_tru_nhanh"
+				name="Khai báo lưu trú nhanh"
 				sequence="5"/>
 			<menuitem id="menu_action_luu_tru"
 				action="action_luu_tru"
-				name="Đăng ký lưu trú"
+				name="Lịch sử lưu trú"
 				sequence="10"/>
 			<menuitem id="bao_cao" name="Thống kê - Báo cáo"/>
 	    		<menuitem id="menu_action_khach_luutru_form"

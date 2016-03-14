@@ -77,6 +77,22 @@
                 </tree>
             </field>
         </record>  
+        
+        <record model="ir.ui.view" id="luu_tru_nhanh_tree">
+            <field name="name">luu.tru.tree</field>
+            <field name="model">luu.tru</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Quản lý lưu trú" editable='top'>
+                	<field name="tiep_nhan" />
+                	<field name="khach_san_id" on_change="on_change_diachi(khach_san_id)" options="{'no_create':True}"/>
+                	<field name="phuong_xa_id" />
+                    <field name="quan_huyen_id" />
+                    <field name="tinh_tp_id" />
+                </tree>
+            </field>
+        </record> 
+        
         <record model="ir.ui.view" id="luu_tru_form">
             <field name="name">luu.tru.form</field>
             <field name="model">luu.tru</field>
@@ -153,18 +169,35 @@
             <field name="context">{'readonly_by_pass': True,'search_default_today': True}</field>
         </record> 
         
-        <record id="action_luu_tru1" model="ir.actions.act_window.view">
+        <record id="action_luu_tru_today1" model="ir.actions.act_window.view">
 	        <field eval="3" name="sequence"/>
 	        <field name="view_mode">tree</field>
 	        <field name="view_id" ref="luu_tru_tree"/>
 	        <field name="act_window_id" ref="action_luu_tru_today"/>
 	    </record>
 	        
-	    <record id="action_luu_tru2" model="ir.actions.act_window.view">
+	    <record id="action_luu_tru_today2" model="ir.actions.act_window.view">
 	        <field eval="4" name="sequence"/>
 	        <field name="view_mode">form</field>
 	        <field name="view_id" ref="luu_tru_form"/>
 	        <field name="act_window_id" ref="action_luu_tru_today"/>
 	    </record>
+	    
+	    <record model="ir.actions.act_window" id="action_luu_tru_nhanh">
+            <field name="name">Khai báo lưu trú nhanh</field>
+            <field name="res_model">luu.tru</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="luu_tru_search"/>
+            <field name="context">{'readonly_by_pass': True}</field>
+        </record> 
+        
+        <record id="action_luu_tru_nhanh1" model="ir.actions.act_window.view">
+	        <field eval="5" name="sequence"/>
+	        <field name="view_mode">tree</field>
+	        <field name="view_id" ref="luu_tru_nhanh_tree"/>
+	        <field name="act_window_id" ref="action_luu_tru_nhanh"/>
+	    </record>
+	        
     </data>
 </openerp>

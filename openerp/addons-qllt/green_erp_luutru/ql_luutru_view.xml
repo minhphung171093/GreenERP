@@ -16,6 +16,7 @@
                     <field name="khach_phuongxa_id"/>
                     <field name="quoc_tich_id"/>
                     <field name="khach_san_id"/>
+                    <field name="so_giay_to"/>
                     <separator/>
                     <group expand="0" string="Group By...">
                     	<filter string="Tỉnh (thành phố)" domain="[]" context="{'group_by':'khach_tinhtp_id'}"/>
@@ -26,7 +27,32 @@
                     </group>
                </search>
             </field>
-        </record>					
+        </record>	
+        
+        <record id="luu_tru_today_search" model="ir.ui.view">
+            <field name="name">luu.tru.search</field>
+            <field name="model">luu.tru</field>
+            <field name="arch" type="xml">
+                <search string="Quản lý lưu trú">
+                	<field name="name" />
+                    <field name="khach_tinhtp_id"/>
+                    <field name="khach_quanhuyen_id"/>
+                    <field name="khach_phuongxa_id"/>
+                    <field name="quoc_tich_id"/>
+                    <field name="khach_san_id"/>
+                    <field name="so_giay_to"/>
+                    <filter icon="terp-go-today" string="Today" name="today" domain="[('ngay_den','&gt;=',current_date),('ngay_den','&lt;=',current_date)]"/>
+                    <separator/>
+                    <group expand="0" string="Group By...">
+                    	<filter string="Tỉnh (thành phố)" domain="[]" context="{'group_by':'khach_tinhtp_id'}"/>
+                        <filter string="Quận (huyện)" domain="[]" context="{'group_by':'khach_quanhuyen_id'}"/>
+                        <filter string="Phường (xã)" domain="[]"  context="{'group_by':'khach_phuongxa_id'}"/>
+                        <filter string="Khách sạn" domain="[]"  context="{'group_by':'khach_san_id'}"/>
+                        <filter string="Quốc tịch" domain="[]"  context="{'group_by':'quoc_tich_id'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>				
         					
         <record model="ir.ui.view" id="luu_tru_tree">
             <field name="name">luu.tru.tree</field>
@@ -103,5 +129,42 @@
             <field name="search_view_id" ref="luu_tru_search"/>
             <field name="context">{'readonly_by_pass': True}</field>
         </record> 
+        
+        <record id="action_luu_tru1" model="ir.actions.act_window.view">
+	        <field eval="1" name="sequence"/>
+	        <field name="view_mode">tree</field>
+	        <field name="view_id" ref="luu_tru_tree"/>
+	        <field name="act_window_id" ref="action_luu_tru"/>
+	    </record>
+	        
+	    <record id="action_luu_tru2" model="ir.actions.act_window.view">
+	        <field eval="2" name="sequence"/>
+	        <field name="view_mode">form</field>
+	        <field name="view_id" ref="luu_tru_form"/>
+	        <field name="act_window_id" ref="action_luu_tru"/>
+	    </record>
+	    
+	    <record model="ir.actions.act_window" id="action_luu_tru_today">
+            <field name="name">Khai báo lưu trú</field>
+            <field name="res_model">luu.tru</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="luu_tru_today_search"/>
+            <field name="context">{'readonly_by_pass': True,'search_default_today': True}</field>
+        </record> 
+        
+        <record id="action_luu_tru1" model="ir.actions.act_window.view">
+	        <field eval="3" name="sequence"/>
+	        <field name="view_mode">tree</field>
+	        <field name="view_id" ref="luu_tru_tree"/>
+	        <field name="act_window_id" ref="action_luu_tru_today"/>
+	    </record>
+	        
+	    <record id="action_luu_tru2" model="ir.actions.act_window.view">
+	        <field eval="4" name="sequence"/>
+	        <field name="view_mode">form</field>
+	        <field name="view_id" ref="luu_tru_form"/>
+	        <field name="act_window_id" ref="action_luu_tru_today"/>
+	    </record>
     </data>
 </openerp>

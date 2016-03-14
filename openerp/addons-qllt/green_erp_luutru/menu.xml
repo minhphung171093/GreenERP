@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-			
+			<menuitem id="menu_action_luu_tru_today"
+				action="action_luu_tru_today"
+				name="Khai báo lưu trú"
+				sequence="5"/>
 			<menuitem id="menu_action_luu_tru"
 				action="action_luu_tru"
 				name="Đăng ký lưu trú"

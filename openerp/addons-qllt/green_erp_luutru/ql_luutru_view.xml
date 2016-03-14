@@ -41,7 +41,7 @@
                     <field name="quoc_tich_id"/>
                     <field name="khach_san_id"/>
                     <field name="so_giay_to"/>
-                    <filter icon="terp-go-today" string="Today" name="today" domain="[('ngay_den','&gt;=',current_date),('ngay_den','&lt;=',current_date)]"/>
+                    <filter icon="terp-go-today" string="Hôm nay" name="today" domain="[('ngay_den','&gt;=',current_date),('ngay_den','&lt;=',current_date)]"/>
                     <separator/>
                     <group expand="0" string="Group By...">
                     	<filter string="Tỉnh (thành phố)" domain="[]" context="{'group_by':'khach_tinhtp_id'}"/>

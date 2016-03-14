@@ -1,0 +1,10 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_luutru_base_1,tinh_tp,green_erp_base.model_tinh_tp,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_2,phuong_xa,green_erp_base.model_phuong_xa,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_3,quan_huyen,green_erp_base.model_quan_huyen,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_4,loai_giay_to,green_erp_base.model_loai_giay_to,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_5,khach_san,green_erp_base.model_khach_san,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_6,tang_ks,green_erp_base.model_tang_ks,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_7,phong_ks,green_erp_base.model_phong_ks,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_8,chau_luc,green_erp_base.model_chau_luc,green_erp_base.group_luutru_admin,True,True,True,True
+access_luutru_base_9,quoc_tich,green_erp_base.model_quoc_tich,green_erp_base.group_luutru_admin,True,True,True,True

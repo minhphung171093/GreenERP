@@ -86,6 +86,9 @@
                 <tree string="Quản lý lưu trú" editable='top'>
                 	<field name="tiep_nhan" />
                 	<field name="khach_san_id" on_change="on_change_diachi(khach_san_id)" options="{'no_create':True}"/>
+                	<field name="tinh_tp_id" readonly='1'/>                   
+					<field name="quan_huyen_id" readonly='1'/>
+					<field name="phuong_xa_id" readonly='1'/>
                 	<field name="ngay_den"/>
                     <field name="tang_ks_id" domain="[('ks_id','=',khach_san_id)]" options="{'no_create':True}"/>
                     <field name="phong_ks_id" domain="[('tang_ks_id','=',tang_ks_id)]" options="{'no_create':True}"/>

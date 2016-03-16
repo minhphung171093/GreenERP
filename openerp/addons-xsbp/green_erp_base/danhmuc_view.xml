@@ -100,12 +100,6 @@
 							<field name="phuong_xa_id" options="{'no_create':True}"/>
 							<field name="dia_chi"/>
                 		</group>
-                		<group col="4"  string="Địa điểm kinh doanh">
-							<field name="kd_tinh_tp_id" options="{'no_create':True}"/>
-							<field name="kd_quan_huyen_id" options="{'no_create':True}"/>
-							<field name="kd_phuong_xa_id" options="{'no_create':True}"/>
-							<field name="kd_dia_chi"/>
-                		</group>
 		            </sheet>		                
 	            </form>
 	        </field>

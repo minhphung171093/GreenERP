@@ -86,12 +86,6 @@
 	            	<sheet>
 		            	<group col="4" string="Thông tin chung">
 		                    <field name="name" string="Mã đại lý"/>
-		                    <field name="ten_dl" />
-		                    <field name="ngay" />
-		                    <field name="ten_gd" />
-		                    <field name="so_dt" />
-		                    <field name="fax" />
-		                    <field name="email" />
 		                    <field name="dai_ly" invisible='1'/>
 			            </group>
 		            </sheet>		                

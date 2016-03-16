@@ -85,27 +85,31 @@ quan_huyen()
 class res_partner(osv.osv):
     _inherit = "res.partner"
     _columns = {
-        'ma_dl': fields.char('Mã đại lý', size=1024, required = True),
-        'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/Thành Phố'),
+        'ten_dl': fields.char('Tên đại lý', size=1024, required = True),
+        'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố'),
         'dia_chi': fields.char('Địa chỉ', size=1024),
-        'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)'),
+        'phuong_xa_id': fields.many2one('phuong.xa','Phường (xã)'),
         'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
         'ngay': fields.date('Ngày sinh'),
         'ten_gd': fields.char('Tên giao dịch', size=1024),
         'so_dt': fields.char('Số điện thoại', size=1024),
+        'kd_tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố'),
+        'kd_dia_chi': fields.char('Địa chỉ', size=1024),
+        'kd_phuong_xa_id': fields.many2one('phuong.xa','Phường (xã)'),
+        'kd_quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
         'dai_ly': fields.boolean('is_dai_ly'),
                 }
       
-#     def name_get(self, cr, uid, ids, context=None):
-#         if not ids:
-#             return []
-#         res = []
-#         reads = self.read(cr, uid, ids, ['ma_dl','name'], context)
-#     
-#         for record in reads:
-#             name = record['ma_dl'] + '-' +'['+record['name']+']'
-#             res.append((record['id'], name))
-#         return res  
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+        res = []
+        reads = self.read(cr, uid, ids, ['ten_dl','name'], context)
+     
+        for record in reads:
+            name = record['name'] + '-' +'['+record['ten_dl']+']'
+            res.append((record['id'], name))
+        return res  
       
 #     def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
 #         if context is None:

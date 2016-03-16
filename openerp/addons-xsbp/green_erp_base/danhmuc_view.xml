@@ -85,8 +85,8 @@
 	            <form string="Đại lý" version="7.0">
 	            	<sheet>
 		            	<group col="4" string="Thông tin chung">
-		                    <field name="ma_dl" />
-		                    <field name="name" />
+		                    <field name="name" string="Mã đại lý"/>
+		                    <field name="ten_dl" />
 		                    <field name="ngay" />
 		                    <field name="ten_gd" />
 		                    <field name="so_dt" />
@@ -99,6 +99,12 @@
 							<field name="quan_huyen_id" options="{'no_create':True}"/>
 							<field name="phuong_xa_id" options="{'no_create':True}"/>
 							<field name="dia_chi"/>
+                		</group>
+                		<group col="4"  string="Địa điểm kinh doanh">
+							<field name="kd_tinh_tp_id" options="{'no_create':True}"/>
+							<field name="kd_quan_huyen_id" options="{'no_create':True}"/>
+							<field name="kd_phuong_xa_id" options="{'no_create':True}"/>
+							<field name="kd_dia_chi"/>
                 		</group>
 		            </sheet>		                
 	            </form>

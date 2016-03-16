@@ -28,6 +28,8 @@
     'website' : 'http://incomtech.com.vn/',
     'depends': ['base','web_readonly_bypass','report_aeroo','report_aeroo_controller'],
     'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'ir_ui_menu_view.xml',
         'danhmuc_view.xml',
         'menu.xml',

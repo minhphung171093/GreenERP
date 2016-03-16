@@ -94,12 +94,6 @@
 		                    <field name="email" />
 		                    <field name="dai_ly" invisible='1'/>
 			            </group>
-			            <group col="4"  string="Địa chỉ thường trú">
-							<field name="tinh_tp_id" options="{'no_create':True}"/>
-							<field name="quan_huyen_id" options="{'no_create':True}"/>
-							<field name="phuong_xa_id" options="{'no_create':True}"/>
-							<field name="dia_chi"/>
-                		</group>
 		            </sheet>		                
 	            </form>
 	        </field>

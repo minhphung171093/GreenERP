@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="bien_ban_tree">
+            <field name="name">bien.ban.tree</field>
+            <field name="model">bien.ban</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree biên bản">
+                    <field name="don_vi_id" />
+                    <field name="quyen_bb" />                    
+                    <field name="so_bb" />
+                    <field name="can_bo_lap_id" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bien_ban_form">
+            <field name="name">bien.ban.form</field>
+            <field name="model">bien.ban</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="form Bien ban" version="7.0">
+                    <header>
+                    		<button name="luu_k" string="Nhập Mới" />
+                    		<button name="luu_k" string="Lưu" />
+                    		<button name="luu_k" string="Sửa" />
+                    		<button name="luu_k" string="In QD" />
+                    		<button name="luu_k" string="In Thông Báo" />
+                    		<button name="luu_k" string="Tước GPLX" />
+                    		<button name="luu_k" string="Tạm Giữ TVPT" />
+                    		<button name="luu_k" string="Thu TVPT" />
+                    		<button name="luu_k" string="Cập Nhật" />
+                    		<button name="luu_k" string="Thoát" />
+                    </header>
+                    <sheet>
+                    	<group col="4"  string="Lập Biên Bản Vi Phạm - Ra Quyết Định Xử  Phạt">
+                    		<field name="so_bb" />
+                    		<field name="quyen_bb" />
+                    		<field name="can_bo_lap_id" on_change="onchange_can_bo_lap(can_bo_lap_id)"/>
+                    		<field name="don_vi_id" />
+                    		<field name="cap_bac" />
+                    	</group>
+                    	<group col="4">
+                    		<group col="1">
+                        		<field name="lap_luc" widget="float_time" on_change="onchange_lap_luc(lap_luc)"/>
+                        	</group>
+                        	<group col="1">
+                        		<field name="lap_ngay"  on_change="onchange_lap_ngay(lap_ngay)"/>
+                        	</group>
+                        	<group col="1">
+                        		<field name="lap_tai"  on_change="onchange_lap_tai(lap_tai)"/>
+                        	</group>
+                        	<group col="1">
+                        		<field name="lap_duong"  on_change="onchange_lap_duong(lap_duong)"/>
+                        	</group>
+                    	</group>
+                    	<group col="4">
+                    		<group col="1">
+                        		<field name="vp_luc" widget="float_time"/>
+                        	</group>
+                        	<group col="1">
+                        		<field name="vp_ngay" />
+                        	</group>
+                        	<group col="1">
+                        		<field name="vp_tai" />
+                        	</group>
+                        	<group col="1">
+                        		<field name="vp_duong" />
+                        	</group>
+                    	</group>
+                    	<group col="4">
+                    		<group col="1" colspan="2">
+                        		<field name="ten_vp" on_change="onchange_doi_tuong_vp(ten_vp)"/>
+                        	</group>
+                        	<group col="2" colspan ="1">
+                        		<field name="sinh_ngay" />
+                        		<field name="quoc_tich_id" />
+                        	</group>
+                    	</group>
+                    	<group col="4" colspan="1">
+                    		<group col="1">
+	                    		<field name="cmnd_hc" />
+                    		</group>
+                    		<group col="1">
+	                    		<field name="ngay_ccmnd" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="noi_cmnd" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="nghe_nghiep" />
+	                    	</group>	
+                    	</group>
+                    	<group col="4">
+                    			<field name="noi_o" />
+                    			<field name="quan_huyen" nolabel="1"/>
+                    	</group>
+                    	<group col="5" colspan="1">
+                    		<group col="1">
+	                    		<field name="bien_so"  on_change="onchange_bien_so(bien_so)"/>
+                    		</group>
+                    		<group col="1">
+	                    		<field name="loai_xe" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="nhan_hieu" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="nghi_dinh" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="nd_nghi_dinh"/>
+	                    	</group>
+                    	</group>
+                    	<group col="4">
+                    		<group col="2">
+	                    		<field name="ma_loi" on_change="onchange_vi_pham(ma_loi)"/>
+	                    	</group>
+	                    	<group col="1" colspan="2">
+	                    		<field name="nd_loi" nolabel="1"/>
+	                    	</group>
+                    	</group>
+                    	<field name="vi_pham_id" nolabel="1">
+                    		<tree editable='top'>
+	                    		<field name="nghi_dinh" />
+	                    		<field name="name" />                
+			                    <field name="noi_dung" />
+	                    	</tree>
+                    	</field>
+                    	<group col="5">
+                    		<group col="2" colspan="3">
+	                    		<field name="nag_nhe" />
+	                    	</group>
+	                    	<group col="2">
+	                    		<field name="tong_tien"/>
+	                    	</group>
+                    	</group>
+                    	<group col="4">
+                    		<group col="1">
+	                    		<field name="hoi_lo" />
+                    		</group>
+                    		<group col="1">
+	                    		<field name="hinh_phat" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="tam_giu" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="ngay_bd_tuoc" />
+	                    	</group>	
+                    	</group>
+                    	<group col="6">
+	                    		<field name="so_gp_id"  on_change="onchange_giay_phep(so_gp_id)"/>
+	                    		<field name="hang_gp" />
+	                    		<field name="tuoc_hang" />
+	                    		<field name="ngay_cap_gp" />
+	                    		<field name="thoi_han_gp"/>
+	                    		<field name="noi_cap_gp"/>
+                    	</group>
+                    	<group col="3">
+                    		<group col="1">
+                    			<field name="nd_tam_giu" />
+                    		</group>
+                    		<group col="1">
+                    			<field name="bo_sung" />
+                    		</group>
+                    		<group col="1">
+                    			<field name="ngan_chan" />
+                    		</group>
+                    	</group>
+                    	<group col="3">
+                    		<group col="1">
+                    			<field name="thoi_han_hq" />
+                    		</group>
+                    		<group col="1">
+                    			<field name="kinh_phi_hq" />
+                    		</group>
+                    		<group col="1">
+                    			<field name="in_tra_giay_to" />
+                    		</group>
+                    	</group>
+                    	<group col="4">
+                    		<group col="1">
+	                    		<field name="can_bo_qd" on_change="onchange_can_bo_qd(can_bo_qd)"/>
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="cap_ra_qd" />
+                    		</group>
+                    		
+	                    	<group col="1">
+	                    		<field name="cap_bac_qd" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="chuc_vu_qd" />
+	                    	</group>	
+                    	</group>
+                    	<group col="5">
+                    		<group col="1">
+	                    		<field name="so_bien_lai" />
+                    		</group>
+                    		<group col="1">
+	                    		<field name="ngay_dong_phat" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="ngay_ktll" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<button name="luu_k" string="Lưu K" />
+	                    	</group>
+	                    	<group col="1">
+	                    		<field name="ngay_ra_qd" />
+	                    	</group>	
+                    	</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+       
+        <record model="ir.actions.act_window" id="action_bien_ban">
+            <field name="name">Biên Bản</field>
+            <field name="res_model">bien.ban</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        
+                <!-- can bộ -->
+        <record model="ir.ui.view" id="can_bo_tree">
+            <field name="name">can.bo.tree</field>
+            <field name="model">can.bo</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree Can bo" editable='top'>
+                    <field name="name" />
+                    <field name="cap_bac" />                    
+                    <field name="chuc_vu" />
+                    <field name="don_vi_id" />
+                </tree>
+        	</field>
+    	</record>
+    	<record model="ir.ui.view" id="can_bo_form">
+            <field name="name">can.bo.form</field>
+            <field name="model">can.bo</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="form Cán bộ" version="7.0">
+	                <sheet>
+	                	<tree string="can bo">
+	                		<group col="4"  string="Danh sách cán bộ">
+	                    		<field name="name"/>
+	                    		<field name="don_vi_id" />
+	                    		<field name="cap_bac" />
+	                    		<field name="chuc_vu" />
+                    		</group>
+                		</tree>
+	                </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_can_bo">
+            <field name="name">Cán bộ</field>
+            <field name="res_model">can.bo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+                <!-- don vi-->        
+        
+        <record model="ir.ui.view" id="don_vi_tree">
+            <field name="name">don.vi.tree</field>
+            <field name="model">don.vi</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree đơn vị" editable='top'>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_don_vi">
+            <field name="name">Đơn vị</field>
+            <field name="res_model">don.vi</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+                        <!--vi_pham-->        
+        
+        <record model="ir.ui.view" id="vi_pham_tree">
+            <field name="name">vi.pham.tree</field>
+            <field name="model">vi.pham</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree vi phạm" editable='top'>
+                    <field name="name" />
+                    <field name="noi_dung" />
+                    <field name="nghi_dinh" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_vi_pham">
+            <field name="name">Vi phạm</field>
+            <field name="res_model">vi.pham</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+                        <!-- nghi_dinh-->        
+        
+        <record model="ir.ui.view" id="nghi_dinh_tree">
+            <field name="name">nghi.dinh.tree</field>
+            <field name="model">nghi.dinh</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree nghị định" editable='top'>
+                    <field name="name" />
+                    <field name="noi_dung" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_nghi_dinh">
+            <field name="name">Nghị định</field>
+            <field name="res_model">nghi.dinh</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+                        <!-- phuong_tien-->        
+        
+        <record model="ir.ui.view" id="phuong_tien_tree">
+            <field name="name">phuong.tien.tree</field>
+            <field name="model">phuong.tien</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree Phương tiện" editable='top'>
+                    <field name="name" />
+                    <field name="nhan_hieu" />
+                    <field name="loai_xe" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_phuong_tien">
+            <field name="name">Phương tiện</field>
+            <field name="res_model">phuong.tien</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+                        <!-- giay_phep-->        
+        
+    	<record model="ir.ui.view" id="giay_phep_form">
+            <field name="name">giay.phep.form</field>
+            <field name="model">giay.phep</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="form giấy phép" version="7.0">
+	                <sheet>
+	                	<tree string="Giay phep">
+	                		<group col="6">
+	                    		<field name="name"/>
+	                    		<field name="hang_gp" />
+	                    		<field name="tuoc_hang" />
+	                    		<field name="ngay_cap" />
+	                    		<field name="thoi_han"/>
+	                    		<field name="noi_cap_id"/>
+                    		</group>
+                		</tree>
+	                </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="giay_phep_tree">
+            <field name="name">giay.phep.tree</field>
+            <field name="model">giay.phep</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree giấy phép" editable='top'>
+                    <field name="name" />
+                    <field name="hang_gp" />
+                    <field name="tuoc_hang" />
+                    <field name="ngay_cap" />
+                    <field name="thoi_han" />
+                    <field name="noi_cap_id" />
+                    
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_giay_phep">
+            <field name="name">Giấy phép</field>
+            <field name="res_model">giay.phep</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+                        <!-- doi_tuong_vp-->        
+        
+        <record model="ir.ui.view" id="doi_tuong_vp_tree">
+            <field name="name">doi.tuong.vp.tree</field>
+            <field name="model">doi.tuong.vp</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree đối tượng">
+                    <field name="name" />
+                    <field name="ngay_sinh" />
+                    <field name="quoc_tich_id" />
+                    <field name="ho_chieu" />
+                    <field name="ngay_cap" />
+                    <field name="noi_cap_id" />
+                    <field name="nghe_nghiep" />
+                    <field name="noi_o" />
+                    <field name="quan_huyen" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="doi_tuong_vp_form">
+            <field name="name">doi.tuong.vp.form</field>
+            <field name="model">doi.tuong.vp</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="form Đối Tượng" version="7.0">
+                <sheet>
+                	<group col="4">
+                    		<group col="1" colspan="2">
+                        		<field name="name" />
+                        	</group>
+                        	<group col="2" colspan ="1">
+                        		<field name="ngay_sinh" />
+                        		<field name="quoc_tich_id" />
+                        	</group>
+                    	</group>
+					<group col="4" colspan="1">
+		        		
+		        		<group col="1">
+		            		<field name="ho_chieu" />
+		        		</group>
+		        		<group col="1">
+		            		<field name="ngay_cap" />
+		            	</group>
+		            	<group col="1">
+		            		<field name="noi_cap_id" />
+		            	</group>
+		            	<group col="1">
+		            		<field name="nghe_nghiep" />
+		            	</group>	
+		        	</group>
+		        	<group col="4">
+		        			<field name="noi_o" />
+		        			<field name="quan_huyen" nolabel="1"/>
+		        	</group>
+		        </sheet>
+	        	</form>
+            </field>
+        </record>
+    
+        <record model="ir.actions.act_window" id="action_doi_tuong_vp">
+            <field name="name">Đối tượng vp</field>
+            <field name="res_model">doi.tuong.vp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+                        <!-- quoc_tich-->        
+        	
+        <record model="ir.ui.view" id="quoc_tich_tree">
+            <field name="name">quoc.tich.tree</field>
+            <field name="model">quoc.tich</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree quốc tịch" editable='top'>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_quoc_tich">
+            <field name="name">Quốc tịch</field>
+            <field name="res_model">quoc.tich</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+                        <!-- thanh_pho-->        
+        
+        <record model="ir.ui.view" id="thanh_pho_tree">
+            <field name="name">thanh.pho.tree</field>
+            <field name="model">thanh.pho</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree thành phố" editable='top'>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_thanh_pho">
+            <field name="name">Thành Phố</field>
+            <field name="res_model">thanh.pho</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+                        <!-- ten_duong-->        
+        
+        <record model="ir.ui.view" id="ten_duong_tree">
+            <field name="name">ten.duong.tree</field>
+            <field name="model">ten.duong</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tree Tên đường" editable='top'>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_ten_duong">
+            <field name="name">Tên đường</field>
+            <field name="res_model">ten.duong</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+        </record>
+        
+		<menuitem id="menu_action_bien_ban"
+			sequence='0'
+			name="Xử phạt giao thông"
+			action="action_bien_ban"/>
+    	
+    	<menuitem id="root_cauhinh"
+			sequence='0'
+			name="Cấu hình"
+			/>
+    	
+	    	<menuitem id="menu_quan_ly" parent="root_cauhinh" name="Danh mục dùng chung" sequence='1'/>
+			    <menuitem id="menu_action_don_vi" parent="menu_quan_ly" name="Đơn vị" action="action_don_vi"/>
+			    <menuitem id="menu_action_can_bo" parent="menu_quan_ly" name="Cán Bộ" action="action_can_bo"/>
+			    <menuitem id="menu_action_vi_pham" parent="menu_quan_ly" name="Vi Phạm" action="action_vi_pham"/>
+			    <menuitem id="menu_action_nghi_dinh" parent="menu_quan_ly" name="Nghị Định" action="action_nghi_dinh"/>
+			    <menuitem id="menu_action_phuong_tien" parent="menu_quan_ly" name="Phương tiện" action="action_phuong_tien"/>
+			    <menuitem id="menu_action_giay_phep" parent="menu_quan_ly" name="Giấy Phép" action="action_giay_phep"/>
+			    <menuitem id="menu_action_doi_tuong_vp" parent="menu_quan_ly" name="Đối tượng vi phạm" action="action_doi_tuong_vp"/>
+			    <menuitem id="menu_action_quoc_tich" parent="menu_quan_ly" name="Quốc tịch" action="action_quoc_tich"/>
+			    <menuitem id="menu_action_thanh_pho" parent="menu_quan_ly" name="Thành Phố" action="action_thanh_pho"/>
+			    <menuitem id="menu_action_ten_duong" parent="menu_quan_ly" name="Tên đường" action="action_ten_duong"/>
+ 
+    </data>
+</openerp>

@@ -87,12 +87,12 @@ class res_partner(osv.osv):
     _columns = {
         'ma_dl': fields.char('Mã đại lý', size=1024, required = True),
         'tinh_tp_id': fields.many2one( 'tinh.tp','Tỉnh/Thành Phố'),
-#         'dia_chi': fields.char('Địa chỉ', size=1024),
-#         'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)'),
-#         'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
-#         'ngay': fields.date('Ngày sinh'),
-#         'ten_gd': fields.char('Tên giao dịch', size=1024),
-#         'so_dt': fields.char('Số điện thoại', size=1024),
+        'dia_chi': fields.char('Địa chỉ', size=1024),
+        'phuong_xa_id': fields.many2one( 'phuong.xa','Phường (xã)'),
+        'quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
+        'ngay': fields.date('Ngày sinh'),
+        'ten_gd': fields.char('Tên giao dịch', size=1024),
+        'so_dt': fields.char('Số điện thoại', size=1024),
         'dai_ly': fields.boolean('is_dai_ly'),
                 }
       

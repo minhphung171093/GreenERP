@@ -100,7 +100,7 @@ class res_partner(osv.osv):
         'kd_phuong_xa_id': fields.many2one('phuong.xa','Phường (xã)'),
         'kd_quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
         'dai_ly': fields.boolean('is_dai_ly'),
-#         'stt': fields.integer('STT'),
+        'stt': fields.integer('STT'),
                 }
       
     def name_get(self, cr, uid, ids, context=None):

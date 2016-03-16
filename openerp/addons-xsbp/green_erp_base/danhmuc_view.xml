@@ -84,11 +84,22 @@
 	        <field name="arch" type="xml">
 	            <form string="Đại lý" version="7.0">
 	            	<sheet>
-		            	<group col="4" colspan="2">
+		            	<group col="4" string="Thông tin chung">
 		                    <field name="ma_dl" />
 		                    <field name="name" />
+		                    <field name="ngay" />
+		                    <field name="ten_gd" />
+		                    <field name="so_dt" />
+		                    <field name="fax" />
+		                    <field name="email" />
 		                    <field name="dai_ly" invisible='1'/>
 			            </group>
+			            <group col="4"  string="Địa chỉ thường trú">
+							<field name="tinh_tp_id" options="{'no_create':True}"/>
+							<field name="quan_huyen_id" options="{'no_create':True}"/>
+							<field name="phuong_xa_id" options="{'no_create':True}"/>
+							<field name="dia_chi"/>
+                		</group>
 		            </sheet>		                
 	            </form>
 	        </field>

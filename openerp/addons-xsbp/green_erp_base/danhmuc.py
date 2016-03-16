@@ -251,7 +251,7 @@ class nhap_doanhthu(osv.osv):
     _name = "nhap.doanhthu"
     _columns = {
         'name': fields.date('Ngày', required = True),
-        'dai_id': fields.many2one('Đài', required = True),
+        'dai_id': fields.many2one('ds.dai','Đài', required = True),
         'doanh_thu': fields.float('Doanh Thu', required = True),
                 }
 nhap_doanhthu()

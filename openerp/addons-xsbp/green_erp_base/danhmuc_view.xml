@@ -72,7 +72,6 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Đại lý" >
-                	<field name="stt"/>
                     <field name="name" string = "Mã đại lý"/>
                     <field name="ten"/>
                     <field name="ngay" />
@@ -103,7 +102,6 @@
 		                    <field name="so_dt" />
 		                    <field name="fax" />
 		                    <field name="email" />
-		                    <field name="stt"/>
 		                    <field name="dai_ly" invisible='1'/>
 			            </group>
 			            <group col="4"  string="Địa chỉ thường trú">

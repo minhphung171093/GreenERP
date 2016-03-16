@@ -239,4 +239,20 @@ class loai_hinh_line(osv.osv):
         'loai_hinh_id': fields.many2one('loai.hinh','Loại hình',ondelete="cascade"),
                 }
 loai_hinh_line()
+
+class ds_dai(osv.osv):
+    _name = "ds.dai"
+    _columns = {
+        'name': fields.char('Tên',size = 1024, required = True),
+                }
+ds_dai()
+
+class nhap_doanhthu(osv.osv):
+    _name = "nhap.doanhthu"
+    _columns = {
+        'name': fields.date('Ngày', required = True),
+        'dai_id': fields.many2one('Đài', required = True),
+        'doanh_thu': fields.float('Doanh Thu', required = True),
+                }
+nhap_doanhthu()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

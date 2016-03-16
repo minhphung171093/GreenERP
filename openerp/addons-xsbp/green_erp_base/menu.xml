@@ -53,5 +53,15 @@
 					name="Cặp vé"
 					parent="menu_danh_muc" sequence="30"/>
 					
+				<menuitem id="menu_action_ds_dai"
+					action="action_ds_dai"
+					name="Đài"
+					parent="menu_danh_muc" sequence="35"/>
+				
+				<menuitem id="menu_action_nhap_doanhthu"
+					action="action_nhap_doanhthu"
+					name="Nhập doanh thu tỉnh miền nam"
+					parent="menu_danh_muc" sequence="40"/>
+					
     </data>	
 </openerp>

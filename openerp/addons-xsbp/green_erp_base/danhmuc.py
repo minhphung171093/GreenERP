@@ -23,6 +23,7 @@ class tinh_tp(osv.osv):
     _columns = {
         'name': fields.char('Tên Tỉnh/Thành Phố',size = 1024, required = True),
         'code': fields.char('Mã Tỉnh/Thành Phố',size = 1024, required = True),
+        'stt': fields.integer('STT'),
                 }
     
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
@@ -99,6 +100,7 @@ class res_partner(osv.osv):
         'kd_phuong_xa_id': fields.many2one('phuong.xa','Phường (xã)'),
         'kd_quan_huyen_id': fields.many2one('quan.huyen','Quận (huyện)'),
         'dai_ly': fields.boolean('is_dai_ly'),
+        'stt': fields.integer('STT'),
                 }
       
     def name_get(self, cr, uid, ids, context=None):

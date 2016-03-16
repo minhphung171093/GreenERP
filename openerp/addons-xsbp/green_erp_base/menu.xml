@@ -48,5 +48,10 @@
 					name="Loại hình"
 					parent="menu_danh_muc" sequence="25"/>
 					
+				<menuitem id="menu_action_cap_ve"
+					action="action_cap_ve"
+					name="Cặp vé"
+					parent="menu_danh_muc" sequence="30"/>
+					
     </data>	
 </openerp>

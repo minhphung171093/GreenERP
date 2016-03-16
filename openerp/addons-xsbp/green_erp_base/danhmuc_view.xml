@@ -201,20 +201,20 @@
             <field name="view_mode">tree,form</field>
         </record>  
         
-<!--Phân loại-->   
-        <record model="ir.ui.view" id="phan_loai_tree">
-            <field name="name">phan.loai.tree</field>
-            <field name="model">phan.loai</field>
+<!--Cặp vé-->   
+        <record model="ir.ui.view" id="cap_ve_tree">
+            <field name="name">cap.ve.tree</field>
+            <field name="model">cap.ve</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree string="Phân loại" editable='top'>
+                <tree string="Cặp vé" editable='top'>
                     <field name="name" />
                 </tree>
             </field>
         </record>  
-        <record model="ir.actions.act_window" id="action_phan_loai">
-            <field name="name">Phân loại</field>
-            <field name="res_model">phan.loai</field>
+        <record model="ir.actions.act_window" id="action_cap_ve">
+            <field name="name">Cặp vé</field>
+            <field name="res_model">cap.ve</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record> 

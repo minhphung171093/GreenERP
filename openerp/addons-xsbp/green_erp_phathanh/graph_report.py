@@ -7,7 +7,7 @@ class doanhthu_graph_report(osv.osv):
     _description = "Báo cáo doanh thu"
     _auto = False
     _columns = {
-        'daily_id': fields.many2one('dai.ly','Đại lý'),
+        'daily_id': fields.many2one('res.partner','Đại lý'),
         'ky_ve_id': fields.many2one('ky.ve','Kỳ vé'),
         'giatri': fields.float('Doanh thu', digits=(16,0)),
         'ngay_mo_thuong': fields.date('Ngày mở thưởng'),
@@ -29,7 +29,7 @@ class doanhthu_graph_report(osv.osv):
                     left join loai_ve lv on pptt.loai_ve_id = lv.id
                     left join ky_ve kv on pptt.ky_ve_id = kv.id
                  
-                union
+                union all
                  
                 select vel.phanphoi_line_id as id, vel.daily_id as daily_id, ve.ky_ve_id as ky_ve_id,-1*vel.thuc_kiem*lv.gia_tri as giatri, kv.ngay_mo_thuong as ngay_mo_thuong
                  
@@ -47,7 +47,7 @@ class dthu_phanh_graph_report(osv.osv):
     _description = "Báo cáo doanh thu và phát hành cho đại lý"
     _auto = False
     _columns = {
-        'daily_id': fields.many2one('dai.ly','Đại lý'),
+        'daily_id': fields.many2one('res.partner','Đại lý'),
         'ky_ve_id': fields.many2one('ky.ve','Kỳ vé'),
         'giatri': fields.float('Giá Trị', digits=(16,0)),
         'loai_giatri': fields.char('Loại'),

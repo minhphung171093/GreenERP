@@ -133,7 +133,7 @@ class Parser(report_sxw.rml_parse):
             total_tile_sosanh_kytruoc = 0
             total_tang_giam = 0
             sql ='''
-                SELECT id FROM phanphoi_tt_line where daily_id in (select id from dai_ly where tinh_tp_id = %s) 
+                SELECT id FROM phanphoi_tt_line where daily_id in (select id from res_partner where kd_tinh_tp_id = %s) 
                 and phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s and loai_ve_id = %s)
             '''%(tinh['id'],ky_ve_id[0],loai_ve_id[0])
             self.cr.execute(sql)

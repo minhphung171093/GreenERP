@@ -40,7 +40,7 @@ class doanhthu_veso(osv.osv_memory):
      
     _columns = {
         'ky_ve_id': fields.many2one('ky.ve','Ký hiệu'),
-        'daily_id': fields.many2one('dai.ly','Đại lý'),
+        'daily_id': fields.many2one('res.partner','Đại lý'),
         'date_from': fields.date('Từ'),
         'date_to': fields.date('Đến'),
                 }
@@ -81,7 +81,7 @@ class dthu_phanh_veso(osv.osv_memory):
     _name = 'dthu.phanh.veso'
      
     _columns = {
-        'daily_id': fields.many2one('dai.ly','Đại lý'),
+        'daily_id': fields.many2one('res.partner','Đại lý'),
         'date_from': fields.date('Từ'),
         'date_to': fields.date('Đến'),
                 }
@@ -130,7 +130,7 @@ class doanhthu_veso_time(osv.osv_memory):
      
     _columns = {
         'ky_ve_id': fields.many2one('ky.ve','Ký hiệu'),
-        'daily_id': fields.many2one('dai.ly','Đại lý'),
+        'daily_id': fields.many2one('res.partner','Đại lý'),
         'date_from': fields.date('Từ'),
         'date_to': fields.date('Đến'),
                 }

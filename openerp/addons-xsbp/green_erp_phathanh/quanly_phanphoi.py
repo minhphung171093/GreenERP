@@ -73,7 +73,7 @@ class phanphoi_tt_line(osv.osv):
     _columns = {
         'phanphoi_tt_id': fields.many2one('phanphoi.truyenthong','Phân phối truyền thống', ondelete='cascade'),
         'ten_daily': fields.char('Tên Đại Lý',size = 1024, required = True),
-        'daily_id': fields.many2one('dai.ly','Đại lý', required = True),
+        'daily_id': fields.many2one('res.partner','Đại lý', required = True),
         'socay_kytruoc': fields.float('Số cây kỳ trước',digits=(16,0)),
         'sove_kytruoc': fields.float('Số vé kỳ trước',digits=(16,0)),
         'socay_kynay': fields.float('Số cây kỳ này',digits=(16,0)),
@@ -88,7 +88,7 @@ class phanphoi_tt_line(osv.osv):
     def onchange_daily_id(self, cr, uid, ids, daily_id=False):
         vals = {}
         if daily_id :
-            daily = self.pool.get('dai.ly').browse(cr,uid,daily_id)
+            daily = self.pool.get('res.partner').browse(cr,uid,daily_id)
             vals = {'ten_daily':daily.ten,
                 }
         return {'value': vals}  
@@ -231,7 +231,7 @@ class dieuchinh_line(osv.osv):
     _columns = {
         'dieuchinh_id': fields.many2one('dieuchinh.phanphoi.ve','Dieu chinh phan phoi', ondelete='cascade'),
         'ten_daily': fields.char('Tên Đại Lý',size = 1024),
-        'daily_id': fields.many2one('dai.ly','Đại lý', required = True),
+        'daily_id': fields.many2one('res.partner','Đại lý', required = True),
         'phanphoi_line_id': fields.many2one('phanphoi.tt.line','Phan Phoi Line'),
         'sove_duocduyet': fields.float('Số vé được duyệt', readonly=True,digits=(16,0)),
         'sove_dc': fields.float('Số vé điều chỉnh',digits=(16,0)),
@@ -256,7 +256,7 @@ class dieuchinh_line(osv.osv):
     def onchange_daily_dc_id(self, cr, uid, ids, daily_id=False, ky_ve_id=False):
         vals = {}
         if daily_id and ky_ve_id:
-            daily = self.pool.get('dai.ly').browse(cr,uid,daily_id)
+            daily = self.pool.get('res.partner').browse(cr,uid,daily_id)
             sql = '''
                 select sove_kynay,id from phanphoi_tt_line where daily_id = %s and phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s)
             '''%(daily_id, ky_ve_id)
@@ -332,7 +332,7 @@ class nhap_ve_e_line(osv.osv):
     _columns = {
         'nhap_ve_e_id': fields.many2one('nhap.ve.e','Nhập vế ế', ondelete='cascade'),
         'ten_daily': fields.char('Tên Đại Lý',size = 1024, required = True),
-        'daily_id': fields.many2one('dai.ly','Đại lý', required = True),
+        'daily_id': fields.many2one('res.partner','Đại lý', required = True),
         'diem_tra_e_id': fields.many2one('khu.vuc','Mã điểm trả ế', required = True),
         'ma_khu_vuc': fields.char('Mã Khu Vực',size = 1024, required = True),
         've_e_theo_bangke': fields.float('Số vé ế theo bảng kê',digits=(16,0)),
@@ -395,14 +395,14 @@ class nhap_ve_e_line(osv.osv):
     def onchange_daily_id(self, cr, uid, ids, daily_id=False, ky_ve_id=False):
         vals = {}
         if daily_id and ky_ve_id:
-            daily = self.pool.get('dai.ly').browse(cr,uid,daily_id)
+            daily = self.pool.get('res.partner').browse(cr,uid,daily_id)
             sql = '''
                 select id from phanphoi_tt_line where daily_id = %s and phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s)
             '''%(daily_id, ky_ve_id)
             cr.execute(sql)
             ve = cr.fetchone()
             vals = {'ten_daily':daily.ten,
-                    'ma_khu_vuc':daily.tinh_tp_id.name,
+                    'ma_khu_vuc':daily.kd_tinh_tp_id.name,
                     'phanphoi_line_id': ve[0],
                 }
         return {'value': vals}  

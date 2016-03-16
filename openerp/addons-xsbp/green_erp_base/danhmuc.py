@@ -105,10 +105,10 @@ class res_partner(osv.osv):
         if not ids:
             return []
         res = []
-        reads = self.read(cr, uid, ids, ['ten_dl','name'], context)
+        reads = self.read(cr, uid, ids, ['ten','name'], context)
       
         for record in reads:
-            name = str(record['ten_dl']) + '-' +'['+str(record['name'])+']'
+            name = str(record['ten']) + '-' +'['+str(record['name'])+']'
             res.append((record['id'], name))
         return res  
       

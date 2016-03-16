@@ -245,7 +245,7 @@
             <field name="arch" type="xml">
                 <tree string="Nhập doanh thu tỉnh miền nam" editable='top'>
                     <field name="name" />
-                    <field name="dai_id" options="{'no_create':True}"/>
+                    <field name="dai_id" string="Đài" options="{'no_create':True}"/>
                     <field name="doanh_thu" />
                 </tree>
             </field>

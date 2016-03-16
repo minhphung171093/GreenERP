@@ -11,6 +11,7 @@
                 <tree string="Phân phối vé truyền thống" >
                     <field name="ky_ve_id" />
                     <field name="loai_ve_id" />
+                    <field name="cap_ve_id" />
                     <field name="ngay_ph" />
                 </tree>
             </field>
@@ -23,8 +24,9 @@
 	            <form string="Phân phối vé truyền thống" version="7.0">
 	            	<sheet>
 		            	<group col="4" colspan="2">
-	                		<field name="ky_ve_id" options="{'no_create':True}" context="{'search_ky_ve':1}" on_change="onchange_previous_phanphoi(ky_ve_id,loai_ve_id)"/>
-		                    <field name="loai_ve_id" options="{'no_create':True}" on_change="onchange_previous_phanphoi(ky_ve_id,loai_ve_id)"/>
+	                		<field name="ky_ve_id" options="{'no_create':True}" context="{'search_ky_ve':1}" on_change="onchange_previous_phanphoi(ky_ve_id,loai_ve_id,cap_ve_id)"/>
+		                    <field name="loai_ve_id" options="{'no_create':True}" on_change="onchange_previous_phanphoi(ky_ve_id,loai_ve_id,cap_ve_id)"/>
+		                    <field name="cap_ve_id" options="{'no_create':True}" on_change="onchange_previous_phanphoi(ky_ve_id,loai_ve_id,cap_ve_id)"/>
 		                    <field name="ngay_ph" />
 			            </group>
 			            <notebook>
@@ -33,10 +35,10 @@
 									<tree editable='bottom'>
 										<field name="daily_id" domain="[('dai_ly','=',True)]" options="{'no_create':True}" on_change="onchange_daily_id(daily_id)"/>
 										<field name="ten_daily" invisible='1'/>
-										<field name="socay_kytruoc" />
-										<field name="sove_kytruoc" /> 
-										<field name="socay_kynay" /> 
-										<field name="sove_kynay" /> 
+										<field name="socay_kytruoc" readonly='1'/>
+										<field name="sove_kytruoc" readonly='1'/> 
+										<field name="socay_kynay" on_change="onchange_socay_kynay(socay_kynay,parent.cap_ve_id)"/> 
+										<field name="sove_kynay" readonly='1'/> 
 										<field name="tang_giam" /> 
 										<field name="phanphoi_line_kytruoc_id" invisible = '1'/> 
 									</tree>

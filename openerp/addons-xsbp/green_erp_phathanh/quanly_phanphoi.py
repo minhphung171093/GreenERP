@@ -23,17 +23,19 @@ class phanphoi_truyenthong(osv.osv):
         'loai_ve_id': fields.many2one('loai.ve','Loại vé',required = True),
         'ngay_ph': fields.date('Ngày phát hành',required = True),
         'phanphoi_tt_line': fields.one2many('phanphoi.tt.line','phanphoi_tt_id','Phan phoi line'),
+        'cap_ve_id': fields.many2one('cap.ve','Cặp vé',required = True),
                 }
     
-    def onchange_previous_phanphoi(self, cr, uid, ids, ky_ve_id=False, loai_ve_id=False):
+    def onchange_previous_phanphoi(self, cr, uid, ids, ky_ve_id=False, loai_ve_id=False, cap_ve_id=False):
         vals = {}
         phanphoi_ids = []
         mang = []
-        if ky_ve_id and loai_ve_id:
+        if ky_ve_id and loai_ve_id and cap_ve_id:
+            ky_ve = self.pool.get('ky.ve').browse(cr,ui,ky_ve_id)
             sql = '''
-                select id from phanphoi_truyenthong where loai_ve_id = %s 
-                order by create_date desc limit 1
-            '''%(loai_ve_id)
+                select id from phanphoi_truyenthong where loai_ve_id = %s and cap_ve_id = %s
+                and ky_ve_id in (select id from ky_ve where ngay_mo_thuong < '%s' order by ngay_mo_thuong desc limit 1)
+            '''%(loai_ve_id,cap_ve_id,ky_ve.ngay_mo_thuong)
             cr.execute(sql)
             phanphoi_ids = [r[0] for r in cr.fetchall()]
             if phanphoi_ids:
@@ -90,6 +92,14 @@ class phanphoi_tt_line(osv.osv):
         if daily_id :
             daily = self.pool.get('res.partner').browse(cr,uid,daily_id)
             vals = {'ten_daily':daily.ten,
+                }
+        return {'value': vals}  
+    
+    def onchange_socay_kynay(self, cr, uid, ids, socay_kynay=False, cap_ve_id=False):
+        vals = {}
+        if socay_kynay and cap_ve_id:
+            cap_ve = self.pool.get('cap.ve').browse(cr,uid,cap_ve_id)
+            vals = {'sove_kynay':socay_kynay*cap_ve.name,
                 }
         return {'value': vals}  
     

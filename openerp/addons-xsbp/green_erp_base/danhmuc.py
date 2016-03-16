@@ -110,7 +110,7 @@ class res_partner(osv.osv):
         reads = self.read(cr, uid, ids, ['ten','name'], context)
       
         for record in reads:
-            name = str(record['ten']) + '-' +'['+str(record['name'])+']'
+            name = str(record['ten']) + u'-' +u'['+str(record['name'])+u']'
             res.append((record['id'], name))
         return res  
       

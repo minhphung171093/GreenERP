@@ -31,7 +31,7 @@
 							<page string = "Chi tiết phân phối">
 								<field name="phanphoi_tt_line" nolabel='1'>
 									<tree editable='bottom'>
-										<field name="daily_id" options="{'no_create':True}" on_change="onchange_daily_id(daily_id)"/>
+										<field name="daily_id" domain="[('dai_ly','=',True)]" options="{'no_create':True}" on_change="onchange_daily_id(daily_id)"/>
 										<field name="ten_daily" invisible='1'/>
 										<field name="socay_kytruoc" />
 										<field name="sove_kytruoc" /> 

@@ -86,7 +86,7 @@
 	            	<sheet>
 		            	<group col="4" string="Thông tin chung">
 		                    <field name="name" string="Mã đại lý" required='1'/>
-		                    <field name="ten_dl" />
+		                    <field name="ten" />
 		                    <field name="ngay" />
 		                    <field name="ten_gd" />
 		                    <field name="so_dt" />

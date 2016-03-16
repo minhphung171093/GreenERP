@@ -86,7 +86,7 @@ class res_partner(osv.osv):
     _inherit = "res.partner"
     _columns = {
         'ma_dl': fields.char('Tên đại lý', size=1024),
-        'ten_dl': fields.char('Tên đại lý', size=1024, required = True),
+        'ten': fields.char('Tên đại lý', size=1024, required = True),
         'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố'),
         'dia_chi': fields.char('Địa chỉ', size=1024),
         'phuong_xa_id': fields.many2one('phuong.xa','Phường (xã)'),

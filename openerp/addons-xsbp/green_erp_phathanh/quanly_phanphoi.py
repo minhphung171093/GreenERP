@@ -31,7 +31,7 @@ class phanphoi_truyenthong(osv.osv):
         phanphoi_ids = []
         mang = []
         if ky_ve_id and loai_ve_id and cap_ve_id:
-            ky_ve = self.pool.get('ky.ve').browse(cr,ui,ky_ve_id)
+            ky_ve = self.pool.get('ky.ve').browse(cr,uid,ky_ve_id)
             sql = '''
                 select id from phanphoi_truyenthong where loai_ve_id = %s and cap_ve_id = %s
                 and ky_ve_id in (select id from ky_ve where ngay_mo_thuong < '%s' order by ngay_mo_thuong desc limit 1)

@@ -71,8 +71,17 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Đại lý" >
-                	<field name="ma_dl" />
-                    <field name="name" />
+                    <field name="name" string = "Mã đại lý"/>
+                    <field name="ten"/>
+                    <field name="ngay" />
+                    <field name="ten_gd" />
+                    <field name="so_dt" />
+                    <field name="fax" />
+                    <field name="email" />
+                    <field name="kd_tinh_tp_id" options="{'no_create':True}"/>
+					<field name="kd_quan_huyen_id" options="{'no_create':True}"/>
+					<field name="kd_phuong_xa_id" options="{'no_create':True}"/>
+					<field name="kd_dia_chi"/>
                     <field name="dai_ly" invisible='1'/>
                 </tree>
             </field>
@@ -96,14 +105,14 @@
 			            </group>
 			            <group col="4"  string="Địa chỉ thường trú">
 							<field name="tinh_tp_id" options="{'no_create':True}"/>
-							<field name="quan_huyen_id" options="{'no_create':True}"/>
-							<field name="phuong_xa_id" options="{'no_create':True}"/>
+							<field name="quan_huyen_id" options="{'no_create':True}" domain="[('tinh_tp_id','=',tinh_tp_id)]"/>
+							<field name="phuong_xa_id" options="{'no_create':True}" domain="[('quan_huyen_id','=',quan_huyen_id)]"/>
 							<field name="dia_chi"/>
                 		</group>
                 		<group col="4"  string="Địa điểm kinh doanh">
 							<field name="kd_tinh_tp_id" options="{'no_create':True}"/>
-							<field name="kd_quan_huyen_id" options="{'no_create':True}"/>
-							<field name="kd_phuong_xa_id" options="{'no_create':True}"/>
+							<field name="kd_quan_huyen_id" options="{'no_create':True}" domain="[('tinh_tp_id','=',kd_tinh_tp_id)]"/>
+							<field name="kd_phuong_xa_id" options="{'no_create':True}" domain="[('quan_huyen_id','=',kd_quan_huyen_id)]"/>
 							<field name="kd_dia_chi"/>
                 		</group>
 		            </sheet>		                

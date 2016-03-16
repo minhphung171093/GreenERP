@@ -85,7 +85,7 @@ quan_huyen()
 class res_partner(osv.osv):
     _inherit = "res.partner"
     _columns = {
-#         'ma_dl': fields.char('Tên đại lý', size=1024, required = True),
+        'ma_dl': fields.char('Tên đại lý', size=1024),
         'ten_dl': fields.char('Tên đại lý', size=1024, required = True),
         'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố'),
         'dia_chi': fields.char('Địa chỉ', size=1024),
@@ -101,16 +101,16 @@ class res_partner(osv.osv):
         'dai_ly': fields.boolean('is_dai_ly'),
                 }
       
-#     def name_get(self, cr, uid, ids, context=None):
-#         if not ids:
-#             return []
-#         res = []
-#         reads = self.read(cr, uid, ids, ['ten_dl','name'], context)
-#      
-#         for record in reads:
-#             name = record['name'] + '-' +'['+record['ten_dl']+']'
-#             res.append((record['id'], name))
-#         return res  
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+        res = []
+        reads = self.read(cr, uid, ids, ['ten_dl','name'], context)
+      
+        for record in reads:
+            name = record['name'] + '-' +'['+record['ten_dl']+']'
+            res.append((record['id'], name))
+        return res  
       
 #     def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
 #         if context is None:

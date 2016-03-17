@@ -17,7 +17,7 @@ class doanhthu_graph_report(osv.osv):
         cr.execute("""
             create or replace view doanhthu_graph_report as (
  
-                select id, daily_id, ky_ve_id, sum(giatri) as giatri, ngay_mo_thuong, diem_tra_e_id as tinh(thi_truong)
+                select id, daily_id, ky_ve_id, sum(giatri) as giatri, ngay_mo_thuong, diem_tra_e_id as thi_truong
                 from
                 (
                 select ppttl.id as id, ppttl.daily_id as daily_id, pptt.ky_ve_id as ky_ve_id,

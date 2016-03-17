@@ -207,19 +207,18 @@ class dieuchinh_phanphoi_ve(osv.osv):
                                         store=True),
                 }
     
-    def onchange_ky_ve(self, cr, uid, ids, ky_ve_id=False):
+    def onchange_ky_ve(self, cr, uid, ids, ky_ve_id=False, loai_ve_id=False):
         vals = {}
         phanphoi_ids = []
         mang = []
-        if ky_ve_id:
+        if ky_ve_id and loai_ve_id:
             sql = '''
-                select ngay_ph,loai_ve_id,cap_ve_id from phanphoi_truyenthong where ky_ve_id = %s
-            '''%(ky_ve_id)
+                select ngay_ph,cap_ve_id from phanphoi_truyenthong where ky_ve_id = %s and loai_ve_id = %s
+            '''%(ky_ve_id, loai_ve_id)
             cr.execute(sql)
             pp = cr.fetchone()
             vals = {'ngay_ph':pp[0],
-                    'loai_ve_id':pp[1],
-                    'cap_ve_id':pp[2],
+                    'cap_ve_id':pp[1],
                 }
         return {'value': vals} 
     
@@ -299,6 +298,7 @@ class nhap_ve_e(osv.osv):
     _columns = {
         'ky_ve_id': fields.many2one('ky.ve','Kỳ vé',required = True),
         'loai_ve_id': fields.many2one('loai.ve','Loại vé',required = True),
+        'cap_ve_id': fields.many2one('cap.ve','Cặp vé',readonly = True),
         'ngay_mo_thuong': fields.date('Ngày mở thưởng'),
         'nhap_ve_e_line': fields.one2many('nhap.ve.e.line','nhap_ve_e_id','Nhap ve e line'),
                 }
@@ -327,13 +327,48 @@ class nhap_ve_e(osv.osv):
 #     _constraints = [
 #         (_check_sl_ve_e, 'Identical Data', []),
 #     ]  
-    def onchange_ky_ve_id(self, cr, uid, ids, ky_ve_id=False):
+
+    def onchange_ky_ve(self, cr, uid, ids, ky_ve_id=False, loai_ve_id=False):
         vals = {}
-        if ky_ve_id :
+        phanphoi_ids = []
+        mang = []
+        if ky_ve_id and loai_ve_id:
             ky_ve = self.pool.get('ky.ve').browse(cr,uid,ky_ve_id)
-            vals = {'ngay_mo_thuong':ky_ve.ngay_mo_thuong,
+            sql = '''
+                select cap_ve_id from phanphoi_truyenthong where ky_ve_id = %s and loai_ve_id = %s
+            '''%(ky_ve_id, loai_ve_id)
+            cr.execute(sql)
+            pp = cr.fetchone()
+            sql = '''
+                select id from nhap_ve_e where loai_ve_id = %s and cap_ve_id = %s
+                and ky_ve_id in (select id from ky_ve where ngay_mo_thuong < '%s' order by ngay_mo_thuong desc limit 1)
+            '''%(loai_ve_id,pp[0],ky_ve.ngay_mo_thuong)
+            cr.execute(sql)
+            ve_e_ids = [r[0] for r in cr.fetchall()]
+            if ve_e_ids:
+                ve_e = self.browse(cr,uid,ve_e_ids[0])   
+                for line in ve_e.nhap_ve_e_line:
+                    sql = '''
+                        select id from phanphoi_tt_line where daily_id = %s and phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s)
+                    '''%(line.daily_id.id, ky_ve_id)
+                    cr.execute(sql)
+                    ve = cr.fetchone()
+                    mang.append((0,0,{
+                                      'daily_id': line.daily_id.id,
+                                      'ten_daily': line.ten_daily,
+                                      'diem_tra_e_id': line.diem_tra_e_id.id,
+                                      'ma_khu_vuc': line.ma_khu_vuc,
+                                      've_e_theo_bangke': line.thuc_kiem,
+                                      've_e_ky_truoc': line.thuc_kiem,
+                                      've_e_ky_truoc_id':line.id,
+                                      'phanphoi_line_id': ve[0],
+                                      }))
+                                 
+            vals = {'cap_ve_id':pp[0],
+                    'ngay_mo_thuong':ky_ve.ngay_mo_thuong,
+                    'nhap_ve_e_line': mang,
                 }
-        return {'value': vals}  
+        return {'value': vals}   
 nhap_ve_e()
 
 class nhap_ve_e_line(osv.osv):
@@ -358,6 +393,8 @@ class nhap_ve_e_line(osv.osv):
         'daily_id': fields.many2one('res.partner','Đại lý', required = True),
         'diem_tra_e_id': fields.many2one('khu.vuc','Mã điểm trả ế', required = True),
         'ma_khu_vuc': fields.char('Mã Khu Vực',size = 1024, required = True),
+        've_e_ky_truoc_id': fields.many2one('nhap.ve.e.line', 'ID số vé ế kỳ trước'),
+        've_e_ky_truoc': fields.float('Số vé ế kỳ trước',digits=(16,0)),
         've_e_theo_bangke': fields.float('Số vé ế theo bảng kê',digits=(16,0)),
         'thuc_kiem': fields.float('Thực kiểm',digits=(16,0)),
         'phanphoi_line_id': fields.many2one('phanphoi.tt.line','Phan Phoi Line'),

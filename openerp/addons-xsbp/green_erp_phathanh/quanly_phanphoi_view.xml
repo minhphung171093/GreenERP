@@ -166,7 +166,7 @@
 										<field name="ten_daily" invisible='1'/>
 										<field name="diem_tra_e_id" options="{'no_create':True}" />
 										<field name="ma_khu_vuc" /> 
-										<field name="ve_e_ky_truoc" /> 
+										<field name="ve_e_ky_truoc" readonly='1'/> 
 										<field name="ve_e_theo_bangke" /> 
 										<field name="kiem_dem_thua" /> 
 										<field name="kiem_dem_thieu"/> 

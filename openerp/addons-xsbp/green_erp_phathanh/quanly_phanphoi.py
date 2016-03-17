@@ -248,7 +248,7 @@ class dieuchinh_line(osv.osv):
         'phanphoi_line_id': fields.many2one('phanphoi.tt.line','Phan Phoi Line'),
         'sove_duocduyet': fields.float('Số vé được duyệt', readonly=True),
         'socay_duocduyet':fields.float('Số cây được duyệt', readonly=True),
-        'socay_dc': fields.float('Số cây điều chỉnh'),
+        'sove_dc': fields.float('Số cây điều chỉnh'),
         'sove_sau_dc':fields.float('Số vé điều chỉnh', readonly=True),
                 }
     
@@ -263,11 +263,11 @@ class dieuchinh_line(osv.osv):
     _constraints = [
         (_check_daily_id, 'Bạn không được chọn trùng đại lý trong cùng một kỳ vé!', ['daily_id']),
     ]
-    def onchange_sove_sau_dc(self, cr, uid, ids, socay_dc=False,cap_ve_id=False):
+    def onchange_sove_sau_dc(self, cr, uid, ids, sove_dc=False,cap_ve_id=False):
         vals = {}
-        if socay_dc:
+        if sove_dc:
             cap_ve = self.pool.get('cap.ve').browse(cr,uid,cap_ve_id)
-            sove = socay_dc * cap_ve.name
+            sove = sove_dc * cap_ve.name
             vals = {'sove_sau_dc':sove,
                 }
         return {'value': vals}      

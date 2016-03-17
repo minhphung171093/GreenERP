@@ -172,8 +172,8 @@
 										<field name="kiem_dem_thieu"/> 
 										<field name="thuc_kiem" /> 
 										<field name="ghi_chu" /> 
-										<field name="phanphoi_line_id" invisible = '0'/> 
-										<field name="ve_e_ky_truoc_id" invisible = '0'/> 
+										<field name="phanphoi_line_id" invisible = '1'/> 
+										<field name="ve_e_ky_truoc_id" invisible = '1'/> 
 									</tree>
 								</field>
 							</page>

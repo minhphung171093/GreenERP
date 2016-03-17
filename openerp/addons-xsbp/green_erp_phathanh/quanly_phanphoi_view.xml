@@ -153,8 +153,8 @@
 	            <form string="Nhập vé ế theo khu vực" version="7.0">
 	            	<sheet>
 		            	<group col="4" colspan="2">
-	                		<field name="ky_ve_id" options="{'no_create':True}" on_change="onchange_ky_ve_id(ky_ve_id,loai_ve_id)" context="{'search_ky_ve_e':1}"/>
-		                    <field name="loai_ve_id" on_change="onchange_ky_ve_id(ky_ve_id,loai_ve_id)" options="{'no_create':True}"/>
+	                		<field name="ky_ve_id" options="{'no_create':True}" on_change="onchange_ky_ve(ky_ve_id,loai_ve_id)" context="{'search_ky_ve_e':1}"/>
+		                    <field name="loai_ve_id" on_change="onchange_ky_ve(ky_ve_id,loai_ve_id)" options="{'no_create':True}"/>
 		                    <field name="cap_ve_id" readonly="1" />
 		                    <field name="ngay_mo_thuong" readonly="1" />
 			            </group>

@@ -66,6 +66,7 @@
                 <tree string="Điều chỉnh kế hoạch phân phối vé" >
                     <field name="ky_ve_id" />
                     <field name="loai_ve_id" />
+                    <field name="cap_ve_id" />
                     <field name="ngay_ph" />
                     <field name="tong_ve_pp" />
                     <field name="tong_ve_dc" />
@@ -86,6 +87,8 @@
 		            	<group col="4" colspan="2">
 	                		<field name="ky_ve_id" options="{'no_create':True}" on_change="onchange_ky_ve(ky_ve_id)" context="{'search_ky_ve_dieuchinh':1}"/>
 		                    <field name="loai_ve_id" options="{'no_create':True}" />
+		                    <field name="loai_ve_id" options="{'no_create':True}" />
+		                    <newline/>
 		                    <field name="ngay_ph" />
 		                    <field name="ngay_dc" />
 			            </group>

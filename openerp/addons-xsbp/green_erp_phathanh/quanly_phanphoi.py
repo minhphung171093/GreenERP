@@ -76,9 +76,9 @@ class phanphoi_tt_line(osv.osv):
         'phanphoi_tt_id': fields.many2one('phanphoi.truyenthong','Phân phối truyền thống', ondelete='cascade'),
         'ten_daily': fields.char('Tên Đại Lý',size = 1024, required = True),
         'daily_id': fields.many2one('res.partner','Đại lý', required = True),
-        'socay_kytruoc': fields.float('Số cây kỳ trước',digits=(16,0)),
+        'socay_kytruoc': fields.float('Số cây kỳ trước',digits=(16,2)),
         'sove_kytruoc': fields.float('Số vé kỳ trước',digits=(16,0)),
-        'socay_kynay': fields.float('Số cây kỳ này',digits=(16,0)),
+        'socay_kynay': fields.float('Số cây kỳ này',digits=(16,2)),
         'sove_kynay': fields.float('Số vé kỳ này',digits=(16,0)),
         'phanphoi_line_kytruoc_id': fields.many2one('phanphoi.tt.line','Phan phoi line ky truoc'),
         'tang_giam':fields.function(_tang_giam, string='Tăng, giảm (cây)', digits=(16,0),
@@ -178,6 +178,7 @@ class dieuchinh_phanphoi_ve(osv.osv):
     _columns = {
         'ky_ve_id': fields.many2one('ky.ve','Kỳ vé',required = True),
         'loai_ve_id': fields.many2one('loai.ve','Loại vé',required = True),
+        'cap_ve_id': fields.many2one('cap.ve','Cặp vé',required = True),
         'ngay_ph': fields.date('Ngày phát hành',required = True),
         'ngay_dc': fields.date('Ngày điều chỉnh',required = True),
         'dieuchinh_line': fields.one2many('dieuchinh.line','dieuchinh_id','Dieu Chinh line'),
@@ -208,11 +209,13 @@ class dieuchinh_phanphoi_ve(osv.osv):
         mang = []
         if ky_ve_id:
             sql = '''
-                select ngay_ph from phanphoi_truyenthong where ky_ve_id = %s
+                select ngay_ph,loai_ve_id,cap_ve_id from phanphoi_truyenthong where ky_ve_id = %s
             '''%(ky_ve_id)
             cr.execute(sql)
-            ngay_ph = cr.fetchone()
-            vals = {'ngay_ph':ngay_ph[0],
+            pp = cr.fetchone()
+            vals = {'ngay_ph':pp[0],
+                    'loai_ve_id':pp[1],
+                    'cap_ve_id':pp[2],
                 }
         return {'value': vals} 
     

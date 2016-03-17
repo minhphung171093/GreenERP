@@ -163,13 +163,17 @@ class dieuchinh_phanphoi_ve(osv.osv):
             }
             sql = '''
                 select case when sum(sove_kynay)!=0 then sum(sove_kynay) else 0 end tong_ve_pp
-                from phanphoi_tt_line where phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id=%s and loai_ve_id=%s and ngay_ph='%s')
-            '''%(dc.ky_ve_id.id, dc.loai_ve_id.id, dc.ngay_ph)
+                from phanphoi_tt_line where phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id=%s and loai_ve_id=%s and cap_ve_id=%s)
+            '''%(dc.ky_ve_id.id, dc.loai_ve_id.id, dc.cap_ve_id.id)
             cr.execute(sql)
             val1 = cr.fetchone()[0]
-            val2 = 0
+            sv_dd = 0
+            sv_dc = 0
+            val2=0
             for line in dc.dieuchinh_line:
-                val2 += line.sove_dc
+                sv_dd += line.sove_duocduyet
+                sv_dc += line.sove_sau_dc
+            val2=sv_dc-sv_dd
             res[dc.id]['total_ve_pp'] = val1
             res[dc.id]['total_ve_dc'] = val2
             res[dc.id]['total_ve_sau_dc'] = val1+val2

@@ -110,7 +110,7 @@
 	                                	<field name="total_ve_pp" widget="monetary" />
 	                                	<field name="total_ve_dc" widget="monetary" />     
 	                                		<div class="oe_subtotal_footer_separator oe_inline">
-	                                     		<label for="tong_ve_sau_dc"/>  
+	                                     		<label for="total_ve_sau_dc"/>  
 	                                		</div>
 	                                 	<field name="total_ve_sau_dc" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" />  
 	                            	</group>  

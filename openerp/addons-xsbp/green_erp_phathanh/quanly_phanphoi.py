@@ -48,12 +48,14 @@ class phanphoi_truyenthong(osv.osv):
                     ve_dc = cr.fetchone()
                     if ve_dc:
                         ve_kytruoc = ve_dc[0]
+                        cay_kytruoc = ve_dc[1]
                     else:
+                        cay_kytruoc = line.socay_kynay
                         ve_kytruoc = line.sove_kynay
                     mang.append((0,0,{
                                       'daily_id': line.daily_id.id,
                                       'ten_daily': line.ten_daily,
-                                      'socay_kytruoc': ve_dc[1],
+                                      'socay_kytruoc': cay_kytruoc,
                                       'sove_kytruoc': ve_kytruoc,
                                       'phanphoi_line_kytruoc_id': line.id,
                                       }))

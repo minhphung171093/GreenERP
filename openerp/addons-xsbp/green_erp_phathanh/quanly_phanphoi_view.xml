@@ -86,10 +86,10 @@
 	            	<sheet>
 		            	<group col="4" colspan="2">
 	                		<field name="ky_ve_id" options="{'no_create':True}" on_change="onchange_ky_ve(ky_ve_id)" context="{'search_ky_ve_dieuchinh':1}"/>
-		                    <field name="loai_ve_id" options="{'no_create':True}" />
-		                    <field name="loai_ve_id" options="{'no_create':True}" />
+		                    <field name="loai_ve_id" options="{'no_create':True}" readonly='1' />
+		                    <field name="cap_ve_id" options="{'no_create':True}" readonly='1' />
 		                    <newline/>
-		                    <field name="ngay_ph" />
+		                    <field name="ngay_ph" readonly='1' />
 		                    <field name="ngay_dc" />
 			            </group>
 			            <notebook>

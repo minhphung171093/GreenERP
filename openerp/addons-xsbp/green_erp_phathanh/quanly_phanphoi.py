@@ -42,7 +42,7 @@ class phanphoi_truyenthong(osv.osv):
                 pp = self.browse(cr,uid,phanphoi_ids[0])   
                 for line in pp.phanphoi_tt_line:
                     sql = '''
-                        select sove_sau_dc from dieuchinh_line where phanphoi_line_id = %s
+                        select sove_sau_dc,sove_dc from dieuchinh_line where phanphoi_line_id = %s
                     '''%(line.id)
                     cr.execute(sql)
                     ve_dc = cr.fetchone()
@@ -53,7 +53,7 @@ class phanphoi_truyenthong(osv.osv):
                     mang.append((0,0,{
                                       'daily_id': line.daily_id.id,
                                       'ten_daily': line.ten_daily,
-                                      'socay_kytruoc': line.socay_kynay,
+                                      'socay_kytruoc': ve_dc[1],
                                       'sove_kytruoc': ve_kytruoc,
                                       'phanphoi_line_kytruoc_id': line.id,
                                       }))

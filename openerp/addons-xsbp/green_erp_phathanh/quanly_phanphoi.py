@@ -235,23 +235,21 @@ dieuchinh_phanphoi_ve()
 class dieuchinh_line(osv.osv):
     _name = "dieuchinh.line"
     
-    def _total_ve(self, cr, uid, ids, name, arg, context=None):
-        res = {}
-        for dc in self.browse(cr,uid,ids):
-            res[dc.id]=dc.sove_duocduyet+dc.sove_dc
-        return res
+#     def _total_ve(self, cr, uid, ids, name, arg, context=None):
+#         res = {}
+#         for dc in self.browse(cr,uid,ids):
+#             res[dc.id]=dc.sove_duocduyet+dc.sove_dc
+#         return res
     
     _columns = {
         'dieuchinh_id': fields.many2one('dieuchinh.phanphoi.ve','Dieu chinh phan phoi', ondelete='cascade'),
         'ten_daily': fields.char('Tên Đại Lý',size = 1024),
         'daily_id': fields.many2one('res.partner','Đại lý', required = True),
         'phanphoi_line_id': fields.many2one('phanphoi.tt.line','Phan Phoi Line'),
-        'sove_duocduyet': fields.float('Số vé được duyệt', readonly=True,digits=(16,0)),
-        'sove_dc': fields.float('Số vé điều chỉnh',digits=(16,0)),
-        'sove_sau_dc':fields.function(_total_ve, string='Số vé sau điều chỉnh',digits=(16,0),
-                                    type='float', store={
-                                                'dieuchinh.line':(lambda self, cr, uid, ids, c={}: ids, ['sove_duocduyet','sove_dc'], 10),
-                                            }),
+        'sove_duocduyet': fields.float('Số vé được duyệt', readonly=True),
+        'socay_duocduyet':fields.float('Số cây được duyệt', readonly=True),
+        'socay_dc': fields.float('Số cây điều chỉnh'),
+        'sove_sau_dc':fields.float('Số vé điều chỉnh', readonly=True),
                 }
     
     def _check_daily_id(self, cr, uid, ids, context=None):
@@ -265,19 +263,27 @@ class dieuchinh_line(osv.osv):
     _constraints = [
         (_check_daily_id, 'Bạn không được chọn trùng đại lý trong cùng một kỳ vé!', ['daily_id']),
     ]
-    
+    def onchange_sove_sau_dc(self, cr, uid, ids, socay_dc=False,cap_ve_id=False):
+        vals = {}
+        if socay_dc:
+            cap_ve = self.pool.get('cap.ve').browse(cr,uid,cap_ve_id)
+            sove = socay_dc * cap_ve.name
+            vals = {'sove_sau_dc':sove,
+                }
+        return {'value': vals}      
     def onchange_daily_dc_id(self, cr, uid, ids, daily_id=False, ky_ve_id=False):
         vals = {}
         if daily_id and ky_ve_id:
             daily = self.pool.get('res.partner').browse(cr,uid,daily_id)
             sql = '''
-                select sove_kynay,id from phanphoi_tt_line where daily_id = %s and phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s)
+                select sove_kynay,id,socay_kynay from phanphoi_tt_line where daily_id = %s and phanphoi_tt_id in (select id from phanphoi_truyenthong where ky_ve_id = %s)
             '''%(daily_id, ky_ve_id)
             cr.execute(sql)
             ve = cr.fetchone()
             vals = {'ten_daily':daily.ten,
                     'sove_duocduyet': ve[0],
                     'phanphoi_line_id': ve[1],
+                    'socay_duocduyet':ve[2],
                 }
         return {'value': vals}  
     

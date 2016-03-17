@@ -98,8 +98,9 @@
 									<tree editable='bottom'>
 										<field name="daily_id" options="{'no_create':True}" context="{'search_dai_ly':1,'ky_ve_id':parent.ky_ve_id,'loai_ve_id':parent.loai_ve_id,'ngay_ph':parent.ngay_ph}" on_change="onchange_daily_dc_id(daily_id,parent.ky_ve_id)"/>
 										<field name="ten_daily" invisible='1'/>
+										<field name="socay_duocduyet" />
 										<field name="sove_duocduyet" />
-										<field name="sove_dc" /> 
+										<field name="socay_dc" required='1' on_change="onchange_sove_sau_dc(socay_dc,parent.cap_ve_id)" /> 
 										<field name="sove_sau_dc" /> 
 										<field name="phanphoi_line_id" invisible = '1'/> 
 									</tree>

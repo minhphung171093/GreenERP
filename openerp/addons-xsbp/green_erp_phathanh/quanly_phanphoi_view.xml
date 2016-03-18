@@ -339,7 +339,7 @@
 									<form version="7.0">
 										<group>
 											<field name="thang" />
-										<group>
+										</group>
 										<notebook>
 											<page string = "Chi tiết chỉ tiêu">
 												<field name="chitieu_dt_tung_thang_line" nolabel='1'>

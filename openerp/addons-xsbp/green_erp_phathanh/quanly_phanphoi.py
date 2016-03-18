@@ -668,7 +668,7 @@ class chitieu_dt_tung_thang_line(osv.osv):
     
     _columns = {
         'thang_line_id': fields.many2one('dt.theo.thang.line','Chi tiết', ondelete='cascade'),
-        'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu', required = True),
+        'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu'),
         'thuc_hien': fields.float('Thực hiện',digits=(16,0)),
                 }
     

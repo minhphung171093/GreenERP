@@ -605,14 +605,14 @@ class doanhthu_theo_loaihinh(osv.osv):
                 dt_line.append((0,0,{
                                      'chi_tieu_id':line.id,
                                      }))
-                dt_line_2.append((0,0,{
-                                     'chi_tieu_id':line.id,
-                                     }))
+                dt_line_2.append({
+                                'chi_tieu_id':line.id,
+                                })
             for thang in range(1,13):
-                dt_thang.append((0,0,{
+                dt_thang.append({
                                      'thang': thang,
                                      'chitieu_dt_tung_thang_line': dt_line_2,
-                                     }))
+                                     })
             vals = {'dt_theo_loaihinh_line':dt_line,
                     'dt_theo_thang_line': dt_thang,
                 }

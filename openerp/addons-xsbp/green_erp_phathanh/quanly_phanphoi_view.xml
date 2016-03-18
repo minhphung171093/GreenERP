@@ -334,7 +334,7 @@
 							<page string = "Chi tiết chỉ tiêu từng tháng">
 								<field name="dt_theo_thang_line" nolabel='1'>
 									<tree >
-										<field name="thang" />
+										<field name="chi_tieu_id" />
 									</tree>
 									<form version="7.0">
 										<group>

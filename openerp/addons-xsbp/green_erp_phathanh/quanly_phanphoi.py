@@ -601,7 +601,7 @@ class doanhthu_theo_loaihinh(osv.osv):
         if loai_hinh_id:
             loai_hinh = self.pool.get('loai.hinh').browse(cr,uid,loai_hinh_id)
             for line in loai_hinh.loai_hinh_line:
-                dt_line.append((6,0,{
+                dt_line.append((0,0,{
                                      'chi_tieu_id':line.id,
                                      }))
             for thang in range(1,13):

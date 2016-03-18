@@ -592,17 +592,25 @@ class doanhthu_theo_loaihinh(osv.osv):
         'year': fields.selection([(num, str(num)) for num in range(2013, 2050)], 'Năm', required = True),
         'loai_hinh_id': fields.many2one('loai.hinh','Loại hình',required = True),
         'dt_theo_loaihinh_line': fields.one2many('dt.theo.loaihinh.line','doanh_thu_id','Doanh thu line'),
+        'dt_theo_thang_line': fields.one2many('dt.theo.thang.line','doanh_thu_id','Doanh thu line'),
                 }
     def onchange_loai_hinh_id(self, cr, uid, ids, loai_hinh_id=False):
         vals = {}
         dt_line = []
+        dt_thang = []
         if loai_hinh_id:
             loai_hinh = self.pool.get('loai.hinh').browse(cr,uid,loai_hinh_id)
             for line in loai_hinh.loai_hinh_line:
                 dt_line.append((0,0,{
                                      'chi_tieu_id':line.id,
                                      }))
+                for thang in range[1:13]:
+                    dt_thang.append((0,0,{
+                                         'chi_tieu_id':line.id,
+                                         'thang': thang,
+                                         }))
             vals = {'dt_theo_loaihinh_line':dt_line,
+                    'dt_theo_thang_line': dt_thang,
                 }
         return {'value': vals}  
 doanhthu_theo_loaihinh()
@@ -631,18 +639,30 @@ class dt_theo_loaihinh_line(osv.osv):
         'doanh_thu_id': fields.many2one('doanhthu.theo.loaihinh','Chi tiết', ondelete='cascade'),
         'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu', required = True),
         'kehoach_namtruoc': fields.float('Kế hoạch năm trước',digits=(16,0)),
-        'thuchien_namtruoc': fields.float('Thực hiện năm trước',digits=(16,0)),
+#         'thuchien_namtruoc': fields.float('Thực hiện năm trước',digits=(16,0)),
         'kehoach_namnay': fields.float('Kế hoạch năm nay',digits=(16,0)),
 #         'tyle': fields.float('Tỷ lệ so thực hiện năm trước'),
-        'tyle':fields.function(_ty_le, string='Tỷ lệ so thực hiện năm trước(%)', type='char',
-                                    multi='sums'),
+#         'tyle':fields.function(_ty_le, string='Tỷ lệ so thực hiện năm trước(%)', type='char',
+#                                     multi='sums'),
         'phan_dau': fields.float('Kế hoạch phấn đấu năm nay',digits=(16,0)),
 #         'tyle_phandau': fields.float('Tỷ lệ so thực hiện năm trước'),
-        'tyle_phandau':fields.function(_ty_le, string='Tỷ lệ so thực hiện năm trước(%)', type='char',
-                                    multi='sums'),
+#         'tyle_phandau':fields.function(_ty_le, string='Tỷ lệ so thực hiện năm trước(%)', type='char',
+#                                     multi='sums'),
                 }
     
 dt_theo_loaihinh_line()
+
+class dt_theo_thang_line(osv.osv):
+    _name = "dt.theo.thang.line"
+    
+    _columns = {
+        'doanh_thu_id': fields.many2one('doanhthu.theo.loaihinh','Chi tiết', ondelete='cascade'),
+        'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu', required = True),
+        'thang': fields.integer('Tháng'),
+        'thuc_hien': fields.float('Thực hiện',digits=(16,0)),
+                }
+    
+dt_theo_thang_line()
 
 class nhap_ve(osv.osv):
     _name = "nhap.ve"

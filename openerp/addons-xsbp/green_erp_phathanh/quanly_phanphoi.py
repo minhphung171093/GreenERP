@@ -597,6 +597,7 @@ class doanhthu_theo_loaihinh(osv.osv):
     def onchange_loai_hinh_id(self, cr, uid, ids, loai_hinh_id=False):
         vals = {}
         dt_line = []
+        dt_line_2 = []
         dt_thang = []
         if loai_hinh_id:
             loai_hinh = self.pool.get('loai.hinh').browse(cr,uid,loai_hinh_id)
@@ -604,10 +605,13 @@ class doanhthu_theo_loaihinh(osv.osv):
                 dt_line.append((0,0,{
                                      'chi_tieu_id':line.id,
                                      }))
+                dt_line_2.append((0,0,{
+                                     'chi_tieu_id':line.id,
+                                     }))
             for thang in range(1,13):
                 dt_thang.append((0,0,{
                                      'thang': thang,
-                                     'chitieu_dt_tung_thang_line': dt_line,
+                                     'chitieu_dt_tung_thang_line': dt_line_2,
                                      }))
             vals = {'dt_theo_loaihinh_line':dt_line,
                     'dt_theo_thang_line': dt_thang,

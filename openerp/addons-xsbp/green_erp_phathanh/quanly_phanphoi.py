@@ -597,22 +597,22 @@ class doanhthu_theo_loaihinh(osv.osv):
     def onchange_loai_hinh_id(self, cr, uid, ids, loai_hinh_id=False):
         vals = {}
         dt_line = []
-        dt_line_2 = []
         dt_thang = []
+        thang = []
         if loai_hinh_id:
             loai_hinh = self.pool.get('loai.hinh').browse(cr,uid,loai_hinh_id)
+            for i in range(1,13):
+                thang.append({
+                              'thang': i
+                              })
             for line in loai_hinh.loai_hinh_line:
                 dt_line.append((0,0,{
                                      'chi_tieu_id':line.id,
                                      }))
-                dt_line_2.append({
-                                'chi_tieu_id':line.id,
-                                })
-            for thang in range(1,13):
-                dt_thang.append({
-                                     'thang': thang,
-                                     'chitieu_dt_tung_thang_line': dt_line_2,
-                                     })
+                dt_thang.append((0,0,{
+                                     'chi_tieu_id':line.id,
+                                     'chitieu_dt_tung_thang_line': thang,
+                                     }))
             vals = {'dt_theo_loaihinh_line':dt_line,
                     'dt_theo_thang_line': dt_thang,
                 }
@@ -661,7 +661,7 @@ class dt_theo_thang_line(osv.osv):
     
     _columns = {
         'doanh_thu_id': fields.many2one('doanhthu.theo.loaihinh','Chi tiết', ondelete='cascade'),
-        'thang': fields.integer('Tháng'),
+        'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu', required = True),
         'chitieu_dt_tung_thang_line': fields.one2many('chitieu.dt.tung.thang.line','thang_line_id','Doanh thu line'),
                 }
     
@@ -672,7 +672,7 @@ class chitieu_dt_tung_thang_line(osv.osv):
     
     _columns = {
         'thang_line_id': fields.many2one('dt.theo.thang.line','Chi tiết', ondelete='cascade'),
-        'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu', required = True),
+        'thang': fields.integer('Tháng'),
         'thuc_hien': fields.float('Thực hiện',digits=(16,0)),
                 }
     

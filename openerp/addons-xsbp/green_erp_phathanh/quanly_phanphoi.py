@@ -604,7 +604,7 @@ class doanhthu_theo_loaihinh(osv.osv):
                 dt_line.append((0,0,{
                                      'chi_tieu_id':line.id,
                                      }))
-                for thang in range[1:13]:
+                for thang in range(1,13):
                     dt_thang.append((0,0,{
                                          'chi_tieu_id':line.id,
                                          'thang': thang,

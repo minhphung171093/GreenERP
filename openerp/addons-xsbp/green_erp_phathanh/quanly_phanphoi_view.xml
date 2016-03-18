@@ -306,6 +306,7 @@
                 <tree string="Kế hoạch doanh thu theo loại hình" >
                     <field name="year" />
                     <field name="loai_hinh_id" />
+                    <field name="ke_hoach" />
                 </tree>
             </field>
         </record>  
@@ -318,39 +319,16 @@
 	            	<sheet>
 		            	<group col="4" colspan="2">
 	                		<field name="loai_hinh_id" options="{'no_create':True}" on_change = "onchange_loai_hinh_id(loai_hinh_id)"/>
-	                		<field name="year" />
+	                		<field name="year"/>
+	                		<field name="ke_hoach"/>
 			            </group>
 			            <notebook>
-							<page string = "Chi tiết chỉ tiêu">
-								<field name="dt_theo_loaihinh_line" nolabel='1'>
-									<tree editable='bottom' >
-										<field name="chi_tieu_id" options="{'no_create':True}" />
-										<field name="kehoach_namtruoc" />
-										<field name="kehoach_namnay" />
-										<field name="phan_dau" /> 
-									</tree>
-								</field>
-							</page>
 							<page string = "Chi tiết chỉ tiêu từng tháng">
 								<field name="dt_theo_thang_line" nolabel='1'>
-									<tree >
-										<field name="thang" />
+									<tree editable='bottom' >
+										<field name="thang"/>
+										<field name="thuc_hien" />
 									</tree>
-									<form version="7.0">
-										<group>
-											<field name="thang" />
-										</group>
-										<notebook>
-											<page string = "Chi tiết chỉ tiêu">
-												<field name="chitieu_dt_tung_thang_line" nolabel='1'>
-													<tree editable='bottom' >
-														<field name="chi_tieu_id" options="{'no_create':True}" />
-														<field name="thuc_hien" />
-													</tree>
-												</field>
-											</page>
-										</notebook>
-									</form>
 								</field>
 							</page>
 						</notebook>

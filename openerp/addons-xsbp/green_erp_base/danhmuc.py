@@ -212,7 +212,8 @@ class loai_hinh(osv.osv):
     _columns = {
         'name': fields.char('Tên',size = 1024, required = True),
         'doanh_thu': fields.selection([('xs','Xổ số'), ('ks','Khách sạn')], 'Doanh thu', required = True),
-        'loai_hinh_line': fields.one2many('loai.hinh.line','loai_hinh_id','Loai hinh line'),
+        'parent_id': fields.many2one('loai.hinh','Parent Loai Hinh'),
+#         'loai_hinh_line': fields.one2many('loai.hinh.line','loai_hinh_id','Loai hinh line'),
                 }
 #     def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
 #         if context is None:

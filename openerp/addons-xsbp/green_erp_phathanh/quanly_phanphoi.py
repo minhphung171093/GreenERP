@@ -591,7 +591,7 @@ class doanhthu_theo_loaihinh(osv.osv):
     _columns = {
         'year': fields.selection([(num, str(num)) for num in range(2013, 2050)], 'Năm', required = True),
         'loai_hinh_id': fields.many2one('loai.hinh','Loại hình',required = True),
-        'dt_theo_loaihinh_line': fields.one2many('dt.theo.loaihinh.line','doanh_thu_id','Doanh thu line'),
+        'ke_hoach': fields.float('Kế hoạch',digits=(16,0)),
         'dt_theo_thang_line': fields.one2many('dt.theo.thang.line','doanh_thu_id','Doanh thu line'),
                 }
     def onchange_loai_hinh_id(self, cr, uid, ids, loai_hinh_id=False):
@@ -599,58 +599,16 @@ class doanhthu_theo_loaihinh(osv.osv):
         dt_line = []
         dt_thang = []
         if loai_hinh_id:
-            loai_hinh = self.pool.get('loai.hinh').browse(cr,uid,loai_hinh_id)
-            for line in loai_hinh.loai_hinh_line:
-                dt_line.append((0,0,{
-                                     'chi_tieu_id':line.id,
-                                     }))
             for thang in range(1,13):
                 dt_thang.append((0,0,{
-                                     'chitieu_dt_tung_thang_line':dt_line,
                                      'thang': thang,
                                      }))
-            vals = {'dt_theo_loaihinh_line':dt_line,
+            vals = {
                     'dt_theo_thang_line': dt_thang,
                 }
         return {'value': vals}  
 doanhthu_theo_loaihinh()
 
-class dt_theo_loaihinh_line(osv.osv):
-    _name = "dt.theo.loaihinh.line"
-    
-    def _ty_le(self, cr, uid, ids, field_name, args, context=None):
-        res = {}
-        for line in self.browse(cr,uid,ids,context=context):
-            val1=''
-            val2=''
-            res[line.id] = {
-                'tyle': 0,
-                'tyle_phandau': 0,
-            }
-            if line.chi_tieu_id.is_ty_le == True:
-                val1 = float(line.thuchien_namtruoc) and float(line.kehoach_namnay)*100/float(line.thuchien_namtruoc) or 0
-                val1 = round(val1,0)
-                val2 = float(line.thuchien_namtruoc) and float(line.phan_dau)*100/float(line.thuchien_namtruoc) or 0
-                val2 = round(val2,0)
-            res[line.id]['tyle'] = val1
-            res[line.id]['tyle_phandau'] = val2
-        return res
-    _columns = {
-        'doanh_thu_id': fields.many2one('doanhthu.theo.loaihinh','Chi tiết', ondelete='cascade'),
-        'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu', required = True),
-        'kehoach_namtruoc': fields.float('Kế hoạch năm trước',digits=(16,0)),
-#         'thuchien_namtruoc': fields.float('Thực hiện năm trước',digits=(16,0)),
-        'kehoach_namnay': fields.float('Kế hoạch năm nay',digits=(16,0)),
-#         'tyle': fields.float('Tỷ lệ so thực hiện năm trước'),
-#         'tyle':fields.function(_ty_le, string='Tỷ lệ so thực hiện năm trước(%)', type='char',
-#                                     multi='sums'),
-        'phan_dau': fields.float('Kế hoạch phấn đấu năm nay',digits=(16,0)),
-#         'tyle_phandau': fields.float('Tỷ lệ so thực hiện năm trước'),
-#         'tyle_phandau':fields.function(_ty_le, string='Tỷ lệ so thực hiện năm trước(%)', type='char',
-#                                     multi='sums'),
-                }
-    
-dt_theo_loaihinh_line()
 
 class dt_theo_thang_line(osv.osv):
     _name = "dt.theo.thang.line"
@@ -658,21 +616,11 @@ class dt_theo_thang_line(osv.osv):
     _columns = {
         'doanh_thu_id': fields.many2one('doanhthu.theo.loaihinh','Chi tiết', ondelete='cascade'),
         'thang': fields.integer('Tháng'),
-        'chitieu_dt_tung_thang_line': fields.one2many('chitieu.dt.tung.thang.line','thang_line_id','Doanh thu line'),
+        'thuc_hien': fields.float('Thực hiện',digits=(16,0)),
                 }
     
 dt_theo_thang_line()
 
-class chitieu_dt_tung_thang_line(osv.osv):
-    _name = "chitieu.dt.tung.thang.line"
-    
-    _columns = {
-        'thang_line_id': fields.many2one('dt.theo.thang.line','Chi tiết', ondelete='cascade'),
-        'chi_tieu_id': fields.many2one('loai.hinh.line','Chỉ tiêu'),
-        'thuc_hien': fields.float('Thực hiện',digits=(16,0)),
-                }
-    
-chitieu_dt_tung_thang_line()
 
 class nhap_ve(osv.osv):
     _name = "nhap.ve"

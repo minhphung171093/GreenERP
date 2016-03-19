@@ -318,7 +318,7 @@
 	            <form string="Kế hoạch doanh thu theo loại hình" version="7.0">
 	            	<sheet>
 		            	<group col="4" colspan="2">
-	                		<field name="loai_hinh_id" options="{'no_create':True}" on_change = "onchange_loai_hinh_id(loai_hinh_id)"/>
+	                		<field name="loai_hinh_id" domain="[('parent_id','=',True)]" options="{'no_create':True}" on_change = "onchange_loai_hinh_id(loai_hinh_id)"/>
 	                		<field name="year"/>
 	                		<field name="ke_hoach"/>
 			            </group>

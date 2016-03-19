@@ -11,6 +11,7 @@ class doanhthu_graph_report(osv.osv):
         'ky_ve_id': fields.many2one('ky.ve','Kỳ vé'),
         'giatri': fields.float('Doanh thu', digits=(16,0)),
         'ngay_mo_thuong': fields.date('Ngày mở thưởng'),
+        'diem_tra_e_id': fields.many2one('khu.vuc','Thị Trường'),
     }
     def init(self, cr):
         tools.drop_view_if_exists(cr, 'doanhthu_graph_report')
@@ -54,6 +55,7 @@ class dthu_phanh_graph_report(osv.osv):
         'ky_ve_id': fields.many2one('ky.ve','Kỳ vé'),
         'giatri': fields.float('Giá Trị', digits=(16,0)),
         'loai_giatri': fields.char('Loại'),
+        'ngay_mo_thuong': fields.date('Ngày mở thưởng'),
     }
     def init(self, cr):
         tools.drop_view_if_exists(cr, 'dthu_phanh_graph_report')
@@ -99,5 +101,31 @@ class dthu_phanh_graph_report(osv.osv):
             )
         """)
 dthu_phanh_graph_report()
+
+class loaihinh_graph_report(osv.osv):
+    _name = "loaihinh.graph.report"
+    _description = "Báo cáo theo loại hình"
+    _auto = False
+    _columns = {
+        'year': fields.selection([(num, str(num)) for num in range(2013, 2050)], 'Năm'),
+        'thang': fields.integer('Tháng'),
+        'loai_hinh_id': fields.many2one('loai.hinh','Loại hình'),
+        'parent_id': fields.many2one('loai.hinh','Parent Loai Hinh'),
+        'thuc_hien': fields.float('Thực hiện',digits=(16,0)),
+    }
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, 'loaihinh_graph_report')
+        cr.execute("""
+            create or replace view loaihinh_graph_report as (
+ 
+                select dtttl.id, dttlh.year, dtttl.thang, dttlh.loai_hinh_id, lh.parent_id, dtttl.thuc_hien
+                    
+                from dt_theo_thang_line dtttl 
+                left join doanhthu_theo_loaihinh dttlh on dtttl.doanh_thu_id=dttlh.id
+                left join loai_hinh lh on dttlh.loai_hinh_id = lh.id
+                     
+            )
+        """)
+loaihinh_graph_report()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -148,6 +148,7 @@ class khu_vuc(osv.osv):
     _columns = {
         'name': fields.char('Mã Điểm trả ế',size = 1024, required = True),
         'ten': fields.char('Tên Điểm trả ế',size = 1024, required = True),
+        'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố', required = True),
                 }
     def name_get(self, cr, uid, ids, context=None):
         if not ids:
@@ -255,7 +256,7 @@ class ds_dai(osv.osv):
     _name = "ds.dai"
     _columns = {
         'name': fields.char('Tên',size = 1024, required = True),
-        'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố'),
+        'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố', required = True),
                 }
 ds_dai()
 

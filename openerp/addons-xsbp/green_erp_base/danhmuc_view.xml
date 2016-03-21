@@ -152,6 +152,7 @@
                 <tree string="Điểm trả ế" editable='top'>
                     <field name="name" />
                     <field name="ten" />
+                    <field name="tinh_tp_id" options="{'no_create':True}"/>
                 </tree>
             </field>
         </record>  

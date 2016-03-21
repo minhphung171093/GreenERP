@@ -227,6 +227,7 @@
             <field name="arch" type="xml">
                 <tree string="Đài" editable='top'>
                     <field name="name" />
+                    <field name="tinh_tp_id" options="{'no_create':True}"/>
                 </tree>
             </field>
         </record>  

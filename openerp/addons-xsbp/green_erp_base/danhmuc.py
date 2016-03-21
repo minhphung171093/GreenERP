@@ -245,6 +245,7 @@ class ds_dai(osv.osv):
     _name = "ds.dai"
     _columns = {
         'name': fields.char('Tên',size = 1024, required = True),
+        'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh/Thành Phố'),
                 }
 ds_dai()
 

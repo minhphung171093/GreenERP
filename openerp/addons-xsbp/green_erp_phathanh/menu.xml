@@ -37,7 +37,15 @@
 				<menuitem id="menu_action_xuat_ve"
 					action="action_xuat_ve"
 					name="Xuất vé số tự chọn"
-					parent="menu_quanly_phanphoi" sequence="9"/>					
+					parent="menu_quanly_phanphoi" sequence="9"/>	
+				<menuitem id="menu_action_nhap_doanhthu"
+					action="action_nhap_doanhthu"
+					name="Nhập doanh thu tỉnh miền nam"
+					parent="menu_quanly_phanphoi" sequence="10"/>	
+				<menuitem id="menu_action_nhap_doanhthu_thitruong"
+					action="action_nhap_doanhthu_thitruong"
+					name="Nhập doanh thu thị trường tỉnh miền nam"
+					parent="menu_quanly_phanphoi" sequence="15"/>			
 			<menuitem id="menu_baocao"
 				name="Báo cáo"
 				parent="quanly_root" sequence="2"/>

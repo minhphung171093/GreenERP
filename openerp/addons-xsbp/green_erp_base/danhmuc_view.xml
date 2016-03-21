@@ -237,25 +237,6 @@
             <field name="view_mode">tree,form</field>
         </record> 
         
-<!--Nhập doanh thu tỉnh miền nam-->   
-        <record model="ir.ui.view" id="nhap_doanhthu_tree">
-            <field name="name">nhap.doanhthu.tree</field>
-            <field name="model">nhap.doanhthu</field>
-            <field name="type">tree</field>
-            <field name="arch" type="xml">
-                <tree string="Nhập doanh thu tỉnh miền nam" editable='top'>
-                    <field name="name" />
-                    <field name="dai_id" string="Đài" options="{'no_create':True}"/>
-                    <field name="doanh_thu" />
-                </tree>
-            </field>
-        </record>  
-        <record model="ir.actions.act_window" id="action_nhap_doanhthu">
-            <field name="name">Nhập doanh thu tỉnh miền nam</field>
-            <field name="res_model">nhap.doanhthu</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record> 
         
 <!--Loại hình kinh doanh-->   
         <record model="ir.ui.view" id="loai_hinh_tree">

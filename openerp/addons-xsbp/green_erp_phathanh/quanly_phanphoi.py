@@ -678,4 +678,22 @@ class xuat_ve_line(osv.osv):
                 }
         return {'value': vals}  
 xuat_ve_line()
+
+class nhap_doanhthu(osv.osv):
+    _name = "nhap.doanhthu"
+    _columns = {
+        'name': fields.date('Ngày', required = True),
+        'dai_id': fields.many2one('ds.dai','Đài', required = True),
+        'doanh_thu': fields.float('Doanh Thu', required = True),
+                }
+nhap_doanhthu()
+
+class nhap_doanhthu_thitruong(osv.osv):
+    _name = "nhap.doanhthu.thitruong"
+    _columns = {
+        'name': fields.date('Ngày', required = True),
+        'thi_truong_id': fields.many2one('khu.vuc','Thị trường', required = True),
+        'doanh_thu': fields.float('Doanh Thu', required = True),
+                }
+nhap_doanhthu_thitruong()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -248,12 +248,4 @@ class ds_dai(osv.osv):
                 }
 ds_dai()
 
-class nhap_doanhthu(osv.osv):
-    _name = "nhap.doanhthu"
-    _columns = {
-        'name': fields.date('Ngày', required = True),
-        'dai_id': fields.many2one('ds.dai','Đài', required = True),
-        'doanh_thu': fields.float('Doanh Thu', required = True),
-                }
-nhap_doanhthu()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

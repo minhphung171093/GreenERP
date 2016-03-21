@@ -149,6 +149,16 @@ class khu_vuc(osv.osv):
         'name': fields.char('Mã Điểm trả ế',size = 1024, required = True),
         'ten': fields.char('Tên Điểm trả ế',size = 1024, required = True),
                 }
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+        res = []
+        reads = self.read(cr, uid, ids, ['ten','name'], context)
+      
+        for record in reads:
+            name = record['ten'] + '-' + '['+ record['name'] + ']'
+            res.append((record['id'], name))
+        return res  
 khu_vuc()
 
 class ky_ve(osv.osv):

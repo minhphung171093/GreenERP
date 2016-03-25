@@ -128,4 +128,43 @@ class loaihinh_graph_report(osv.osv):
         """)
 loaihinh_graph_report()
 
+class doanhthu_thitruong_graph_report(osv.osv):
+    _name = "doanhthu.thitruong.graph.report"
+    _description = "Báo cáo theo doanh thu thi truong"
+    _auto = False
+    _columns = {
+        'ngay': fields.date('Ngày'),
+        'loai_giatri': fields.char('Loại'),
+        'thi_truong_id': fields.many2one('khu.vuc','Thị trường'),
+        'dai_id': fields.many2one('ds.dai','Đài'),
+        'tinh_tp_id': fields.many2one('ds.dai','Đài'),
+        'doanh_thu': fields.float('Doanh thu',digits=(16,2)),
+    }
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, 'doanhthu_thitruong_graph_report')
+        cr.execute("""
+            create or replace view doanhthu_thitruong_graph_report as (
+ 
+                select id, ngay, thi_truong_id, dai_id, tinh_tp_id, loai_giatri, doanh_thu
+                from
+                (
+                select n_dt_tt.id as id, n_dt_tt.name as ngay, n_dt_tt.thi_truong_id as thi_truong_id, kv.tinh_tp_id, 'Thị trường' as loai_giatri, 
+                n_dt_tt.doanh_thu as doanh_thu, '' as dai_id
+                from nhap_doanhthu_thitruong n_dt_tt 
+                left join khu_vuc kv on n_dt_tt.thi_truong_id=kv.id
+                left join tinh_tp t_tp on kv.tinh_tp_id = t_tp.id
+                
+                union all
+                
+                select n_dt.id as id, n_dt.name as ngay, n_dt.dai_id as dai_id, ds_d.tinh_tp_id, 'Đài' as loai_giatri, 
+                n_dt.doanh_thu as doanh_thu, '' as thi_truong_id
+                from nhap_doanhthu n_dt 
+                left join ds_dai ds_d on n_dt.dai_id = ds_d.id
+                left join tinh_tp t_tp on ds_d.tinh_tp_id = t_tp.id
+                )foo
+                group by id,ngay,thi_truong_id,dai_id,tinh_tp_id,loai_giatri
+            )
+        """)
+doanhthu_thitruong_graph_report()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

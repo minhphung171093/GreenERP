@@ -132,7 +132,7 @@ class khach_san(osv.osv):
             args += [('id','in',ks_ids)]
         return super(khach_san, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
-       ids = self.search(cr, user, args, context=context, limit=limit)
+       ids = self.search(cr, user, args, limit=limit, context=context)
        return self.name_get(cr, user, ids, context=context)
    
 khach_san()

@@ -137,7 +137,7 @@ class doanhthu_thitruong_graph_report(osv.osv):
         'loai_giatri': fields.char('Loại'),
         'thi_truong_id': fields.many2one('khu.vuc','Thị trường'),
         'dai_id': fields.many2one('ds.dai','Đài'),
-        'tinh_tp_id': fields.many2one('ds.dai','Đài'),
+        'tinh_tp_id': fields.many2one('tinh.tp','Tỉnh'),
         'doanh_thu': fields.float('Doanh thu',digits=(16,2)),
     }
     def init(self, cr):
@@ -162,7 +162,7 @@ class doanhthu_thitruong_graph_report(osv.osv):
                 left join ds_dai ds_d on n_dt.dai_id = ds_d.id
                 left join tinh_tp t_tp on ds_d.tinh_tp_id = t_tp.id
                 )foo
-                group by id,ngay,thi_truong_id,dai_id,tinh_tp_id,loai_giatri
+                group by id,ngay,thi_truong_id,dai_id,tinh_tp_id,loai_giatri,doanh_thu
             )
         """)
 doanhthu_thitruong_graph_report()

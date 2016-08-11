@@ -260,4 +260,100 @@ class ds_dai(osv.osv):
                 }
 ds_dai()
 
+class zz_dim_kyve0(osv.osv):
+    _name = "zz.dim.kyve0"
+    _auto = False
+    _columns = {
+        'kyve_key': fields.many2one('ky.ve','KyVe_key'),
+        'tenkyve': fields.char('TenKyVe',size = 1024),
+    }
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, 'zz_dim_kyve0')
+        cr.execute("""
+            create or replace view zz_dim_kyve0 as (
+                select id as kyve_key, name as tenkyve
+                    from ky_ve
+            )
+        """)
+zz_dim_kyve0()
+
+class zz_dim_daily0(osv.osv):
+    _name = "zz.dim.daily0"
+    _auto = False
+    _columns = {
+        'daily_key': fields.many2one('res.partner','DaiLy_Key'),
+        'tendaily': fields.char('TenDaiLy',size = 1024),
+        'tentinh': fields.char('TenTinh',size = 1024),
+        'tenquanhuyen': fields.char('TenQuanHuyen',size = 1024),
+        'tenphuongxa': fields.char('TenPhuongXa',size = 1024),
+    }
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, 'zz_dim_daily0')
+        cr.execute("""
+            create or replace view zz_dim_daily0 as (
+                select rp.id as daily_key, rp.name as tendaily, t.name as tentinh,
+                    qh.name as tenquanhuyen, px.name as tenphuongxa
+                    from res_partner rp
+                    left join tinh_tp t on rp.tinh_tp_id=t.id
+                    left join quan_huyen qh on rp.quan_huyen_id=qh.id
+                    left join phuong_xa px on rp.phuong_xa_id=px.id
+                where dai_ly=True
+            )
+        """)
+zz_dim_kyve0()
+
+class zz_fact_doanhthuphathanhsx0(osv.osv):
+    _name = "zz.fact.doanhthuphathanhsx0"
+    _auto = False
+    _columns = {
+        'doanhthu': fields.float('Doanh thu', digits=(16,0)),
+        'phathanh': fields.float('Phat hanh', digits=(16,0)),
+        'ngay_key': fields.date('Ngày mở thưởng'),
+        'daily_key': fields.many2one('res.partner','Đại lý'),
+        'kyve_key': fields.many2one('ky.ve','Kỳ vé'),
+    }
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, 'zz_fact_doanhthuphathanhsx0')
+        cr.execute("""
+            create or replace view zz_fact_doanhthuphathanhsx0 as (
+
+                select daily_id as daily_key, ky_ve_id as kyve_key, sum(doanhthu) as doanhthu, sum(phathanh) as phathanh, ngay_mo_thuong as ngay_key
+                from
+                (
+                select ppttl.daily_id as daily_id, pptt.ky_ve_id as ky_ve_id,
+                    case when (select sove_sau_dc from dieuchinh_line where phanphoi_line_id=ppttl.id order by id desc limit 1) is not null
+                        then (select sove_sau_dc*lv.gia_tri from dieuchinh_line where phanphoi_line_id=ppttl.id order by id desc limit 1) else ppttl.sove_kynay*lv.gia_tri end doanhthu,
+                    
+                    0 as phathanh,
+                    kv.ngay_mo_thuong as ngay_mo_thuong
+                    from phanphoi_tt_line ppttl 
+                    left join phanphoi_truyenthong pptt on ppttl.phanphoi_tt_id=pptt.id
+                    left join loai_ve lv on pptt.loai_ve_id = lv.id
+                    left join ky_ve kv on pptt.ky_ve_id = kv.id
+                union all
+                
+                select vel.daily_id as daily_id, ve.ky_ve_id as ky_ve_id,-1*vel.thuc_kiem*lv.gia_tri as doanhthu,0 as phathanh, 
+                kv.ngay_mo_thuong as ngay_mo_thuong
+                
+                    from nhap_ve_e_line vel
+                    left join nhap_ve_e ve on vel.nhap_ve_e_id=ve.id
+                    left join loai_ve lv on ve.loai_ve_id = lv.id
+                    left join ky_ve kv on ve.ky_ve_id = kv.id
+                union all
+
+                select ppttl.daily_id as daily_id, pptt.ky_ve_id as ky_ve_id,
+                    0 as doanhthu,
+                    case when (select sove_sau_dc from dieuchinh_line where phanphoi_line_id=ppttl.id order by id desc limit 1) is not null
+                        then (select sove_sau_dc*lv.gia_tri from dieuchinh_line where phanphoi_line_id=ppttl.id order by id desc limit 1) else ppttl.sove_kynay*lv.gia_tri end phathanh,
+                    kv.ngay_mo_thuong as ngay_mo_thuong
+                    from phanphoi_tt_line ppttl 
+                    left join phanphoi_truyenthong pptt on ppttl.phanphoi_tt_id=pptt.id
+                    left join loai_ve lv on pptt.loai_ve_id = lv.id
+                    left join ky_ve kv on pptt.ky_ve_id = kv.id
+                )foo
+                group by daily_id,ky_ve_id,ngay_mo_thuong
+            )
+        """)
+zz_fact_doanhthuphathanhsx0()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
